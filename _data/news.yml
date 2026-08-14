@@ -1,0 +1,15 @@
+# Recent updates, newest first. The homepage shows the top 5.
+# `date` is free text so you can write "Aug 2026" or "Fall 2026" — whatever fits.
+#
+# TODO: replace these three examples with real news, or delete them all
+# (an empty list hides the section entirely).
+
+- date: "TODO"
+  text: "Paper accepted at [VENUE]."
+  url: ""      # optional — makes the text a link
+
+- date: "TODO"
+  text: "Presented a poster at [WORKSHOP]."
+
+- date: "TODO"
+  text: "Started the PhD at [UNIVERSITY]."

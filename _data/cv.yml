@@ -1,0 +1,50 @@
+# The CV. This page is canonical — there is no separate PDF; the print
+# stylesheet turns Cmd-P into a clean document.
+#
+# Teaching, talks and service live in teaching.yml and are pulled into the CV
+# page automatically, so you never enter them twice.
+#
+# Each group is a list of items with: when, title, where, detail.
+# TODO: replace every placeholder below.
+
+summary: >-
+  TODO: optional one-line summary — e.g. "PhD student in [FIELD] at
+  [UNIVERSITY], working on [TOPIC] with [ADVISOR]." Delete if you'd rather the
+  CV open straight into Education.
+
+education:
+  - when: "2024 – present"
+    title: "PhD, TODO: Field"
+    where: "TODO: Department, University"
+    detail: "Advisor: TODO: Name. TODO: thesis topic, if you have one."
+
+  - when: "2020 – 2024"
+    title: "BSc, TODO: Field"
+    where: "TODO: University"
+    detail: "TODO: honours, thesis title, GPA if it's strong."
+
+experience:
+  - when: "Summer 2025"
+    title: "TODO: Research Intern"
+    where: "TODO: Lab or Company"
+    detail: "TODO: one line on what you built or found."
+
+awards:
+  - when: "2026"
+    title: "TODO: Award or Fellowship Name"
+    where: "TODO: Awarding body"
+    detail: "TODO: amount or selectivity, if it's impressive."
+
+  - when: "2024"
+    title: "TODO: Scholarship Name"
+    where: "TODO: University"
+
+skills:
+  - when: "Programming"
+    title: "TODO: Python, R, ..."
+
+  - when: "Methods"
+    title: "TODO: the techniques you'd claim in an interview"
+
+  - when: "Languages"
+    title: "TODO: English (native), ..."

@@ -1,0 +1,54 @@
+# Research output. Three groups, each rendered as its own section on /research/.
+# Delete a group's items and that section disappears.
+#
+# Your name is bolded automatically inside `authors` — write the list exactly as
+# it appears in the citation.
+#
+# TODO: replace every placeholder below with real work.
+
+# ─── the current-work blurb at the top of /research/ ─────────────────────────
+statement: >-
+  TODO: two or three sentences on what you actually work on and why it matters.
+  Write it for a smart person outside your subfield — a committee member from a
+  neighbouring area should finish this paragraph knowing what you do.
+
+# ─── peer-reviewed papers ────────────────────────────────────────────────────
+papers:
+  - title: "TODO: Full Paper Title As Published"
+    authors: "A. Author, S. Chan, B. Author"
+    venue: "TODO: Conference or Journal Name"
+    year: 2026
+    featured: true          # tinted card — keep this on your strongest paper
+    badge: ""               # e.g. "spotlight", "oral", "best paper"
+    note: >-
+      TODO: one sentence on what the paper found, in plain language.
+    links:
+      - name: "pdf"
+        url: "#"
+      - name: "code"
+        url: "#"
+      - name: "bibtex"
+        url: "#"
+
+# ─── posters and workshop papers ─────────────────────────────────────────────
+posters:
+  - title: "TODO: Poster Title"
+    authors: "S. Chan, A. Author"
+    venue: "TODO: Workshop or Conference"
+    year: 2026
+    links:
+      - name: "poster (pdf)"
+        url: "#"
+
+  - title: "TODO: Second Poster Title"
+    authors: "S. Chan"
+    venue: "TODO: Venue"
+    year: 2025
+
+# ─── in progress ─────────────────────────────────────────────────────────────
+# Signals momentum without over-claiming. Delete if you'd rather not preview
+# unpublished work.
+in_progress:
+  - title: "TODO: Working title of a project in flight"
+    note: >-
+      TODO: one line on the question you're asking. No venue, no promises.

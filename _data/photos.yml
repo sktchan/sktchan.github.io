@@ -1,0 +1,29 @@
+# The photo gallery.
+#
+# Workflow: drop full-size originals in photos-originals/ (git-ignored), run
+#   ./scripts/resize-photos.sh
+# which writes web-sized copies into assets/img/photos/. Then add an entry here.
+#
+# `alt` is REQUIRED — it's what a blind visitor and Google both read. Describe
+# what's in the frame, not "photo". `caption` is optional and shown below the
+# image.
+#
+# `width` and `height` are the pixel dimensions of the resized file. They stop
+# the page jumping around as images load. resize-photos.sh prints them for you.
+#
+# TODO: replace with real photographs.
+
+intro: >-
+  TODO: a sentence about your photography — what you shoot, on what, why.
+
+photos:
+  - file: "placeholder-1.svg"
+    alt: "TODO: describe what is in this photograph"
+    caption: "TODO: optional caption — place, year, or a note"
+    width: 1600
+    height: 1067
+
+  - file: "placeholder-2.svg"
+    alt: "TODO: describe what is in this photograph"
+    width: 1067
+    height: 1600

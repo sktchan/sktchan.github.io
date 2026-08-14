@@ -1,0 +1,27 @@
+# Software, tools, and side projects. Rendered as a card grid on /projects/.
+#
+# `thumb` is optional — a path under /assets/img/. Without one the card shows a
+# soft pink block, which looks intentional rather than broken.
+#
+# TODO: replace with real projects, or delete the file's contents and drop
+# "projects" from the nav in _config.yml.
+
+- title: "TODO: Project Name"
+  url: "https://github.com/sktchan/..."
+  note: >-
+    TODO: what it does and who it's for, in one or two sentences.
+  tags: ["python", "TODO"]
+  thumb: ""
+  links:
+    - name: "repo"
+      url: "https://github.com/sktchan/..."
+    - name: "docs"
+      url: "#"
+
+- title: "TODO: Second Project"
+  note: >-
+    TODO: what it does.
+  tags: ["TODO"]
+  links:
+    - name: "repo"
+      url: "#"
