@@ -1,0 +1,9 @@
+<!-- Placeholder. Replace with a real photo and point `photo:` in
+     _data/links.yml at it, e.g. "/assets/img/profile.jpg". -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 380" role="img" aria-label="Placeholder portrait">
+  <rect width="380" height="380" fill="#ffebef"/>
+  <circle cx="190" cy="152" r="58" fill="#ffd9e1"/>
+  <path d="M74 380 c0-72 52-118 116-118 s116 46 116 118 z" fill="#ffd9e1"/>
+  <text x="190" y="350" text-anchor="middle"
+        font-family="Georgia, serif" font-size="20" fill="#a8415c">your photo here</text>
+</svg>
