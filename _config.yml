@@ -1,0 +1,54 @@
+# ─── site ────────────────────────────────────────────────────────────────────
+# TODO: check every value in this block reads the way you want it to.
+title: Serena Chan
+tagline: PhD student # TODO: e.g. "PhD student in Computer Science"
+description: >-
+  TODO: one or two sentences about your research, written for a stranger.
+  This text is what shows up in Google results and link previews.
+author: Serena Chan
+
+# Both forms of your name get bolded automatically inside author lists, so
+# "S. Chan" in a citation stands out the same way "Serena Chan" does.
+author_short: S. Chan
+
+url: https://sktchan.github.io
+baseurl: ""
+lang: en
+
+# ─── build ───────────────────────────────────────────────────────────────────
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+sass:
+  style: compressed
+
+# Pages get clean URLs (/research/ rather than /research.html)
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - scripts/
+  - vendor/
+  - .bundle/
+# assets/fonts/LICENSE.md is deliberately NOT excluded — the OFL asks that the
+# licence travel with the font files, and the site serves those .woff2s.
+
+# ─── navigation ──────────────────────────────────────────────────────────────
+# Reorder or comment out a line to change the nav. `url` must match the page's
+# permalink exactly (trailing slash included) for the active state to light up.
+nav:
+  - title: home
+    url: /
+  - title: research
+    url: /research/
+  - title: projects
+    url: /projects/
+  - title: teaching
+    url: /teaching/
+  - title: cv
+    url: /cv/
+  - title: photos
+    url: /photos/

@@ -1,0 +1,15 @@
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/
+
+# Gemfile.lock IS committed — it pins the exact gem versions so the GitHub
+# Actions build resolves to the same Jekyll you ran locally.
+
+.DS_Store
+*.swp
+
+# Drop full-resolution originals here; scripts/resize-photos.sh writes the
+# web-sized copies into assets/img/photos/, which *are* committed.
+photos-originals/
