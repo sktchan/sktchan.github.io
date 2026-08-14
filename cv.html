@@ -1,0 +1,181 @@
+---
+layout: page
+title: cv
+permalink: /cv/
+wide: true
+---
+
+{%- comment -%}
+  This page IS the CV — there is no separate PDF to keep in sync. The print
+  stylesheet in main.scss strips the nav, footer, colours and backgrounds, so
+  Cmd-P → "Save as PDF" produces a clean black-on-white document.
+
+  Teaching, talks and service are pulled from _data/teaching.yml and papers
+  from _data/research.yml, so nothing is entered twice.
+{%- endcomment -%}
+
+{%- assign cv = site.data.cv -%}
+{%- assign r  = site.data.research -%}
+{%- assign t  = site.data.teaching -%}
+{%- assign l  = site.data.links -%}
+
+{%- if cv.summary -%}
+  <p>{{ cv.summary }}</p>
+{%- endif -%}
+
+<p class="cv-actions">
+  <button class="button" type="button" onclick="window.print()">print / save as pdf</button>
+</p>
+
+{%- comment -%} A reusable block for each labelled CV group. {%- endcomment -%}
+
+{%- if cv.education and cv.education.size > 0 -%}
+  <h2><span class="section-title">education</span></h2>
+  <div class="cv-group">
+    {%- for item in cv.education %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.when }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.where %}<div class="cv-item__where">{{ item.where }}</div>{% endif -%}
+          {%- if item.detail %}<div class="cv-item__detail">{{ item.detail }}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if cv.experience and cv.experience.size > 0 -%}
+  <h2><span class="section-title">experience</span></h2>
+  <div class="cv-group">
+    {%- for item in cv.experience %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.when }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.where %}<div class="cv-item__where">{{ item.where }}</div>{% endif -%}
+          {%- if item.detail %}<div class="cv-item__detail">{{ item.detail }}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- comment -%} Papers and posters, pulled straight from research.yml. {%- endcomment -%}
+{%- if r.papers and r.papers.size > 0 -%}
+  <h2><span class="section-title">publications</span></h2>
+  <div class="cv-group">
+    {%- for item in r.papers %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.year }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.authors -%}
+            {%- capture me_long %}<strong>{{ site.author }}</strong>{% endcapture -%}
+            {%- capture me_short %}<strong>{{ site.author_short }}</strong>{% endcapture -%}
+            {%- assign authors = item.authors -%}
+            {%- if site.author_short and site.author_short != '' -%}
+              {%- assign authors = authors | replace: site.author_short, me_short -%}
+            {%- endif -%}
+            {%- assign authors = authors | replace: site.author, me_long -%}
+            <div class="cv-item__where">{{ authors }}</div>
+          {%- endif -%}
+          {%- if item.venue %}<div class="cv-item__detail"><em>{{ item.venue }}</em></div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if r.posters and r.posters.size > 0 -%}
+  <h2><span class="section-title">posters &amp; workshop papers</span></h2>
+  <div class="cv-group">
+    {%- for item in r.posters %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.year }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.venue %}<div class="cv-item__detail"><em>{{ item.venue }}</em></div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if cv.awards and cv.awards.size > 0 -%}
+  <h2><span class="section-title">awards</span></h2>
+  <div class="cv-group">
+    {%- for item in cv.awards %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.when }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.where %}<div class="cv-item__where">{{ item.where }}</div>{% endif -%}
+          {%- if item.detail %}<div class="cv-item__detail">{{ item.detail }}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if t.courses and t.courses.size > 0 -%}
+  <h2><span class="section-title">teaching</span></h2>
+  <div class="cv-group">
+    {%- for item in t.courses %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.year }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.role %}<div class="cv-item__where">{{ item.role }}{% if item.venue %} &middot; {{ item.venue }}{% endif %}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if t.talks and t.talks.size > 0 -%}
+  <h2><span class="section-title">talks</span></h2>
+  <div class="cv-group">
+    {%- for item in t.talks %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.year }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.venue %}<div class="cv-item__where">{{ item.venue }}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if t.service and t.service.size > 0 -%}
+  <h2><span class="section-title">service</span></h2>
+  <div class="cv-group">
+    {%- for item in t.service %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.year }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.venue %}<div class="cv-item__where">{{ item.venue }}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if cv.skills and cv.skills.size > 0 -%}
+  <h2><span class="section-title">skills</span></h2>
+  <div class="cv-group">
+    {%- for item in cv.skills %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.when }}</div>
+        <div class="cv-item__what">{{ item.title }}</div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if l.email and l.email != '' -%}
+  <h2><span class="section-title">contact</span></h2>
+  <p><a href="mailto:{{ l.email }}">{{ l.email }}</a></p>
+{%- endif -%}

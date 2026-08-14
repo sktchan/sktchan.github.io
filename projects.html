@@ -1,0 +1,49 @@
+---
+layout: page
+title: projects
+permalink: /projects/
+intro: "Software and side projects — things I've built that aren't papers."
+---
+
+{%- assign projects = site.data.projects -%}
+
+{%- if projects and projects.size > 0 -%}
+  <div class="cards">
+    {%- for item in projects %}
+      <article class="entry">
+        {%- if item.thumb and item.thumb != '' -%}
+          <img class="card__thumb"
+               src="{{ item.thumb | relative_url }}"
+               alt=""
+               loading="lazy">
+        {%- endif -%}
+
+        <h3 class="entry__title">
+          {%- if item.url -%}
+            <a href="{{ item.url }}">{{ item.title }}</a>
+          {%- else -%}
+            {{ item.title }}
+          {%- endif -%}
+        </h3>
+
+        {%- if item.note %}<p class="entry__note">{{ item.note }}</p>{% endif -%}
+
+        {%- if item.tags -%}
+          <ul class="tags">
+            {%- for tag in item.tags %}<li>{{ tag }}</li>{% endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if item.links -%}
+          <ul class="entry__links">
+            {%- for link in item.links %}
+              <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </article>
+    {%- endfor %}
+  </div>
+{%- else -%}
+  <p>Nothing here yet.</p>
+{%- endif -%}

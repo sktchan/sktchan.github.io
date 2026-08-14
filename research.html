@@ -1,0 +1,38 @@
+---
+layout: page
+title: research
+permalink: /research/
+---
+
+{%- assign r = site.data.research -%}
+
+{%- if r.statement -%}
+  <p>{{ r.statement }}</p>
+{%- endif -%}
+
+{%- comment -%}
+  Papers, posters and work-in-progress are separate sections rather than one
+  flat list — a single paper reads as a highlight in its own section, and as a
+  thin list anywhere else.
+{%- endcomment -%}
+
+{%- if r.papers and r.papers.size > 0 -%}
+  <h2><span class="section-title">papers</span></h2>
+  <div class="entries">
+    {%- for item in r.papers %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}
+
+{%- if r.posters and r.posters.size > 0 -%}
+  <h2><span class="section-title">posters &amp; workshop papers</span></h2>
+  <div class="entries">
+    {%- for item in r.posters %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}
+
+{%- if r.in_progress and r.in_progress.size > 0 -%}
+  <h2><span class="section-title">in progress</span></h2>
+  <div class="entries">
+    {%- for item in r.in_progress %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}

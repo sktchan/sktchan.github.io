@@ -1,0 +1,56 @@
+---
+layout: page
+title: photos
+permalink: /photos/
+wide: true
+---
+
+{%- assign p = site.data.photos -%}
+
+{%- if p.intro -%}
+  <p>{{ p.intro }}</p>
+{%- endif -%}
+
+{%- if p.photos and p.photos.size > 0 -%}
+  <div class="gallery">
+    {%- for photo in p.photos %}
+      {%- assign src = photo.file | prepend: '/assets/img/photos/' | relative_url -%}
+      <figure class="gallery__item">
+        {%- comment -%}
+          The button (not a div) is what makes the lightbox reachable by
+          keyboard. data-* attributes carry everything lightbox.js needs.
+        {%- endcomment -%}
+        <button class="gallery__button"
+                type="button"
+                data-lightbox
+                data-src="{{ src }}"
+                data-alt="{{ photo.alt | escape }}"
+                data-caption="{{ photo.caption | default: '' | escape }}"
+                aria-label="View larger: {{ photo.alt | escape }}">
+          <img src="{{ src }}"
+               alt="{{ photo.alt | escape }}"
+               width="{{ photo.width | default: 1600 }}"
+               height="{{ photo.height | default: 1067 }}"
+               loading="lazy"
+               decoding="async">
+        </button>
+        {%- if photo.caption and photo.caption != '' -%}
+          <figcaption class="gallery__caption">{{ photo.caption }}</figcaption>
+        {%- endif -%}
+      </figure>
+    {%- endfor %}
+  </div>
+
+  {%- comment -%} The lightbox shell — hidden until a photo is clicked. {%- endcomment -%}
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lightbox__btn lightbox__close" type="button" data-close aria-label="Close">&times;</button>
+    <button class="lightbox__btn lightbox__prev"  type="button" data-prev  aria-label="Previous photo">&#8249;</button>
+    <button class="lightbox__btn lightbox__next"  type="button" data-next  aria-label="Next photo">&#8250;</button>
+    <img class="lightbox__img" id="lightbox-img" src="" alt="">
+    <p class="lightbox__caption" id="lightbox-caption"></p>
+  </div>
+
+  <script src="{{ '/assets/js/lightbox.js' | relative_url }}" defer></script>
+{%- else -%}
+  <p>No photos yet.</p>
+{%- endif -%}

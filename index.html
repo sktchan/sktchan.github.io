@@ -1,1 +1,70 @@
-hello
+---
+layout: default
+title: Home
+permalink: /
+---
+
+{%- assign l = site.data.links -%}
+
+<section class="intro">
+  <img class="intro__photo"
+       src="{{ l.photo | default: '/assets/img/profile.svg' | relative_url }}"
+       alt="Portrait of {{ site.author }}"
+       width="380" height="380">
+
+  <div class="intro__body">
+    <h1>hi, i'm {{ site.author | split: ' ' | first | downcase }} &#10038;</h1>
+
+    {%- comment -%}
+      TODO: rewrite this bio. Two or three sentences: what you work on, where,
+      with whom, and one thing that makes you specifically interesting. This is
+      the paragraph most visitors will read in full — everything else they skim.
+    {%- endcomment -%}
+    <p>
+      TODO: I'm a PhD student in <strong>[DEPARTMENT]</strong> at
+      <strong>[UNIVERSITY]</strong>, where I work with
+      <a href="#">[ADVISOR]</a> in the <a href="#">[LAB NAME]</a>.
+    </p>
+    <p>
+      TODO: I study [TOPIC] — roughly, [THE QUESTION YOU ARE ASKING, IN PLAIN
+      WORDS]. Before this I was at [PREVIOUS PLACE], where I [DID THE THING].
+      Outside the lab I take <a href="{{ '/photos/' | relative_url }}">photographs</a>.
+    </p>
+
+    {%- comment -%}
+      An empty string is truthy in Liquid, so every link needs an explicit
+      `!= ''` test — otherwise a blank entry in links.yml renders a dead pill.
+      (Liquid's `blank` keyword doesn't help: it calls String#blank?, which
+      only exists under ActiveSupport, so in Jekyll it matches nothing.)
+    {%- endcomment -%}
+    <ul class="linkrow">
+      {%- if l.email    and l.email    != '' %}<li><a href="mailto:{{ l.email }}">email</a></li>{% endif -%}
+      {%- if l.scholar  and l.scholar  != '' %}<li><a href="{{ l.scholar }}">google scholar</a></li>{% endif -%}
+      {%- if l.github   and l.github   != '' %}<li><a href="{{ l.github }}">github</a></li>{% endif -%}
+      {%- if l.orcid    and l.orcid    != '' %}<li><a href="{{ l.orcid }}">orcid</a></li>{% endif -%}
+      {%- if l.linkedin and l.linkedin != '' %}<li><a href="{{ l.linkedin }}">linkedin</a></li>{% endif -%}
+      {%- if l.bluesky  and l.bluesky  != '' %}<li><a href="{{ l.bluesky }}">bluesky</a></li>{% endif -%}
+      {%- if l.twitter  and l.twitter  != '' %}<li><a href="{{ l.twitter }}">twitter</a></li>{% endif -%}
+      <li><a href="{{ '/cv/' | relative_url }}">cv</a></li>
+    </ul>
+  </div>
+</section>
+
+{%- if site.data.news and site.data.news.size > 0 -%}
+  <h2><span class="section-title">news</span></h2>
+
+  <ul class="news">
+    {%- for item in site.data.news limit: 5 %}
+      <li>
+        <span class="news__date">{{ item.date }}</span>
+        <span class="news__text">
+          {%- if item.url and item.url != '' -%}
+            <a href="{{ item.url }}">{{ item.text }}</a>
+          {%- else -%}
+            {{ item.text }}
+          {%- endif -%}
+        </span>
+      </li>
+    {%- endfor %}
+  </ul>
+{%- endif -%}
