@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+  {% include head.html %}
+  <body>
+    <a class="skip-link" href="#main">skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap {% if page.wide %}wrap--wide{% endif %}">
+        <p class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></p>
+        {% if site.tagline %}<p class="site-tagline">{{ site.tagline }}</p>{% endif %}
+        {% include nav.html %}
+      </div>
+    </header>
+
+    <main class="site-main" id="main">
+      <div class="wrap {% if page.wide %}wrap--wide{% endif %}">
+        {{ content }}
+      </div>
+    </main>
+
+    {% include footer.html %}
+  </body>
+</html>

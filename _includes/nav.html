@@ -1,0 +1,16 @@
+{%- comment -%}
+  Nav items come from `nav:` in _config.yml. A page is current when its URL
+  matches the nav entry — compared with trailing slashes normalised, since
+  Jekyll writes "/research/" but the home page is bare "/".
+{%- endcomment -%}
+
+<nav class="nav" aria-label="Main">
+  {%- assign here = page.url | remove_first: 'index.html' -%}
+  {%- for item in site.nav -%}
+    {%- if here == item.url -%}
+      <a href="{{ item.url | relative_url }}" aria-current="page">{{ item.title }}</a>
+    {%- else -%}
+      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+    {%- endif -%}
+  {%- endfor -%}
+</nav>

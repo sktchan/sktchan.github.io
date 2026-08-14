@@ -1,0 +1,694 @@
+---
+# Empty front matter tells Jekyll to compile this file.
+---
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   fonts — self-hosted, so the site makes no third-party requests
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("{{ '/assets/fonts/fraunces.woff2' | relative_url }}") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("{{ '/assets/fonts/inter.woff2' | relative_url }}") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   tokens — change the site's whole feel from this block
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* colour. --tint is the soft pink; it is a *surface*, never a text colour.
+     --accent is its darkened sibling, the only pink readable as type.
+     Contrast on --bg: accent 5.3:1, ink-muted 5.3:1, ink 14:1 — all pass AA. */
+  --bg:         #f6f4f1;
+  --surface:    #ffffff;
+  --tint:       #ffebef;
+  --tint-deep:  #ffd9e1;
+  --accent:     #a8415c;
+  --ink:        #2b2826;
+  --ink-muted:  #6b6461;
+  --rule:       #e7e2dc;
+
+  /* shape */
+  --radius:      14px;
+  --radius-sm:   9px;
+  --radius-pill: 999px;
+  --shadow:      0 1px 2px rgba(43, 40, 38, .04), 0 8px 24px rgba(43, 40, 38, .06);
+  --shadow-lift: 0 2px 4px rgba(43, 40, 38, .05), 0 14px 32px rgba(43, 40, 38, .09);
+
+  /* type */
+  --serif: "Fraunces", "Lora", Georgia, "Times New Roman", serif;
+  --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* rhythm */
+  --measure: 44rem;   /* comfortable reading width */
+  --wide:    64rem;   /* photo gallery + cv */
+  --gap:     1.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   base
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 .5rem;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem); }
+h2 { font-size: 1.5rem; margin-top: 3rem; }
+h3 { font-size: 1.15rem; margin-top: 2rem; }
+
+p { margin: 0 0 1rem; }
+
+a {
+  color: var(--accent);
+  text-decoration-color: var(--tint-deep);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover { text-decoration-color: var(--accent); }
+
+/* One visible, consistent focus ring for keyboard users everywhere. */
+:focus-visible {
+  outline: 2.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+img { max-width: 100%; height: auto; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.5rem 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: .9em;
+  background: var(--tint);
+  padding: .1em .35em;
+  border-radius: 5px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Skip link — first thing a keyboard or screen reader user meets. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--surface);
+  color: var(--accent);
+  padding: .6rem 1rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  transition: top .15s ease;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   layout
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.wrap {
+  width: 100%;
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.wrap--wide { max-width: var(--wide); }
+
+.site-main { padding-bottom: 5rem; }
+
+/* Two soft pink blobs behind the header. Pure CSS — no image requests, and
+   they are what keeps the page from reading as a plain document. */
+.site-header {
+  position: relative;
+  padding: 3rem 0 1.5rem;
+  overflow: hidden;
+}
+
+.site-header::before,
+.site-header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--tint), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.site-header::before { width: 26rem; height: 26rem; top: -13rem; right: -8rem; }
+.site-header::after  { width: 18rem; height: 18rem; top: -6rem;  left: -9rem; opacity: .7; }
+
+.site-header > * { position: relative; z-index: 1; }
+
+.site-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.site-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-title a:hover { color: var(--accent); }
+
+.site-tagline {
+  color: var(--ink-muted);
+  font-size: .95rem;
+  margin: .15rem 0 0;
+}
+
+/* ─── nav ─────────────────────────────────────────────────────────────────── */
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-top: 1.5rem;
+}
+
+.nav a {
+  display: inline-block;
+  padding: .35rem .9rem;
+  border-radius: var(--radius-pill);
+  color: var(--ink-muted);
+  font-size: .95rem;
+  text-decoration: none;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.nav a:hover { background: var(--tint); color: var(--accent); }
+
+.nav a[aria-current="page"] {
+  background: var(--tint);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ─── footer ──────────────────────────────────────────────────────────────── */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding: 2rem 0 3rem;
+  color: var(--ink-muted);
+  font-size: .875rem;
+}
+
+.site-footer p { margin: 0 0 .35rem; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   components
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* A section heading with a soft pink swash under it. */
+.section-title {
+  display: inline-block;
+  position: relative;
+  padding-bottom: .15rem;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: .45rem;
+  background: var(--tint-deep);
+  border-radius: var(--radius-pill);
+  z-index: -1;
+}
+
+/* ─── intro (homepage) ────────────────────────────────────────────────────── */
+
+.intro {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.intro__photo {
+  flex: 0 0 auto;
+  width: 9.5rem;
+  height: 9.5rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.intro__body { flex: 1 1 auto; min-width: 0; }
+.intro__body > :last-child { margin-bottom: 0; }
+
+@media (max-width: 34rem) {
+  .intro { flex-direction: column; gap: 1.25rem; }
+  .intro__photo { width: 7.5rem; height: 7.5rem; }
+}
+
+/* ─── link row (email / scholar / github …) ───────────────────────────────── */
+
+.linkrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.linkrow a {
+  display: inline-block;
+  padding: .3rem .85rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-size: .9rem;
+  text-decoration: none;
+  transition: background-color .15s ease, border-color .15s ease, transform .15s ease;
+}
+
+.linkrow a:hover {
+  background: var(--tint);
+  border-color: var(--tint-deep);
+}
+
+/* ─── news ────────────────────────────────────────────────────────────────── */
+
+.news { list-style: none; padding: 0; margin: 0; }
+
+.news li {
+  display: flex;
+  gap: 1rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: .97rem;
+}
+
+.news li:last-child { border-bottom: 0; }
+
+.news__date {
+  flex: 0 0 5.5rem;
+  color: var(--ink-muted);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  padding-top: .15rem;
+}
+
+@media (max-width: 30rem) {
+  .news li { flex-direction: column; gap: .1rem; }
+  .news__date { flex-basis: auto; }
+}
+
+/* ─── entry: one paper / poster / talk / course record ────────────────────── */
+
+.entries { display: grid; gap: 1rem; margin-top: 1.25rem; }
+
+.entry {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.35rem;
+  transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .entry:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--tint-deep);
+  }
+}
+
+/* The one paper gets a tinted wash so it doesn't read as just another row. */
+.entry--featured {
+  background: linear-gradient(180deg, var(--tint) 0%, var(--surface) 60%);
+  border-color: var(--tint-deep);
+}
+
+.entry__title {
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 .3rem;
+}
+
+.entry__title a { color: var(--ink); text-decoration: none; }
+.entry__title a:hover { color: var(--accent); }
+
+.entry__authors {
+  font-size: .92rem;
+  color: var(--ink-muted);
+  margin: 0 0 .2rem;
+}
+
+/* Bold the site owner in the author list so a reader finds them instantly. */
+.entry__authors strong { color: var(--ink); font-weight: 600; }
+
+.entry__venue {
+  font-size: .9rem;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.entry__venue em { font-style: italic; }
+
+.entry__note {
+  font-size: .93rem;
+  margin: .6rem 0 0;
+}
+
+.entry__badge {
+  display: inline-block;
+  background: var(--tint-deep);
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .1rem .55rem;
+  border-radius: var(--radius-pill);
+  margin-left: .4rem;
+  vertical-align: 2px;
+}
+
+/* small link pills at the bottom of an entry */
+.entry__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  list-style: none;
+  padding: 0;
+  margin: .75rem 0 0;
+}
+
+.entry__links a {
+  display: inline-block;
+  padding: .15rem .6rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  font-size: .82rem;
+  text-decoration: none;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+
+.entry__links a:hover { background: var(--tint); border-color: var(--tint-deep); }
+
+/* ─── tags ────────────────────────────────────────────────────────────────── */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  list-style: none;
+  padding: 0;
+  margin: .7rem 0 0;
+}
+
+.tags li {
+  font-size: .78rem;
+  color: var(--ink-muted);
+  background: var(--bg);
+  border-radius: var(--radius-pill);
+  padding: .1rem .6rem;
+}
+
+/* ─── project cards ───────────────────────────────────────────────────────── */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.card__thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: .85rem;
+  background: var(--tint);
+}
+
+/* ─── cv ──────────────────────────────────────────────────────────────────── */
+
+.cv-actions { margin: .5rem 0 2rem; }
+
+.button {
+  display: inline-block;
+  background: var(--tint);
+  color: var(--accent);
+  border: 1px solid var(--tint-deep);
+  border-radius: var(--radius-pill);
+  padding: .4rem 1.1rem;
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color .15s ease;
+}
+
+.button:hover { background: var(--tint-deep); }
+
+/* Label on the left, records on the right — the classic CV shape. */
+.cv-group { display: grid; gap: .9rem; margin-top: 1.25rem; }
+
+.cv-item {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cv-item:last-child { border-bottom: 0; }
+
+.cv-item__when {
+  color: var(--ink-muted);
+  font-size: .87rem;
+  font-variant-numeric: tabular-nums;
+  padding-top: .15rem;
+}
+
+.cv-item__what > :first-child { margin-top: 0; }
+.cv-item__what > :last-child { margin-bottom: 0; }
+
+.cv-item__title { font-weight: 600; }
+
+.cv-item__where, .cv-item__detail {
+  color: var(--ink-muted);
+  font-size: .93rem;
+}
+
+@media (max-width: 34rem) {
+  .cv-item { grid-template-columns: 1fr; gap: .1rem; }
+}
+
+/* ─── photo gallery ───────────────────────────────────────────────────────── */
+
+.gallery {
+  columns: 3 15rem;
+  column-gap: .85rem;
+  margin-top: 1.5rem;
+}
+
+.gallery__item {
+  break-inside: avoid;
+  margin: 0 0 .85rem;
+}
+
+.gallery__button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  line-height: 0;
+}
+
+.gallery__button img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+  transition: transform .3s ease, filter .3s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gallery__button:hover img { transform: scale(1.02); filter: brightness(1.03); }
+}
+
+.gallery__caption {
+  font-size: .82rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin: .4rem .15rem 0;
+}
+
+/* ─── lightbox ────────────────────────────────────────────────────────────── */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: 2.5rem 1.25rem;
+  background: rgba(43, 40, 38, .92);
+  backdrop-filter: blur(3px);
+}
+
+.lightbox[hidden] { display: none; }
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.lightbox__caption {
+  color: #f4efe9;
+  font-size: .88rem;
+  text-align: center;
+  max-width: 40rem;
+  margin: 0;
+}
+
+.lightbox__btn {
+  position: absolute;
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+
+.lightbox__btn:hover { background: rgba(255, 255, 255, .25); }
+.lightbox__btn:focus-visible { outline-color: #fff; }
+
+.lightbox__close { top: 1rem; right: 1rem; }
+.lightbox__prev  { left: 1rem;  top: 50%; transform: translateY(-50%); }
+.lightbox__next  { right: 1rem; top: 50%; transform: translateY(-50%); }
+
+/* ─── placeholder callout ─────────────────────────────────────────────────── */
+
+/* Shown wherever a _data file still holds TODO content, so nothing ships
+   half-finished by accident. Delete the data placeholders and it disappears. */
+.todo {
+  background: var(--tint);
+  border: 1px dashed var(--accent);
+  border-radius: var(--radius);
+  padding: .85rem 1.1rem;
+  font-size: .9rem;
+  color: var(--ink);
+  margin: 1.25rem 0;
+}
+
+.todo strong { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   print — /cv is the canonical CV, so Cmd-P must produce a clean document
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+  :root {
+    --bg: #fff;
+    --surface: #fff;
+    --ink: #000;
+    --ink-muted: #333;
+    --accent: #000;
+    --rule: #bbb;
+    --shadow: none;
+  }
+
+  body { font-size: 10.5pt; line-height: 1.45; }
+
+  .site-header, .site-footer, .nav, .cv-actions, .skip-link, .todo { display: none !important; }
+
+  .site-header::before, .site-header::after { display: none; }
+
+  .wrap { max-width: none; padding: 0; }
+
+  .site-main { padding-bottom: 0; }
+
+  a { color: #000; text-decoration: none; }
+
+  /* Print the destination of external links — a paper CV still has to be useful. */
+  .cv-item__what a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8.5pt;
+    color: #555;
+    word-break: break-all;
+  }
+
+  h1 { font-size: 18pt; }
+  h2 { font-size: 12.5pt; margin-top: 1.1rem; page-break-after: avoid; }
+  h3 { font-size: 11pt; page-break-after: avoid; }
+
+  .cv-item, .entry { page-break-inside: avoid; break-inside: avoid; }
+
+  .entry { border: 0; padding: 0 0 .5rem; background: none; }
+
+  .section-title::after { display: none; }
+
+  @page { margin: 1.6cm 1.5cm; }
+}

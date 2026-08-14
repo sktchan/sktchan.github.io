@@ -1,0 +1,24 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {%- comment -%}
+    jekyll-seo-tag writes <title>, description, canonical URL, Open Graph and
+    Twitter card tags from _config.yml and each page's front matter.
+  {%- endcomment -%}
+  {% seo %}
+
+  {%- comment -%}
+    Preload the two fonts so text does not reflow after first paint. crossorigin
+    is required on font preloads even for same-origin files.
+  {%- endcomment -%}
+  <link rel="preload" href="{{ '/assets/fonts/fraunces.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/inter.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/assets/favicon.svg' | relative_url }}">
+
+  <meta name="theme-color" content="#ffebef">
+</head>

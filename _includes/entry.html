@@ -1,0 +1,74 @@
+{%- comment -%}
+  One record — a paper, poster, talk, course, or project. Used by every content
+  page so a record looks identical wherever it appears.
+
+  Usage:  {% include entry.html item=item %}
+
+  Recognised fields on `item` (all optional except title):
+    title     the thing's name
+    url       makes the title a link
+    authors   full author string; your own name is bolded automatically
+    venue     conference / journal / institution
+    year      shown after the venue
+    badge     small pill, e.g. "spotlight", "best poster"
+    role      e.g. "Teaching assistant" — shown where authors would be
+    note      a sentence of context
+    featured  true → tinted card (use for the strongest item on the page)
+    links     list of { name, url }
+{%- endcomment -%}
+
+{%- assign item = include.item -%}
+
+<article class="entry {% if item.featured %}entry--featured{% endif %}">
+  <h3 class="entry__title">
+    {%- if item.url -%}
+      <a href="{{ item.url }}">{{ item.title }}</a>
+    {%- else -%}
+      {{ item.title }}
+    {%- endif -%}
+    {%- comment -%} Explicit `!= ''` — an empty string is truthy in Liquid. {%- endcomment -%}
+    {%- if item.badge and item.badge != '' %}<span class="entry__badge">{{ item.badge }}</span>{% endif -%}
+  </h3>
+
+  {%- if item.authors -%}
+    {%- comment -%} Bold your own name so a reader can find you at a glance. {%- endcomment -%}
+    {%- capture me_long %}<strong>{{ site.author }}</strong>{% endcapture -%}
+    {%- capture me_short %}<strong>{{ site.author_short }}</strong>{% endcapture -%}
+    {%- assign authors = item.authors -%}
+    {%- if site.author_short and site.author_short != '' -%}
+      {%- assign authors = authors | replace: site.author_short, me_short -%}
+    {%- endif -%}
+    {%- assign authors = authors | replace: site.author, me_long -%}
+    <p class="entry__authors">{{ authors }}</p>
+  {%- endif -%}
+
+  {%- if item.role -%}
+    <p class="entry__authors">{{ item.role }}</p>
+  {%- endif -%}
+
+  {%- if item.venue or item.year -%}
+    <p class="entry__venue">
+      {%- if item.venue %}<em>{{ item.venue }}</em>{% endif -%}
+      {%- if item.venue and item.year %}, {% endif -%}
+      {%- if item.year %}{{ item.year }}{% endif -%}
+    </p>
+  {%- endif -%}
+
+  {%- if item.note -%}
+    <p class="entry__note">{{ item.note }}</p>
+  {%- endif -%}
+
+  {%- if item.tags -%}
+    <ul class="tags">
+      {%- for tag in item.tags %}<li>{{ tag }}</li>{% endfor -%}
+    </ul>
+  {%- endif -%}
+
+  {%- if item.links -%}
+    <ul class="entry__links">
+      {%- for link in item.links %}
+        <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</article>
