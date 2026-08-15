@@ -36,3 +36,10 @@ permalink: /research/
     {%- for item in r.in_progress %}{% include entry.html item=item %}{% endfor -%}
   </div>
 {%- endif -%}
+
+{%- if r.talks and r.talks.size > 0 -%}
+  <h2><span class="section-title">talks</span></h2>
+  <div class="entries">
+    {%- for item in r.talks %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}

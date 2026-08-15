@@ -58,7 +58,7 @@ right as-is; it just says TODO in a lot of places.
       (square, ~600×600). Currently a pink placeholder.
 - [ ] `_data/research.yml` — `statement`, the paper, the posters
 - [ ] `_data/cv.yml` — education, experience, awards, skills
-- [ ] `_data/teaching.yml` — courses, talks, mentoring, service
+- [ ] `_data/community.yml` — workshops, mentoring, volunteering
 - [ ] `_data/news.yml` — three or four recent things, newest first
 - [ ] `_data/projects.yml` — or delete its contents and drop `projects` from
       `nav:` in `_config.yml`
@@ -89,8 +89,10 @@ what a blind visitor and Google both read. Then delete the two
 stylesheet strips the nav, footer and colour, so the "print / save as pdf"
 button on the page produces a clean black-on-white document.
 
-Teaching, talks, service and publications are pulled into `/cv/` from
-`teaching.yml` and `research.yml` automatically, so you never type them twice.
+Publications, posters and talks are pulled into `/cv/` from `research.yml`, and
+workshops, mentoring and volunteering from `community.yml` — so nothing is typed
+twice. Talks live in `research.yml` rather than `community.yml` so they sit next
+to the work they're about.
 
 ---
 

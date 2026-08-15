@@ -1,0 +1,50 @@
+# Workshops, mentoring and volunteering — the /community/ page.
+# Any group you empty out disappears from the page.
+#
+# Talks live in research.yml, next to the work they're about.
+#
+# TODO: replace every placeholder below.
+
+statement: >-
+  TODO: optional — a sentence on why this work matters to you. Delete this line
+  if you'd rather the page open straight into the list.
+
+# ─── workshops you've run ────────────────────────────────────────────────────
+workshops:
+  - title: "TODO: Workshop Title"
+    role: "Organiser and facilitator"   # or "Co-organiser", "Instructor"
+    venue: "TODO: Where it ran — conference, department, community group"
+    year: "TODO: Month 2026"
+    note: >-
+      TODO: what it covered, who came, roughly how many people. Numbers help.
+    links:
+      - name: "materials"
+        url: "#"
+
+  - title: "TODO: Second Workshop"
+    role: "Instructor"
+    venue: "TODO: Where"
+    year: "2025"
+
+# ─── mentoring ───────────────────────────────────────────────────────────────
+mentoring:
+  - title: "TODO: Student name, or 'Undergraduate researcher'"
+    role: "TODO: e.g. Direct supervisor, Peer mentor"
+    year: "2025–2026"
+    note: >-
+      TODO: what you mentored them on, and where it went — a thesis, a poster,
+      a grad school offer.
+
+# ─── volunteering ────────────────────────────────────────────────────────────
+# Doesn't have to be research-related. Sustained volunteer work says something
+# real about you, and committees do read it.
+volunteering:
+  - title: "TODO: Volunteer role"
+    venue: "TODO: Organisation — e.g. [HOSPITAL]"
+    year: "2024–present"
+    note: >-
+      TODO: what you actually do there, and how often.
+
+  - title: "TODO: Second volunteer role"
+    venue: "TODO: Organisation"
+    year: "2023–2024"

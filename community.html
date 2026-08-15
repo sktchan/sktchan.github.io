@@ -1,0 +1,32 @@
+---
+layout: page
+title: community
+permalink: /community/
+---
+
+{%- assign c = site.data.community -%}
+
+{%- if c.statement -%}
+  <p>{{ c.statement }}</p>
+{%- endif -%}
+
+{%- if c.workshops and c.workshops.size > 0 -%}
+  <h2><span class="section-title">workshops</span></h2>
+  <div class="entries">
+    {%- for item in c.workshops %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}
+
+{%- if c.mentoring and c.mentoring.size > 0 -%}
+  <h2><span class="section-title">mentoring</span></h2>
+  <div class="entries">
+    {%- for item in c.mentoring %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}
+
+{%- if c.volunteering and c.volunteering.size > 0 -%}
+  <h2><span class="section-title">volunteering</span></h2>
+  <div class="entries">
+    {%- for item in c.volunteering %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}

@@ -10,13 +10,13 @@ wide: true
   stylesheet in main.scss strips the nav, footer, colours and backgrounds, so
   Cmd-P → "Save as PDF" produces a clean black-on-white document.
 
-  Teaching, talks and service are pulled from _data/teaching.yml and papers
-  from _data/research.yml, so nothing is entered twice.
+  Papers, posters and talks are pulled from _data/research.yml; workshops,
+  mentoring and volunteering from _data/community.yml. Nothing is entered twice.
 {%- endcomment -%}
 
 {%- assign cv = site.data.cv -%}
 {%- assign r  = site.data.research -%}
-{%- assign t  = site.data.teaching -%}
+{%- assign c  = site.data.community -%}
 {%- assign l  = site.data.links -%}
 
 {%- if cv.summary -%}
@@ -118,25 +118,10 @@ wide: true
   </div>
 {%- endif -%}
 
-{%- if t.courses and t.courses.size > 0 -%}
-  <h2><span class="section-title">teaching</span></h2>
-  <div class="cv-group">
-    {%- for item in t.courses %}
-      <div class="cv-item">
-        <div class="cv-item__when">{{ item.year }}</div>
-        <div class="cv-item__what">
-          <div class="cv-item__title">{{ item.title }}</div>
-          {%- if item.role %}<div class="cv-item__where">{{ item.role }}{% if item.venue %} &middot; {{ item.venue }}{% endif %}</div>{% endif -%}
-        </div>
-      </div>
-    {%- endfor %}
-  </div>
-{%- endif -%}
-
-{%- if t.talks and t.talks.size > 0 -%}
+{%- if r.talks and r.talks.size > 0 -%}
   <h2><span class="section-title">talks</span></h2>
   <div class="cv-group">
-    {%- for item in t.talks %}
+    {%- for item in r.talks %}
       <div class="cv-item">
         <div class="cv-item__when">{{ item.year }}</div>
         <div class="cv-item__what">
@@ -148,10 +133,45 @@ wide: true
   </div>
 {%- endif -%}
 
-{%- if t.service and t.service.size > 0 -%}
-  <h2><span class="section-title">service</span></h2>
+{%- comment -%}
+  Workshops, mentoring and volunteering come from community.yml, so they're
+  written once and appear both on /community/ and here.
+{%- endcomment -%}
+
+{%- if c.workshops and c.workshops.size > 0 -%}
+  <h2><span class="section-title">workshops</span></h2>
   <div class="cv-group">
-    {%- for item in t.service %}
+    {%- for item in c.workshops %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.year }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.role %}<div class="cv-item__where">{{ item.role }}{% if item.venue %} &middot; {{ item.venue }}{% endif %}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if c.mentoring and c.mentoring.size > 0 -%}
+  <h2><span class="section-title">mentoring</span></h2>
+  <div class="cv-group">
+    {%- for item in c.mentoring %}
+      <div class="cv-item">
+        <div class="cv-item__when">{{ item.year }}</div>
+        <div class="cv-item__what">
+          <div class="cv-item__title">{{ item.title }}</div>
+          {%- if item.role %}<div class="cv-item__where">{{ item.role }}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endfor %}
+  </div>
+{%- endif -%}
+
+{%- if c.volunteering and c.volunteering.size > 0 -%}
+  <h2><span class="section-title">volunteering</span></h2>
+  <div class="cv-group">
+    {%- for item in c.volunteering %}
       <div class="cv-item">
         <div class="cv-item__when">{{ item.year }}</div>
         <div class="cv-item__what">

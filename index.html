@@ -40,9 +40,9 @@ permalink: /
     <ul class="linkrow">
       {%- if l.email    and l.email    != '' %}<li><a href="mailto:{{ l.email }}">email</a></li>{% endif -%}
       {%- if l.scholar  and l.scholar  != '' %}<li><a href="{{ l.scholar }}">google scholar</a></li>{% endif -%}
+      {%- if l.linkedin and l.linkedin != '' %}<li><a href="{{ l.linkedin }}">linkedin</a></li>{% endif -%}
       {%- if l.github   and l.github   != '' %}<li><a href="{{ l.github }}">github</a></li>{% endif -%}
       {%- if l.orcid    and l.orcid    != '' %}<li><a href="{{ l.orcid }}">orcid</a></li>{% endif -%}
-      {%- if l.linkedin and l.linkedin != '' %}<li><a href="{{ l.linkedin }}">linkedin</a></li>{% endif -%}
       {%- if l.bluesky  and l.bluesky  != '' %}<li><a href="{{ l.bluesky }}">bluesky</a></li>{% endif -%}
       {%- if l.twitter  and l.twitter  != '' %}<li><a href="{{ l.twitter }}">twitter</a></li>{% endif -%}
       <li><a href="{{ '/cv/' | relative_url }}">cv</a></li>

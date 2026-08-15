@@ -45,6 +45,22 @@ posters:
     venue: "TODO: Venue"
     year: 2025
 
+# ─── talks ───────────────────────────────────────────────────────────────────
+# Talks live here rather than on /community/ so they sit next to the work
+# they're about. They're pulled into the CV page automatically.
+talks:
+  - title: "TODO: Talk Title"
+    venue: "TODO: Seminar / Conference / Lab, Institution"
+    year: "TODO: Month 2026"
+    badge: ""            # e.g. "invited"
+    links:
+      - name: "slides"
+        url: "#"
+
+  - title: "TODO: Second Talk Title"
+    venue: "TODO: Venue"
+    year: "2025"
+
 # ─── in progress ─────────────────────────────────────────────────────────────
 # Signals momentum without over-claiming. Delete if you'd rather not preview
 # unpublished work.

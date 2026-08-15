@@ -1,8 +1,9 @@
 # The CV. This page is canonical — there is no separate PDF; the print
 # stylesheet turns Cmd-P into a clean document.
 #
-# Teaching, talks and service live in teaching.yml and are pulled into the CV
-# page automatically, so you never enter them twice.
+# Talks live in research.yml, and workshops/mentoring/volunteering live in
+# community.yml. Both are pulled into the CV page automatically, so you never
+# enter anything twice.
 #
 # Each group is a list of items with: when, title, where, detail.
 # TODO: replace every placeholder below.
