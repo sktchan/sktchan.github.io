@@ -1,70 +1,60 @@
-# Research output. Three groups, each rendered as its own section on /research/.
+# Research output. Each group renders as its own section on /research/.
 # Delete a group's items and that section disappears.
 #
 # Your name is bolded automatically inside `authors` — write the list exactly as
 # it appears in the citation.
-#
-# TODO: replace every placeholder below with real work.
 
-# ─── the current-work blurb at the top of /research/ ─────────────────────────
+# ─── the blurb at the top of /research/ ──────────────────────────────────────
 statement: >-
-  TODO: two or three sentences on what you actually work on and why it matters.
-  Write it for a smart person outside your subfield — a committee member from a
-  neighbouring area should finish this paragraph knowing what you do.
+  I work on representation learning for transcriptomics — how to turn gene
+  expression measurements into representations a model can actually reason over.
+  Most of my time goes to benchmarking transformer, autoencoder and feedforward
+  architectures against one another, and asking what pre-training objectives and
+  input tokenizations genuinely buy you on downstream tasks like perturbation
+  prediction. Before this I worked in radiation oncology physics and in child
+  health research, which is where the clinical thread in my CV comes from.
 
 # ─── peer-reviewed papers ────────────────────────────────────────────────────
 papers:
-  - title: "TODO: Full Paper Title As Published"
-    authors: "A. Author, S. Chan, B. Author"
-    venue: "TODO: Conference or Journal Name"
-    year: 2026
-    featured: true          # tinted card — keep this on your strongest paper
-    badge: ""               # e.g. "spotlight", "oral", "best paper"
-    note: >-
-      TODO: one sentence on what the paper found, in plain language.
-    links:
-      - name: "pdf"
-        url: "#"
-      - name: "code"
-        url: "#"
-      - name: "bibtex"
-        url: "#"
-
-# ─── posters and workshop papers ─────────────────────────────────────────────
-posters:
-  - title: "TODO: Poster Title"
-    authors: "S. Chan, A. Author"
-    venue: "TODO: Workshop or Conference"
-    year: 2026
-    links:
-      - name: "poster (pdf)"
-        url: "#"
-
-  - title: "TODO: Second Poster Title"
-    authors: "S. Chan"
-    venue: "TODO: Venue"
+  - title: "Evaluating Accufix head and neck shoulder immobilization for head and neck radiation therapy"
+    authors: "Chan S, Ostapiak O, VanSantvoort T, Chow T"
+    venue: "URNCST Journal 9(2)"
     year: 2025
-
-# ─── talks ───────────────────────────────────────────────────────────────────
-# Talks live here rather than on /community/ so they sit next to the work
-# they're about. They're pulled into the CV page automatically.
-talks:
-  - title: "TODO: Talk Title"
-    venue: "TODO: Seminar / Conference / Lab, Institution"
-    year: "TODO: Month 2026"
-    badge: ""            # e.g. "invited"
-    links:
-      - name: "slides"
-        url: "#"
-
-  - title: "TODO: Second Talk Title"
-    venue: "TODO: Venue"
-    year: "2025"
-
-# ─── in progress ─────────────────────────────────────────────────────────────
-# Signals momentum without over-claiming. Delete if you'd rather not preview
-# unpublished work.
-in_progress:
-  - title: "TODO: Working title of a project in flight"
+    featured: true
     note: >-
-      TODO: one line on the question you're asking. No venue, no promises.
+      Benchmarked immobilization performance for head and neck radiotherapy,
+      comparing interfractional and intrafractional motion across setups.
+    links:
+      - name: "article"
+        url: "https://urncst.com/index.php/urncst/article/view/750"
+
+# ─── conference presentations ────────────────────────────────────────────────
+# Combined talks and posters, newest first.
+presentations:
+  - title: "The limits of transformers for transcriptomic representation learning"
+    venue: "ISCB — Intelligent Systems in Molecular Biology, Washington, USA"
+    year: "Jul 2026"
+
+  - title: "The limits of transformers for transcriptomic learning"
+    venue: "DIRO Scientific Day, Montréal, Canada"
+    year: "May 2026"
+
+  - title: "Evaluating input representations and architectures for learning transcriptomic embeddings"
+    venue: "IRIC International Symposium, Montréal, Canada"
+    year: "Oct 2025"
+
+  - title: "Evaluating input representations and architectures for learning transcriptomic embeddings"
+    venue: "IVADO Digital Futures, Montréal, Canada"
+    year: "Oct 2025"
+
+  - title: "Evaluating deep learning-based representations for modelling transcriptomic variation and function"
+    venue: "IRIC Scientific Day, Montréal, Canada"
+    year: "Jun 2025"
+
+  - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
+    venue: "RTi3 Conference, Toronto, Canada"
+    year: "Mar 2024"
+
+  - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
+    venue: "Canadian Undergraduate Conference on Healthcare (CUCOH), Toronto, Canada"
+    year: "Jan 2024"

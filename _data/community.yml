@@ -1,50 +1,80 @@
-# Workshops, mentoring and volunteering — the /community/ page.
+# Leadership, mentoring and volunteering — the /community/ page.
 # Any group you empty out disappears from the page.
 #
 # Talks live in research.yml, next to the work they're about.
-#
-# TODO: replace every placeholder below.
 
 statement: >-
-  TODO: optional — a sentence on why this work matters to you. Delete this line
-  if you'd rather the page open straight into the list.
+  Some of the work I care most about happens outside the lab — building more
+  equitable research spaces, mentoring students through the transitions I found
+  hardest, and showing up for the communities I've lived in.
 
 # ─── workshops you've run ────────────────────────────────────────────────────
-workshops:
-  - title: "TODO: Workshop Title"
-    role: "Organiser and facilitator"   # or "Co-organiser", "Instructor"
-    venue: "TODO: Where it ran — conference, department, community group"
-    year: "TODO: Month 2026"
-    note: >-
-      TODO: what it covered, who came, roughly how many people. Numbers help.
-    links:
-      - name: "materials"
-        url: "#"
+# Empty for now — add entries here and the section appears automatically.
+# Shape: title, role, venue, year, note, links (same as every other group).
+workshops: []
 
-  - title: "TODO: Second Workshop"
-    role: "Instructor"
-    venue: "TODO: Where"
-    year: "2025"
+# ─── leadership and organizing ───────────────────────────────────────────────
+leadership:
+  - title: "Equity, Diversity & Inclusion (EDI) Team"
+    venue: "Mila — Quebec AI Institute"
+    year: "Apr 2025 – present"
+    note: >-
+      Organizing institute-wide initiatives to build a more equitable, inclusive
+      and diverse environment across the AI research community.
+
+  - title: "Advisor, independent consultant"
+    year: "Jan 2025 – present"
+    note: >-
+      Multidisciplinary strategic guidance to an early-stage biotech startup —
+      biological feasibility, ML code development, and market audience strategy.
+
+  - title: "SciComm Consultant"
+    venue: "STEM Fellowship"
+    year: "Mar 2022 – present"
+    note: >-
+      Identified gaps in business processes and built tailored presentation
+      material from consultee assessments.
+
+  - title: "Vice President"
+    venue: "McMaster Chinese Students' Association"
+    year: "Apr 2022 – Apr 2023"
+    note: >-
+      Ran events logistics, booking and promotion, and led weekly subcommittee
+      meetings.
+
+  - title: "Design Review Team"
+    venue: "McMaster IMPACT Initiative"
+    year: "Mar 2021 – Jan 2022"
+    note: >-
+      Reviewed engineering prototypes custom-designed with students and
+      professors to increase accessibility for clients.
 
 # ─── mentoring ───────────────────────────────────────────────────────────────
 mentoring:
-  - title: "TODO: Student name, or 'Undergraduate researcher'"
-    role: "TODO: e.g. Direct supervisor, Peer mentor"
-    year: "2025–2026"
+  - title: "Undergraduate Mentor"
+    venue: "McMaster Women in STEM"
+    year: "Sep 2021 – Apr 2022"
     note: >-
-      TODO: what you mentored them on, and where it went — a thesis, a poster,
-      a grad school offer.
+      One-on-one mentoring of first-year students on academics and
+      extracurriculars, through the return from online to in-person schooling.
 
 # ─── volunteering ────────────────────────────────────────────────────────────
-# Doesn't have to be research-related. Sustained volunteer work says something
-# real about you, and committees do read it.
 volunteering:
-  - title: "TODO: Volunteer role"
-    venue: "TODO: Organisation — e.g. [HOSPITAL]"
-    year: "2024–present"
+  - title: "Inpatient Volunteer"
+    venue: "St. Joseph's Health Care Centre"
+    year: "Nov 2018 – Nov 2019"
     note: >-
-      TODO: what you actually do there, and how often.
+      Provided compassionate nonmedical care and support to inpatients.
 
-  - title: "TODO: Second volunteer role"
-    venue: "TODO: Organisation"
-    year: "2023–2024"
+  - title: "Winter Fair Executive"
+    venue: "Ernestine's Women's Shelter"
+    year: "Sep 2017 – Dec 2018"
+    note: >-
+      Organized and led weekly subcommittee meetings to plan events.
+
+  - title: "Restaurant Volunteer"
+    venue: "St. Francis Table"
+    year: "Nov 2017"
+    note: >-
+      Served meals in a welcoming space to those physically or mentally unable
+      to work.

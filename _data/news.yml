@@ -1,15 +1,20 @@
 # Recent updates, newest first. The homepage shows the top 5.
-# `date` is free text so you can write "Aug 2026" or "Fall 2026" — whatever fits.
+# `date` is free text — "Aug 2026", "Fall 2026", whatever fits.
 #
-# TODO: replace these three examples with real news, or delete them all
-# (an empty list hides the section entirely).
+# Drafted from your CV — edit the wording to sound like you.
 
-- date: "TODO"
-  text: "Paper accepted at [VENUE]."
-  url: ""      # optional — makes the text a link
+- date: "Jul 2026"
+  text: "Presented “The limits of transformers for transcriptomic representation learning” at ISCB in Washington, DC."
 
-- date: "TODO"
-  text: "Presented a poster at [WORKSHOP]."
+- date: "2026"
+  text: "Received the IRIC Master's Award."
 
-- date: "TODO"
-  text: "Started the PhD at [UNIVERSITY]."
+- date: "2025"
+  text: "Awarded an NSERC Canada Graduate Scholarship (Master's), along with the Mila Scientific Director Scholarship."
+
+- date: "Feb 2025"
+  text: "Our paper on Accufix immobilization for head and neck radiation therapy was published in the URNCST Journal."
+  url: "https://urncst.com/index.php/urncst/article/view/750"
+
+- date: "Jan 2025"
+  text: "Started my MSc at Université de Montréal, with Mila and IRIC."

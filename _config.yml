@@ -1,15 +1,20 @@
 # ─── site ────────────────────────────────────────────────────────────────────
-# TODO: check every value in this block reads the way you want it to.
 title: Serena Chan
-tagline: PhD student # TODO: e.g. "PhD student in Computer Science"
+tagline: computational biology + machine learning
 description: >-
-  TODO: one or two sentences about your research, written for a stranger.
-  This text is what shows up in Google results and link previews.
+  Serena Chan is an MSc student in computer science at Université de Montréal,
+  affiliated with Mila and IRIC, working on representation learning for
+  transcriptomics.
 author: Serena Chan
 
-# Both forms of your name get bolded automatically inside author lists, so
-# "S. Chan" in a citation stands out the same way "Serena Chan" does.
-author_short: S. Chan
+# Every form of your name gets bolded automatically inside author lists, so you
+# stand out whichever citation style a venue uses. Longest first — otherwise
+# "Chan S" would match inside "Chan Serena" and mangle it.
+author_forms:
+  - "Serena Chan"
+  - "Chan Serena"
+  - "S. Chan"
+  - "Chan S"
 
 url: https://sktchan.github.io
 baseurl: ""

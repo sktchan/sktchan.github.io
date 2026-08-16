@@ -1,29 +1,91 @@
 # The photo gallery.
 #
-# Workflow: drop full-size originals in photos-originals/ (git-ignored), run
-#   ./scripts/resize-photos.sh
-# which writes web-sized copies into assets/img/photos/. Then add an entry here.
+# Workflow for new photos: drop full-size originals in photos-originals/
+# (git-ignored), run ./scripts/resize-photos.sh, then add an entry here.
 #
-# `alt` is REQUIRED — it's what a blind visitor and Google both read. Describe
-# what's in the frame, not "photo". `caption` is optional and shown below the
-# image.
+# `alt` is what a blind visitor and Google both read — it describes what's in
+# the frame. `caption` is yours to write: place, year, or whatever you want to
+# say about the shot. Add a `caption:` line to any entry and it appears below
+# the image; leave it out and the photo stands alone.
 #
-# `width` and `height` are the pixel dimensions of the resized file. They stop
-# the page jumping around as images load. resize-photos.sh prints them for you.
-#
-# TODO: replace with real photographs.
+# Ordered for how the masonry grid looks rather than chronologically.
 
 intro: >-
-  TODO: a sentence about your photography — what you shoot, on what, why.
+  Shot on film, mostly while travelling. TODO: replace this line with a sentence
+  in your own words — what you shoot, what camera, why.
 
 photos:
-  - file: "placeholder-1.svg"
-    alt: "TODO: describe what is in this photograph"
-    caption: "TODO: optional caption — place, year, or a note"
-    width: 1600
-    height: 1067
-
-  - file: "placeholder-2.svg"
-    alt: "TODO: describe what is in this photograph"
-    width: 1067
+  - file: "img-2983.jpg"
+    alt: "Hundreds of brightly coloured open umbrellas suspended in rows above a narrow street, receding into the distance"
+    width: 1061
     height: 1600
+
+  - file: "img-8898.jpg"
+    alt: "Stacked Chinese and English shop signs and fire escapes crowding a Chinatown street in daylight"
+    width: 1600
+    height: 1060
+
+  - file: "img-2989.jpg"
+    alt: "A cable car descending toward a coastline at sunset, with islands silhouetted on a calm sea"
+    width: 1600
+    height: 1061
+
+  - file: "img-6574.jpg"
+    alt: "A Ferris wheel beside a row of red and orange autumn trees, mirrored in still water at dusk"
+    width: 1061
+    height: 1600
+
+  - file: "img-0237.jpg"
+    alt: "Two hikers sitting on a granite ledge, with a forested valley and snow-covered peaks behind them"
+    width: 1600
+    height: 1060
+
+  - file: "img-8923.jpg"
+    alt: "Sunlit fire escapes zigzagging up a brick facade, with gold figurative sculptures mounted on the wall"
+    width: 1060
+    height: 1600
+
+  - file: "img-2967.jpg"
+    alt: "Rows of staked vines in a vineyard, with a snow-streaked volcano rising behind low cloud"
+    width: 1061
+    height: 1600
+
+  - file: "img-8904.jpg"
+    alt: "Laundry strung on lines across a narrow alley between brick buildings, a tower rising at the far end"
+    width: 1060
+    height: 1600
+
+  - file: "img-0245.jpg"
+    alt: "Deep pink bougainvillea spilling over the entrance to an open garage with a white car parked inside"
+    width: 1060
+    height: 1600
+
+  - file: "img-8927.jpg"
+    alt: "The ornate corner of a brick building lit gold by low evening sun against a pale sky"
+    width: 1060
+    height: 1600
+
+  - file: "img-2962.jpg"
+    alt: "A sloping European street between pastel buildings, cafe umbrellas on one side and a blue-tiled facade on the other"
+    width: 1075
+    height: 1600
+
+  - file: "img-5180.jpg"
+    alt: "A row of sports cars at a meet, the nearest a black coupe with its hood raised over a polished engine bay"
+    width: 1060
+    height: 1600
+
+  - file: "img-8914.jpg"
+    alt: "A hazy city skyline seen through the steel trusses of a bridge"
+    width: 1060
+    height: 1600
+
+  - file: "img-3646.jpg"
+    alt: "A neon sign reading Aunties Supply with an arrow, under a ceiling hung with coloured mesh baskets in a dim bar"
+    width: 1060
+    height: 1600
+
+  - file: "img-0225.jpg"
+    alt: "Four people silhouetted in the foreground looking out over a glacial valley of granite cliffs and snow-dusted peaks"
+    width: 1600
+    height: 1060

@@ -16,19 +16,23 @@ permalink: /
     <h1>hi, i'm {{ site.author | split: ' ' | first | downcase }} &#10038;</h1>
 
     {%- comment -%}
-      TODO: rewrite this bio. Two or three sentences: what you work on, where,
-      with whom, and one thing that makes you specifically interesting. This is
-      the paragraph most visitors will read in full — everything else they skim.
+      The paragraph most visitors read in full — everything else they skim.
+      Edit freely; it's plain HTML.
     {%- endcomment -%}
     <p>
-      TODO: I'm a PhD student in <strong>[DEPARTMENT]</strong> at
-      <strong>[UNIVERSITY]</strong>, where I work with
-      <a href="#">[ADVISOR]</a> in the <a href="#">[LAB NAME]</a>.
+      I'm a master's student in computer science at the
+      <strong>Université de Montréal</strong>, working with
+      <a href="https://www.iric.ca/en/research/principal-investigators/sebastien-lemieux">Dr. Sébastien Lemieux</a>.
+      I'm affiliated with <a href="https://mila.quebec">Mila — Quebec AI Institute</a>
+      and the <a href="https://www.iric.ca/en">Institute for Research in Immunology and Cancer</a>.
     </p>
     <p>
-      TODO: I study [TOPIC] — roughly, [THE QUESTION YOU ARE ASKING, IN PLAIN
-      WORDS]. Before this I was at [PREVIOUS PLACE], where I [DID THE THING].
-      Outside the lab I take <a href="{{ '/photos/' | relative_url }}">photographs</a>.
+      I work on <a href="{{ '/research/' | relative_url }}">representation learning for
+      transcriptomics</a> — what it takes to turn gene expression measurements into
+      something a model can reason over, and which architectures and pre-training
+      objectives actually earn their keep. Before this I worked in radiation
+      oncology physics and child health research. Outside the lab I shoot
+      <a href="{{ '/photos/' | relative_url }}">film photography</a>.
     </p>
 
     {%- comment -%}
