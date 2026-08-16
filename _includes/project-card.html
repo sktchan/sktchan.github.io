@@ -3,9 +3,18 @@
   grids stay identical.
 
   Usage:  {% include project-card.html item=item %}
+          {% include project-card.html item=item heading=item.venue
+             subtitle=item.title modifier="card--tile" %}
 
   Built on native <details>/<summary>: keyboard operable and announced correctly
   by screen readers with no JavaScript, and it still works if a script fails.
+
+  Optional parameters, so one component serves both the 2-up research/project
+  grid and the denser community tiles:
+    heading   overrides the face text (default: item.title). Community tiles are
+              headed by the institute, with the role moved into the body.
+    subtitle  the line at the top of the body (default: item.role)
+    modifier  extra class on the <details>, e.g. "card--tile"
 
   Recognised fields:
     id            anchor target, so /research/#osms scrolls here
@@ -20,22 +29,28 @@
 {%- endcomment -%}
 
 {%- assign item = include.item -%}
+{%- assign heading = include.heading | default: item.title -%}
+{%- assign subtitle = include.subtitle | default: item.role -%}
 
-<details class="card" {% if item.id %}id="{{ item.id }}"{% endif %}>
+<details class="card {{ include.modifier }}" {% if item.id %}id="{{ item.id }}"{% endif %}>
   <summary class="card__face">
     {%- comment -%}
-      Title stacked over year rather than side by side — in a ~17rem grid column
+      Title stacked over year rather than side by side — in a narrow grid column
       a date sitting beside the title squeezes it into four or five lines.
     {%- endcomment -%}
     <span class="card__text">
-      <span class="card__title">{{ item.title }}</span>
+      <span class="card__title">{{ heading }}</span>
       {%- if item.year %}<span class="card__year">{{ item.year }}</span>{% endif -%}
     </span>
   </summary>
 
   <div class="card__body">
-    {%- if item.role -%}
-      <p class="card__role">{{ item.role }}</p>
+    {%- comment -%}
+      Skip the subtitle when it would just repeat the face — that happens on
+      research and project cards, where the heading already is the title.
+    {%- endcomment -%}
+    {%- if subtitle and subtitle != heading -%}
+      <p class="card__role">{{ subtitle }}</p>
     {%- endif -%}
 
     {%- if item.note -%}

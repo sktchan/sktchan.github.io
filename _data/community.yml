@@ -1,12 +1,79 @@
-# Leadership, mentoring and volunteering — the /community/ page.
+# Workshops, leadership, mentoring and volunteering — the /community/ page.
+# Rendered as small tiles you click into, in the order the groups appear below.
 # Any group you empty out disappears from the page.
+#
+# Except for workshops, a tile is headed by the institute (`venue`) rather than
+# the role — the role moves inside. Workshops are headed by their title, since
+# that's the useful thing about a workshop.
 #
 # Talks live in research.yml, next to the work they're about.
 
 # ─── workshops you've run ────────────────────────────────────────────────────
-# Empty for now — add entries here and the section appears automatically.
-# Shape: title, role, venue, year, note, links (same as every other group).
-workshops: []
+# Slides live in assets/docs/; code lives in github.com/sktchan/lab-demos, deep
+# linked to the folder for each workshop.
+workshops:
+  - title: "Debugging and Profiling in Julia"
+    note: >-
+      Demonstrated advanced debugging techniques using Debugger.jl and
+      Infiltrator.jl, and guided participants through performance profiling with
+      @profview and Nvidia Nsight Systems.
+    tags: ["Julia", "debugging", "profiling"]
+    links:
+      - name: "slides (pdf)"
+        url: "/assets/docs/workshop-debugging.pdf"
+      - name: "debugging code"
+        url: "https://github.com/sktchan/lab-demos/tree/main/debugging"
+      - name: "profiling code"
+        url: "https://github.com/sktchan/lab-demos/tree/main/profiling"
+
+  - title: "CUDA GPU Kernels in Julia"
+    note: >-
+      Taught the fundamentals of GPU architecture and custom kernel programming,
+      covering thread hierarchy, memory synchronization, dynamic shared memory
+      and atomic operations.
+    tags: ["Julia", "CUDA", "GPU"]
+    links:
+      # Slides deliberately not hosted — the source PDF is 11MB, too heavy to
+      # serve. The notebook in the repo covers the same material.
+      - name: "code"
+        url: "https://github.com/sktchan/lab-demos/tree/main/gpu_opt"
+
+  - title: "Nvidia Nsight Systems Performance Analysis"
+    note: >-
+      Led a system-wide performance analysis workshop, covering CLI data
+      collection with nsys profile, hardware bottleneck identification, and GUI
+      timeline visualization across CPU and GPU tasks.
+    tags: ["Nsight", "profiling", "GPU"]
+    links:
+      - name: "slides (pdf)"
+        url: "/assets/docs/workshop-nsight.pdf"
+      - name: "code"
+        url: "https://github.com/sktchan/lab-demos/tree/main/nsight"
+
+  - title: "Introduction to Quantum Computing"
+    note: >-
+      Presented the theoretical foundations of quantum mechanics and led a
+      practical tutorial on simulating multi-qubit circuits, entanglement and
+      state measurements using the Snowflurry.jl framework.
+    tags: ["Julia", "quantum computing", "Snowflurry.jl"]
+    links:
+      - name: "slides (pdf)"
+        url: "/assets/docs/workshop-quantum.pdf"
+      - name: "code"
+        url: "https://github.com/sktchan/lab-demos/tree/main/quantum"
+
+  - title: "Calcul Québec HPC Infrastructure"
+    note: >-
+      Facilitated technical onboarding for Calcul Québec's high-performance
+      computing clusters (Fir, Narval, Nibi, Rorqual, Trillium), covering SLURM
+      job scheduling, reference GPU unit (RGU) allocation and Globus file
+      transfers.
+    tags: ["HPC", "SLURM", "Calcul Québec"]
+    links:
+      - name: "slides (pdf)"
+        url: "/assets/docs/workshop-calcul-quebec.pdf"
+      - name: "code"
+        url: "https://github.com/sktchan/lab-demos/tree/main/calcul_quebec"
 
 # ─── leadership and organizing ───────────────────────────────────────────────
 leadership:
@@ -16,19 +83,6 @@ leadership:
     note: >-
       Organizing institute-wide initiatives to build a more equitable, inclusive
       and diverse environment across the AI research community.
-
-  - title: "Advisor, independent consultant"
-    year: "Jan 2025 – present"
-    note: >-
-      Multidisciplinary strategic guidance to an early-stage biotech startup —
-      biological feasibility, ML code development, and market audience strategy.
-
-  - title: "SciComm Consultant"
-    venue: "STEM Fellowship"
-    year: "Mar 2022 – present"
-    note: >-
-      Identified gaps in business processes and built tailored presentation
-      material from consultee assessments.
 
   - title: "Vice President"
     venue: "McMaster Chinese Students' Association"
@@ -44,8 +98,22 @@ leadership:
       Reviewed engineering prototypes custom-designed with students and
       professors to increase accessibility for clients.
 
-# ─── mentoring ───────────────────────────────────────────────────────────────
+# ─── mentoring and advising ──────────────────────────────────────────────────
 mentoring:
+  - title: "Advisor"
+    venue: "Independent consulting"
+    year: "Jan 2025 – present"
+    note: >-
+      Multidisciplinary strategic guidance to an early-stage biotech startup —
+      biological feasibility, ML code development, and market audience strategy.
+
+  - title: "SciComm Consultant"
+    venue: "STEM Fellowship"
+    year: "Mar 2022 – present"
+    note: >-
+      Identified gaps in business processes and built tailored presentation
+      material from consultee assessments.
+
   - title: "Undergraduate Mentor"
     venue: "McMaster Women in STEM"
     year: "Sep 2021 – Apr 2022"

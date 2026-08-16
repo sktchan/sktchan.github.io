@@ -6,35 +6,48 @@ permalink: /community/
 
 {%- assign c = site.data.community -%}
 
+{%- comment -%}
+  Denser tiles than /research/ and /projects/ so the two pages don't read as the
+  same grid. Workshops are headed by their title; everything else is headed by
+  the institute, with the role moved inside the card.
+{%- endcomment -%}
+
+{%- if c.workshops and c.workshops.size > 0 -%}
+  <h2><span class="section-title">workshops</span></h2>
+  <div class="cards cards--tiles">
+    {%- for item in c.workshops %}
+      {% include project-card.html item=item modifier="card--tile" %}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
 {%- if c.leadership and c.leadership.size > 0 -%}
   {%- comment -%}
     "and", not "&" — Fraunces sets a highly decorative ampersand that reads as a
     stray symbol at heading size.
   {%- endcomment -%}
   <h2><span class="section-title">leadership and organizing</span></h2>
-  <div class="entries">
-    {%- for item in c.leadership %}{% include entry.html item=item %}{% endfor -%}
-  </div>
-{%- endif -%}
-
-{%- comment -%} Empty today; fills in as soon as workshops.yml entries exist. {%- endcomment -%}
-{%- if c.workshops and c.workshops.size > 0 -%}
-  <h2><span class="section-title">workshops</span></h2>
-  <div class="entries">
-    {%- for item in c.workshops %}{% include entry.html item=item %}{% endfor -%}
+  <div class="cards cards--tiles">
+    {%- for item in c.leadership %}
+      {% include project-card.html item=item heading=item.venue subtitle=item.title modifier="card--tile" %}
+    {%- endfor -%}
   </div>
 {%- endif -%}
 
 {%- if c.mentoring and c.mentoring.size > 0 -%}
   <h2><span class="section-title">mentoring</span></h2>
-  <div class="entries">
-    {%- for item in c.mentoring %}{% include entry.html item=item %}{% endfor -%}
+  <div class="cards cards--tiles">
+    {%- for item in c.mentoring %}
+      {% include project-card.html item=item heading=item.venue subtitle=item.title modifier="card--tile" %}
+    {%- endfor -%}
   </div>
 {%- endif -%}
 
 {%- if c.volunteering and c.volunteering.size > 0 -%}
   <h2><span class="section-title">volunteering</span></h2>
-  <div class="entries">
-    {%- for item in c.volunteering %}{% include entry.html item=item %}{% endfor -%}
+  <div class="cards cards--tiles">
+    {%- for item in c.volunteering %}
+      {% include project-card.html item=item heading=item.venue subtitle=item.title modifier="card--tile" %}
+    {%- endfor -%}
   </div>
 {%- endif -%}

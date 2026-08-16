@@ -6,6 +6,13 @@ permalink: /research/
 
 {%- assign r = site.data.research -%}
 
+{%- if r.projects and r.projects.size > 0 -%}
+  <h2><span class="section-title">projects</span></h2>
+  <div class="cards">
+    {%- for item in r.projects %}{% include project-card.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}
+
 {%- comment -%}
   Papers are listed here as well as inside the project they came from, so a
   reader finds them either by skimming or by clicking into the work.
@@ -14,13 +21,6 @@ permalink: /research/
   <h2><span class="section-title">publications</span></h2>
   <div class="entries">
     {%- for item in r.papers %}{% include entry.html item=item %}{% endfor -%}
-  </div>
-{%- endif -%}
-
-{%- if r.projects and r.projects.size > 0 -%}
-  <h2><span class="section-title">projects</span></h2>
-  <div class="cards">
-    {%- for item in r.projects %}{% include project-card.html item=item %}{% endfor -%}
   </div>
 {%- endif -%}
 
