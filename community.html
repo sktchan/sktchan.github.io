@@ -10,6 +10,18 @@ permalink: /community/
   <p>{{ c.statement }}</p>
 {%- endif -%}
 
+{%- if c.leadership and c.leadership.size > 0 -%}
+  {%- comment -%}
+    "and", not "&" — Fraunces sets a highly decorative ampersand that reads as a
+    stray symbol at heading size.
+  {%- endcomment -%}
+  <h2><span class="section-title">leadership and organizing</span></h2>
+  <div class="entries">
+    {%- for item in c.leadership %}{% include entry.html item=item %}{% endfor -%}
+  </div>
+{%- endif -%}
+
+{%- comment -%} Empty today; fills in as soon as workshops.yml entries exist. {%- endcomment -%}
 {%- if c.workshops and c.workshops.size > 0 -%}
   <h2><span class="section-title">workshops</span></h2>
   <div class="entries">

@@ -1,0 +1,18 @@
+{%- comment -%}
+  The lightbox dialog shell, plus the script that drives it.
+
+  Include this once on any page that renders `[data-lightbox]` triggers —
+  /photos/ and /projects/ both do. lightbox.js binds every trigger on the page,
+  so a page can hold several independent galleries and the arrow keys will walk
+  through all of them in document order.
+{%- endcomment -%}
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lightbox__btn lightbox__close" type="button" data-close aria-label="Close">&times;</button>
+  <button class="lightbox__btn lightbox__prev"  type="button" data-prev  aria-label="Previous photo">&#8249;</button>
+  <button class="lightbox__btn lightbox__next"  type="button" data-next  aria-label="Next photo">&#8250;</button>
+  <img class="lightbox__img" id="lightbox-img" src="" alt="">
+  <p class="lightbox__caption" id="lightbox-caption"></p>
+</div>
+
+<script src="{{ '/assets/js/lightbox.js' | relative_url }}" defer></script>

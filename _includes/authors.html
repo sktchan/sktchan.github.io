@@ -1,0 +1,24 @@
+{%- comment -%}
+  Renders an author list with the site owner's name bolded.
+
+  Usage:  {% include authors.html list=item.authors %}
+
+  Venues cite names differently ("Serena Chan", "S. Chan", "Chan S"), so
+  _config.yml carries every form in `author_forms`. We replace the FIRST form
+  that appears and then stop: replacing more than once risks a shorter form
+  matching inside text a longer one already wrapped — "Chan S" would otherwise
+  hit inside "<strong>Chan Serena</strong>" and produce nested tags.
+
+  `author_forms` is ordered longest-first so the most specific match wins.
+{%- endcomment -%}
+
+{%- assign authors = include.list -%}
+{%- assign matched = false -%}
+{%- for form in site.author_forms -%}
+  {%- if matched == false and authors contains form -%}
+    {%- capture bolded %}<strong>{{ form }}</strong>{% endcapture -%}
+    {%- assign authors = authors | replace: form, bolded -%}
+    {%- assign matched = true -%}
+  {%- endif -%}
+{%- endfor -%}
+{{- authors -}}

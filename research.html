@@ -23,23 +23,9 @@ permalink: /research/
   </div>
 {%- endif -%}
 
-{%- if r.posters and r.posters.size > 0 -%}
-  <h2><span class="section-title">posters &amp; workshop papers</span></h2>
+{%- if r.presentations and r.presentations.size > 0 -%}
+  <h2><span class="section-title">presentations</span></h2>
   <div class="entries">
-    {%- for item in r.posters %}{% include entry.html item=item %}{% endfor -%}
-  </div>
-{%- endif -%}
-
-{%- if r.in_progress and r.in_progress.size > 0 -%}
-  <h2><span class="section-title">in progress</span></h2>
-  <div class="entries">
-    {%- for item in r.in_progress %}{% include entry.html item=item %}{% endfor -%}
-  </div>
-{%- endif -%}
-
-{%- if r.talks and r.talks.size > 0 -%}
-  <h2><span class="section-title">talks</span></h2>
-  <div class="entries">
-    {%- for item in r.talks %}{% include entry.html item=item %}{% endfor -%}
+    {%- for item in r.presentations %}{% include entry.html item=item %}{% endfor -%}
   </div>
 {%- endif -%}

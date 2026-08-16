@@ -1,0 +1,38 @@
+{%- comment -%}
+  A masonry gallery of lightbox-able images.
+
+  Usage:  {% include gallery.html items=list base="/assets/img/photos/" %}
+
+  Each item needs `file` and `alt`; `caption`, `width` and `height` are optional
+  but width/height are what stop the page shifting as images load.
+
+  The page including this must also include lightbox.html once.
+{%- endcomment -%}
+
+<div class="gallery">
+  {%- for photo in include.items %}
+    {%- assign src = photo.file | prepend: include.base | relative_url -%}
+    <figure class="gallery__item">
+      {%- comment -%}
+        A button, not a div — that's what makes the lightbox keyboard-reachable.
+      {%- endcomment -%}
+      <button class="gallery__button"
+              type="button"
+              data-lightbox
+              data-src="{{ src }}"
+              data-alt="{{ photo.alt | escape }}"
+              data-caption="{{ photo.caption | default: '' | escape }}"
+              aria-label="View larger: {{ photo.alt | escape }}">
+        <img src="{{ src }}"
+             alt="{{ photo.alt | escape }}"
+             width="{{ photo.width | default: 1600 }}"
+             height="{{ photo.height | default: 1067 }}"
+             loading="lazy"
+             decoding="async">
+      </button>
+      {%- if photo.caption and photo.caption != '' -%}
+        <figcaption class="gallery__caption">{{ photo.caption }}</figcaption>
+      {%- endif -%}
+    </figure>
+  {%- endfor %}
+</div>

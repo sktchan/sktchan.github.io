@@ -2,48 +2,28 @@
 layout: page
 title: projects
 permalink: /projects/
-intro: "Software and side projects — things I've built that aren't papers."
+intro: "Research projects and coursework, newest first. Reports, slides and code where they exist."
 ---
 
 {%- assign projects = site.data.projects -%}
 
 {%- if projects and projects.size > 0 -%}
-  <div class="cards">
+  <div class="entries">
     {%- for item in projects %}
-      <article class="entry">
-        {%- if item.thumb and item.thumb != '' -%}
-          <img class="card__thumb"
-               src="{{ item.thumb | relative_url }}"
-               alt=""
-               loading="lazy">
-        {%- endif -%}
+      {% include entry.html item=item %}
 
-        <h3 class="entry__title">
-          {%- if item.url -%}
-            <a href="{{ item.url }}">{{ item.title }}</a>
-          {%- else -%}
-            {{ item.title }}
-          {%- endif -%}
-        </h3>
-
-        {%- if item.note %}<p class="entry__note">{{ item.note }}</p>{% endif -%}
-
-        {%- if item.tags -%}
-          <ul class="tags">
-            {%- for tag in item.tags %}<li>{{ tag }}</li>{% endfor -%}
-          </ul>
-        {%- endif -%}
-
-        {%- if item.links -%}
-          <ul class="entry__links">
-            {%- for link in item.links %}
-              <li><a href="{{ link.url }}">{{ link.name }}</a></li>
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
-      </article>
+      {%- comment -%}
+        A project can carry its own image gallery. It sits outside the card so
+        the masonry can use the full page width.
+      {%- endcomment -%}
+      {%- if item.gallery and item.gallery.size > 0 -%}
+        {% include gallery.html items=item.gallery base="/assets/img/projects/" %}
+      {%- endif -%}
     {%- endfor %}
   </div>
+
+  {%- comment -%} One shared lightbox drives every gallery on the page. {%- endcomment -%}
+  {% include lightbox.html %}
 {%- else -%}
   <p>Nothing here yet.</p>
 {%- endif -%}

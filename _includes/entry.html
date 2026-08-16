@@ -31,15 +31,7 @@
   </h3>
 
   {%- if item.authors -%}
-    {%- comment -%} Bold your own name so a reader can find you at a glance. {%- endcomment -%}
-    {%- capture me_long %}<strong>{{ site.author }}</strong>{% endcapture -%}
-    {%- capture me_short %}<strong>{{ site.author_short }}</strong>{% endcapture -%}
-    {%- assign authors = item.authors -%}
-    {%- if site.author_short and site.author_short != '' -%}
-      {%- assign authors = authors | replace: site.author_short, me_short -%}
-    {%- endif -%}
-    {%- assign authors = authors | replace: site.author, me_long -%}
-    <p class="entry__authors">{{ authors }}</p>
+    <p class="entry__authors">{% include authors.html list=item.authors %}</p>
   {%- endif -%}
 
   {%- if item.role -%}
