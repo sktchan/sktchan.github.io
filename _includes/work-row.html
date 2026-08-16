@@ -1,46 +1,52 @@
 {%- comment -%}
-  One row on /work/ — year, title, links, and any talks or papers as nested
-  lines beneath.
+  One row in the work section: title, links, and — for the two research items
+  that have them — a dropdown of conferences.
 
   Usage:  {% include work-row.html item=item %}
 
-  Reuses the .cv-item shape (year column, content column, hairline rule) so
-  /work/ and /cv/ read as the same kind of document rather than two designs.
+  No dates: they were removed deliberately. The `year` values are still in
+  _data/*.yml if they're ever wanted back.
 
-  `note` is deliberately NOT rendered: /work/ is title-and-links only. The text
-  is still in _data/*.yml if it's ever wanted back.
+  `note` is not rendered either; rows are title-and-links only.
 {%- endcomment -%}
 
 {%- assign item = include.item -%}
 
-<div class="cv-item">
-  <div class="cv-item__when">{{ item.year }}</div>
-  <div class="cv-item__what">
-    <div class="work-row__head">
-      <span class="cv-item__title">{{ item.title }}</span>
-      {%- if item.links -%}
-        <span class="work-row__links">
-          {%- for link in item.links %}
-            <a href="{{ link.url }}">{{ link.name }}</a>
-          {%- endfor -%}
-        </span>
-      {%- endif -%}
-    </div>
-
-    {%- comment -%} Papers first, then talks — both as plain nested lines. {%- endcomment -%}
-    {%- if item.publications or item.presentations -%}
-      <ul class="work-row__sub">
-        {%- for pub in item.publications %}
-          <li>
-            {{ pub.title }} &middot;
-            <em>{{ pub.venue }}</em>, {{ pub.year }}
-            {%- for link in pub.links %} <a href="{{ link.url }}">{{ link.name }}</a>{% endfor -%}
-          </li>
+<div class="row">
+  <div class="row__head">
+    <span class="row__title">{{ item.title }}</span>
+    {%- if item.links -%}
+      <span class="row__links">
+        {%- for link in item.links %}
+          <a href="{{ link.url }}">{{ link.name }}</a>
         {%- endfor -%}
+      </span>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%}
+    A peer-reviewed paper stays visible rather than going in the dropdown — it's
+    the strongest credential on the row, and it isn't a conference.
+  {%- endcomment -%}
+  {%- if item.publications and item.publications.size > 0 -%}
+    {%- for pub in item.publications %}
+      <p class="row__pub">
+        {{ pub.title }} &middot; <em>{{ pub.venue }}</em>, {{ pub.year }}
+        {%- for link in pub.links %} <a href="{{ link.url }}">{{ link.name }}</a>{% endfor -%}
+      </p>
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- if item.presentations and item.presentations.size > 0 -%}
+    <details class="drop">
+      <summary class="drop__face">
+        conferences <span class="drop__count">{{ item.presentations.size }}</span>
+      </summary>
+      <ul class="drop__list">
         {%- for talk in item.presentations %}
           <li><em>{{ talk.venue }}</em>, {{ talk.year }}</li>
         {%- endfor %}
       </ul>
-    {%- endif -%}
-  </div>
+    </details>
+  {%- endif -%}
 </div>

@@ -206,11 +206,32 @@ code {
 
 /* ─── nav ─────────────────────────────────────────────────────────────────── */
 
+/* Sticky. This only works because the nav is a sibling of .site-header rather
+   than a child — that element has `overflow: hidden` to clip its blobs, and an
+   overflow-hidden ancestor silently disables position: sticky. */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  padding: .55rem 0;
+  margin-bottom: 2.5rem;
+}
+
 .nav {
   display: flex;
   flex-wrap: wrap;
   gap: .35rem;
-  margin-top: 1.5rem;
+}
+
+/* Anchor jumps should land below the sticky bar, not under it. */
+:target { scroll-margin-top: 4.5rem; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 .nav a {
@@ -458,42 +479,121 @@ code {
   padding: .1rem .6rem;
 }
 
-/* ─── work rows ───────────────────────────────────────────────────────────── */
+/* ─── sections on the one-pager ───────────────────────────────────────────── */
 
-/* /work/ reuses the .cv-item shape, so it and /cv/ read as the same kind of
-   document. These rules only add the title-plus-links row and the nested
-   talks/papers beneath it. */
+.band { margin-top: 3.5rem; }
 
-.work-row__head {
+.band__sub {
+  font-family: var(--sans);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 2rem 0 .35rem;
+}
+
+.band__note {
+  color: var(--ink-muted);
+  font-size: .88rem;
+}
+
+.band--cv { margin-bottom: 1rem; }
+
+/* ─── text rows (work and community) ──────────────────────────────────────── */
+
+.rows { display: grid; }
+
+.row {
+  padding: .7rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.row:last-child { border-bottom: 0; }
+
+.row__head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: .4rem .85rem;
+  gap: .3rem .85rem;
 }
 
-.work-row__links {
+.row__title {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.row__links {
   display: inline-flex;
   flex-wrap: wrap;
   gap: .5rem;
   font-size: .85rem;
 }
 
-.work-row__links a { white-space: nowrap; }
+.row__links a { white-space: nowrap; }
 
-.work-row__sub {
+.row__sub,
+.row__pub {
+  margin: .15rem 0 0;
+  color: var(--ink-muted);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+/* ─── conference dropdown ─────────────────────────────────────────────────── */
+
+/* Native <details>: keyboard operable and announced correctly with no
+   JavaScript, and it degrades to open content if a script ever fails. */
+.drop { margin-top: .35rem; }
+
+.drop__face {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--accent);
+  font-size: .85rem;
+  border-radius: var(--radius-pill);
+}
+
+.drop__face::-webkit-details-marker { display: none; }
+
+.drop__face::after {
+  content: "";
+  width: .35rem;
+  height: .35rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .drop__face::after { transition: transform .2s ease; }
+}
+
+.drop[open] .drop__face::after { transform: rotate(225deg) translate(-2px, -2px); }
+
+.drop__count {
+  background: var(--tint);
+  border-radius: var(--radius-pill);
+  padding: 0 .45rem;
+  font-size: .78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.drop__list {
   list-style: none;
   padding: 0;
-  margin: .35rem 0 0;
+  margin: .4rem 0 .2rem;
   color: var(--ink-muted);
   font-size: .88rem;
   line-height: 1.55;
 }
 
-/* A small pink marker instead of a bullet, to tie the nested lines to the
-   palette rather than leaving browser-default discs. */
-.work-row__sub > li { padding-left: .9rem; position: relative; }
+.drop__list > li { padding-left: .9rem; position: relative; }
 
-.work-row__sub > li::before {
+.drop__list > li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -502,89 +602,6 @@ code {
   height: .3rem;
   border-radius: 50%;
   background: var(--tint-deep);
-}
-
-/* ─── community photo tiles ───────────────────────────────────────────────── */
-
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-  gap: .7rem;
-  margin-top: 1.25rem;
-}
-
-.tile {
-  position: relative;
-  margin: 0;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--tint);
-}
-
-.tile__img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tile__img--empty {
-  background: linear-gradient(140deg, var(--tint) 0%, var(--tint-deep) 100%);
-}
-
-/* The label is always in the DOM so screen readers and search engines get it;
-   CSS only controls whether sighted pointer users see it at rest. */
-.tile__label {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: .15rem;
-  padding: .85rem;
-  background: linear-gradient(to top, rgba(43, 40, 38, .82) 0%, rgba(43, 40, 38, .35) 55%, transparent 100%);
-  color: #fff;
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .tile__label { transition: opacity .2s ease; }
-}
-
-.tile:hover .tile__label,
-.tile:focus-within .tile__label { opacity: 1; }
-
-/* Without hover there is no way to reveal a hidden label, and a tile with no
-   photo is just a pink square — so in both cases show it permanently. */
-@media (hover: none) {
-  .tile__label { opacity: 1; }
-}
-
-.tile--no-photo .tile__label {
-  opacity: 1;
-  background: none;
-  color: var(--accent);
-  justify-content: center;
-}
-
-.tile__where {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: .95rem;
-  line-height: 1.25;
-}
-
-.tile__role {
-  font-size: .8rem;
-  line-height: 1.35;
-  opacity: .85;
-}
-
-.tile--no-photo .tile__role { color: var(--ink-muted); opacity: 1; }
-
-@media (max-width: 30rem) {
-  .tiles { grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); }
 }
 
 /* ─── the heart beside the homepage greeting ──────────────────────────────── */
@@ -714,15 +731,17 @@ code {
 
 /* ─── photo gallery ───────────────────────────────────────────────────────── */
 
+/* Denser than before: 15 photos sit inside the one-pager, so they read as a
+   thumbnail grid rather than three big columns. */
 .gallery {
-  columns: 3 15rem;
-  column-gap: .85rem;
+  columns: 5 9rem;
+  column-gap: .6rem;
   margin-top: 1.5rem;
 }
 
 .gallery__item {
   break-inside: avoid;
-  margin: 0 0 .85rem;
+  margin: 0 0 .6rem;
 }
 
 .gallery__button {

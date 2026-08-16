@@ -8,9 +8,16 @@
       <div class="wrap {% if page.wide %}wrap--wide{% endif %}">
         <p class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></p>
         {% if site.tagline %}<p class="site-tagline">{{ site.tagline }}</p>{% endif %}
-        {% include nav.html %}
       </div>
     </header>
+
+    {%- comment -%}
+      The nav sits OUTSIDE .site-header on purpose. That element sets
+      `overflow: hidden` to clip its decorative blobs, and an overflow-hidden
+      ancestor silently disables `position: sticky` on any descendant — the nav
+      would just scroll away with no error to explain why.
+    {%- endcomment -%}
+    {% include nav.html %}
 
     <main class="site-main" id="main">
       <div class="wrap {% if page.wide %}wrap--wide{% endif %}">

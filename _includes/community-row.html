@@ -1,0 +1,32 @@
+{%- comment -%}
+  One row in the community section — the same plain-text shape as work.
+
+  Usage:  {% include community-row.html item=item %}
+
+  Workshops have no `venue`, so their title is the main line and their links
+  (slides plus the lab-demos folder) sit beside it. Everything else leads with
+  the institute and puts the role underneath.
+
+  No dates, and `note` is not rendered.
+{%- endcomment -%}
+
+{%- assign item = include.item -%}
+{%- assign lead = item.venue | default: item.title -%}
+
+<div class="row">
+  <div class="row__head">
+    <span class="row__title">{{ lead }}</span>
+    {%- if item.links -%}
+      <span class="row__links">
+        {%- for link in item.links %}
+          <a href="{{ link.url }}">{{ link.name }}</a>
+        {%- endfor -%}
+      </span>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Only shown when it isn't just repeating the lead line. {%- endcomment -%}
+  {%- if item.venue and item.title != item.venue -%}
+    <p class="row__sub">{{ item.title }}</p>
+  {%- endif -%}
+</div>

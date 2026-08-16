@@ -2,9 +2,19 @@
 layout: default
 title: Home
 permalink: /
+wide: true
 ---
 
 {%- assign l = site.data.links -%}
+{%- assign r = site.data.research -%}
+{%- assign pj = site.data.projects -%}
+{%- assign c = site.data.community -%}
+{%- assign ph = site.data.photos -%}
+
+{%- comment -%}
+  The whole site lives on this page. /cv/ is the only separate page, linked at
+  the bottom and from the nav.
+{%- endcomment -%}
 
 <section class="intro">
   <img class="intro__photo"
@@ -15,10 +25,6 @@ permalink: /
   <div class="intro__body">
     <h1>hi, i'm {{ site.author | split: ' ' | first | downcase }} <span class="heart" aria-hidden="true">&#9829;</span></h1>
 
-    {%- comment -%}
-      The paragraph most visitors read in full — everything else they skim.
-      Edit freely; it's plain HTML.
-    {%- endcomment -%}
     <p>
       I'm a master's student in computer science at the
       <strong>Université de Montréal</strong>, working with
@@ -27,19 +33,17 @@ permalink: /
       and the <a href="https://www.iric.ca/en">Institute for Research in Immunology and Cancer</a>.
     </p>
     <p>
-      I work on <a href="{{ '/research/' | relative_url }}">representation learning for
-      transcriptomics</a> — what it takes to turn gene expression measurements into
-      something a model can reason over, and which architectures and pre-training
-      objectives actually earn their keep. Before this I worked in radiation
-      oncology physics and child health research. Outside the lab I shoot
-      <a href="{{ '/photos/' | relative_url }}">film photography</a>.
+      I work on representation learning for transcriptomics — what it takes to
+      turn gene expression measurements into something a model can reason over,
+      and which architectures and pre-training objectives actually earn their
+      keep. Before this I worked in radiation oncology physics and child health
+      research. Outside the lab I shoot
+      <a href="#photos">film photography</a>.
     </p>
 
     {%- comment -%}
       An empty string is truthy in Liquid, so every link needs an explicit
       `!= ''` test — otherwise a blank entry in links.yml renders a dead pill.
-      (Liquid's `blank` keyword doesn't help: it calls String#blank?, which
-      only exists under ActiveSupport, so in Jekyll it matches nothing.)
     {%- endcomment -%}
     <ul class="linkrow">
       {%- if l.email    and l.email    != '' %}<li><a href="mailto:{{ l.email }}">email</a></li>{% endif -%}
@@ -54,21 +58,94 @@ permalink: /
   </div>
 </section>
 
+{%- comment -%} ─── news ──────────────────────────────────────────────── {%- endcomment -%}
 {%- if site.data.news and site.data.news.size > 0 -%}
-  <h2><span class="section-title">news</span></h2>
-
-  <ul class="news">
-    {%- for item in site.data.news limit: 5 %}
-      <li>
-        <span class="news__date">{{ item.date }}</span>
-        <span class="news__text">
-          {%- if item.url and item.url != '' -%}
-            <a href="{{ item.url }}">{{ item.text }}</a>
-          {%- else -%}
-            {{ item.text }}
-          {%- endif -%}
-        </span>
-      </li>
-    {%- endfor %}
-  </ul>
+  <section id="news" class="band">
+    <h2><span class="section-title">news</span></h2>
+    <ul class="news">
+      {%- for item in site.data.news limit: 5 %}
+        <li>
+          <span class="news__date">{{ item.date }}</span>
+          <span class="news__text">
+            {%- if item.url and item.url != '' -%}
+              <a href="{{ item.url }}">{{ item.text }}</a>
+            {%- else -%}
+              {{ item.text }}
+            {%- endif -%}
+          </span>
+        </li>
+      {%- endfor %}
+    </ul>
+  </section>
 {%- endif -%}
+
+{%- comment -%} ─── work ──────────────────────────────────────────────── {%- endcomment -%}
+<section id="work" class="band">
+  <h2><span class="section-title">work</span></h2>
+
+  {%- if r.projects and r.projects.size > 0 -%}
+    <h3 class="band__sub">research</h3>
+    <div class="rows">
+      {%- for item in r.projects %}{% include work-row.html item=item %}{% endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if pj and pj.size > 0 -%}
+    <h3 class="band__sub">projects</h3>
+    <div class="rows">
+      {%- for item in pj %}{% include work-row.html item=item %}{% endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{%- comment -%} ─── community ─────────────────────────────────────────── {%- endcomment -%}
+<section id="community" class="band">
+  <h2><span class="section-title">community</span></h2>
+
+  {%- if c.workshops and c.workshops.size > 0 -%}
+    <h3 class="band__sub">workshops</h3>
+    <div class="rows">
+      {%- for item in c.workshops %}{% include community-row.html item=item %}{% endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if c.leadership and c.leadership.size > 0 -%}
+    <h3 class="band__sub">leadership and organizing</h3>
+    <div class="rows">
+      {%- for item in c.leadership %}{% include community-row.html item=item %}{% endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if c.mentoring and c.mentoring.size > 0 -%}
+    <h3 class="band__sub">mentoring</h3>
+    <div class="rows">
+      {%- for item in c.mentoring %}{% include community-row.html item=item %}{% endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if c.volunteering and c.volunteering.size > 0 -%}
+    <h3 class="band__sub">volunteering</h3>
+    <div class="rows">
+      {%- for item in c.volunteering %}{% include community-row.html item=item %}{% endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{%- comment -%} ─── photos ────────────────────────────────────────────── {%- endcomment -%}
+{%- if ph.photos and ph.photos.size > 0 -%}
+  <section id="photos" class="band">
+    <h2><span class="section-title">photos</span></h2>
+    {% include gallery.html items=ph.photos base="/assets/img/photos/" %}
+  </section>
+{%- endif -%}
+
+{%- comment -%} ─── cv ────────────────────────────────────────────────── {%- endcomment -%}
+<section id="cv" class="band band--cv">
+  <h2><span class="section-title">cv</span></h2>
+  <p>
+    <a class="button" href="{{ '/cv/' | relative_url }}">read my cv &rarr;</a>
+  </p>
+  <p class="band__note">Opens as a page you can print or save as a PDF.</p>
+</section>
+
+{% include lightbox.html %}

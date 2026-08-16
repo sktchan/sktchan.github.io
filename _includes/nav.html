@@ -1,16 +1,30 @@
 {%- comment -%}
-  Nav items come from `nav:` in _config.yml. A page is current when its URL
-  matches the nav entry — compared with trailing slashes normalised, since
-  Jekyll writes "/research/" but the home page is bare "/".
+  Nav items come from `nav:` in _config.yml. The site is one scrolling page, so
+  most entries are in-page anchors; only /cv/ is a real URL.
+
+  Anchors get no active state — that would need scroll-spy, which needs
+  JavaScript, and isn't worth it for five links. A real URL still lights up when
+  you're on it, which is what /cv/ relies on.
+
+  When you're NOT on the home page, anchors have to be prefixed with "/" or they
+  resolve against the current page and go nowhere.
 {%- endcomment -%}
 
-<nav class="nav" aria-label="Main">
-  {%- assign here = page.url | remove_first: 'index.html' -%}
-  {%- for item in site.nav -%}
-    {%- if here == item.url -%}
-      <a href="{{ item.url | relative_url }}" aria-current="page">{{ item.title }}</a>
-    {%- else -%}
-      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-    {%- endif -%}
-  {%- endfor -%}
+<nav class="nav-bar" aria-label="Main">
+  <div class="wrap {% if page.wide %}wrap--wide{% endif %}">
+    <div class="nav">
+      {%- assign home = '/' | relative_url -%}
+      {%- for item in site.nav -%}
+        {%- if item.url contains '#' -%}
+          {%- assign target = item.url -%}
+          {%- unless page.url == '/' %}{% assign target = home | append: item.url %}{% endunless -%}
+          <a href="{{ target }}">{{ item.title }}</a>
+        {%- elsif page.url == item.url -%}
+          <a href="{{ item.url | relative_url }}" aria-current="page">{{ item.title }}</a>
+        {%- else -%}
+          <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
 </nav>
