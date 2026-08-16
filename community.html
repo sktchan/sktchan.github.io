@@ -6,10 +6,6 @@ permalink: /community/
 
 {%- assign c = site.data.community -%}
 
-{%- if c.statement -%}
-  <p>{{ c.statement }}</p>
-{%- endif -%}
-
 {%- if c.leadership and c.leadership.size > 0 -%}
   {%- comment -%}
     "and", not "&" — Fraunces sets a highly decorative ampersand that reads as a

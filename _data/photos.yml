@@ -10,10 +10,6 @@
 #
 # Ordered for how the masonry grid looks rather than chronologically.
 
-intro: >-
-  Shot on film, mostly while travelling. TODO: replace this line with a sentence
-  in your own words — what you shoot, what camera, why.
-
 photos:
   - file: "img-2983.jpg"
     alt: "Hundreds of brightly coloured open umbrellas suspended in rows above a narrow street, receding into the distance"

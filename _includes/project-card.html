@@ -1,0 +1,101 @@
+{%- comment -%}
+  One expandable project card, used by both /research/ and /projects/ so the two
+  grids stay identical.
+
+  Usage:  {% include project-card.html item=item %}
+
+  Built on native <details>/<summary>: keyboard operable and announced correctly
+  by screen readers with no JavaScript, and it still works if a script fails.
+
+  Recognised fields:
+    id            anchor target, so /research/#osms scrolls here
+    title, year   the card face
+    role          supervisor or professor
+    note          the description
+    tags          list of strings
+    links         list of { name, url }
+    publications  list of paper records (title, authors, venue, year, links)
+    presentations list of { title, venue, year }
+    gallery       list of { file, alt } under assets/img/projects/
+{%- endcomment -%}
+
+{%- assign item = include.item -%}
+
+<details class="card" {% if item.id %}id="{{ item.id }}"{% endif %}>
+  <summary class="card__face">
+    {%- comment -%}
+      Title stacked over year rather than side by side — in a ~17rem grid column
+      a date sitting beside the title squeezes it into four or five lines.
+    {%- endcomment -%}
+    <span class="card__text">
+      <span class="card__title">{{ item.title }}</span>
+      {%- if item.year %}<span class="card__year">{{ item.year }}</span>{% endif -%}
+    </span>
+  </summary>
+
+  <div class="card__body">
+    {%- if item.role -%}
+      <p class="card__role">{{ item.role }}</p>
+    {%- endif -%}
+
+    {%- if item.note -%}
+      <p class="card__note">{{ item.note }}</p>
+    {%- endif -%}
+
+    {%- if item.tags -%}
+      <ul class="tags">
+        {%- for tag in item.tags %}<li>{{ tag }}</li>{% endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if item.links -%}
+      <ul class="entry__links">
+        {%- for link in item.links %}
+          <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if item.publications and item.publications.size > 0 -%}
+      <h3 class="card__subhead">publication{% if item.publications.size > 1 %}s{% endif %}</h3>
+      <ul class="card__list">
+        {%- for pub in item.publications %}
+          <li>
+            <span class="card__list-title">{{ pub.title }}</span>
+            <span class="card__list-meta">
+              {% include authors.html list=pub.authors %} &middot;
+              <em>{{ pub.venue }}</em>, {{ pub.year }}
+            </span>
+            {%- if pub.links -%}
+              <ul class="entry__links">
+                {%- for link in pub.links %}
+                  <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor %}
+      </ul>
+    {%- endif -%}
+
+    {%- if item.presentations and item.presentations.size > 0 -%}
+      <h3 class="card__subhead">presentations</h3>
+      <ul class="card__list">
+        {%- for talk in item.presentations %}
+          <li>
+            <span class="card__list-title">{{ talk.title }}</span>
+            <span class="card__list-meta"><em>{{ talk.venue }}</em>, {{ talk.year }}</span>
+          </li>
+        {%- endfor %}
+      </ul>
+    {%- endif -%}
+
+    {%- if item.gallery and item.gallery.size > 0 -%}
+      {%- comment -%}
+        Images inside a closed <details> are display:none, so `loading="lazy"`
+        means they aren't fetched until someone actually opens the card.
+      {%- endcomment -%}
+      {% include gallery.html items=item.gallery base="/assets/img/projects/" %}
+    {%- endif -%}
+  </div>
+</details>

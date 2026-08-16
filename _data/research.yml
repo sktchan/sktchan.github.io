@@ -1,60 +1,95 @@
-# Research output. Each group renders as its own section on /research/.
-# Delete a group's items and that section disappears.
+# Research — supervised positions, each owning the presentations that came out of
+# it, plus the peer-reviewed papers.
+#
+# Rendered on /research/ as a card grid: the card face shows title + year, and
+# clicking opens the description, links and presentations.
 #
 # Your name is bolded automatically inside `authors` — write the list exactly as
 # it appears in the citation.
 
-# ─── the blurb at the top of /research/ ──────────────────────────────────────
-statement: >-
-  I work on representation learning for transcriptomics — how to turn gene
-  expression measurements into representations a model can actually reason over.
-  Most of my time goes to benchmarking transformer, autoencoder and feedforward
-  architectures against one another, and asking what pre-training objectives and
-  input tokenizations genuinely buy you on downstream tasks like perturbation
-  prediction. Before this I worked in radiation oncology physics and in child
-  health research, which is where the clinical thread in my CV comes from.
-
 # ─── peer-reviewed papers ────────────────────────────────────────────────────
+# Also listed inside the project they came from, so a reader finds them either
+# way: skimming the top of /research/, or clicking into the work itself.
 papers:
   - title: "Evaluating Accufix head and neck shoulder immobilization for head and neck radiation therapy"
     authors: "Chan S, Ostapiak O, VanSantvoort T, Chow T"
     venue: "URNCST Journal 9(2)"
     year: 2025
-    featured: true
-    note: >-
-      Benchmarked immobilization performance for head and neck radiotherapy,
-      comparing interfractional and intrafractional motion across setups.
     links:
       - name: "article"
         url: "https://urncst.com/index.php/urncst/article/view/750"
 
-# ─── conference presentations ────────────────────────────────────────────────
-# Combined talks and posters, newest first.
-presentations:
-  - title: "The limits of transformers for transcriptomic representation learning"
-    venue: "ISCB — Intelligent Systems in Molecular Biology, Washington, USA"
-    year: "Jul 2026"
+# ─── research projects ───────────────────────────────────────────────────────
+projects:
+  - id: "tokenization"
+    title: "Transcriptomic foundation model tokenization"
+    role: "Supervisor: Dr. Sébastien Lemieux, Université de Montréal"
+    year: "Jan 2025 – present"
+    note: >-
+      Building an evaluation framework that varies tokenization, pre-training
+      objective and architecture together, to see which combinations actually
+      help on downstream perturbation prediction.
+    tags: ["Julia", "Flux.jl", "transformers", "transcriptomics"]
+    links:
+      - name: "code"
+        url: "https://github.com/lemieux-lab/LTformers"
+    presentations:
+      - title: "The limits of transformers for transcriptomic representation learning"
+        venue: "ISCB — Intelligent Systems in Molecular Biology, Washington, USA"
+        year: "Jul 2026"
+      - title: "The limits of transformers for transcriptomic learning"
+        venue: "DIRO Scientific Day, Montréal, Canada"
+        year: "May 2026"
+      - title: "Evaluating input representations and architectures for learning transcriptomic embeddings"
+        venue: "IRIC International Symposium, Montréal, Canada"
+        year: "Oct 2025"
+      - title: "Evaluating input representations and architectures for learning transcriptomic embeddings"
+        venue: "IVADO Digital Futures, Montréal, Canada"
+        year: "Oct 2025"
+      - title: "Evaluating deep learning-based representations for modelling transcriptomic variation and function"
+        venue: "IRIC Scientific Day, Montréal, Canada"
+        year: "Jun 2025"
 
-  - title: "The limits of transformers for transcriptomic learning"
-    venue: "DIRO Scientific Day, Montréal, Canada"
-    year: "May 2026"
+  - id: "osms"
+    title: "OSMS for head and neck radiation therapy"
+    role: "Supervisor: Dr. Orest Ostapiak, Juravinski Cancer Centre"
+    year: "Sep 2023 – Apr 2024"
+    note: >-
+      Evaluated immobilization systems for minimizing 6D interfractional and
+      intrafractional motion, and benchmarked AlignRT optical surface monitoring
+      against cone-beam CT image registration.
+    tags: ["radiation oncology", "image registration"]
+    links:
+      - name: "report (pdf)"
+        url: "/assets/docs/osms-report.pdf"
+      - name: "code"
+        url: "https://github.com/sktchan/alignRT-preprocessing"
+    publications:
+      - title: "Evaluating Accufix head and neck shoulder immobilization for head and neck radiation therapy"
+        authors: "Chan S, Ostapiak O, VanSantvoort T, Chow T"
+        venue: "URNCST Journal 9(2)"
+        year: 2025
+        links:
+          - name: "article"
+            url: "https://urncst.com/index.php/urncst/article/view/750"
+    presentations:
+      - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
+        venue: "RTi3 Conference, Toronto, Canada"
+        year: "Mar 2024"
+      - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
+        venue: "Canadian Undergraduate Conference on Healthcare (CUCOH), Toronto, Canada"
+        year: "Jan 2024"
 
-  - title: "Evaluating input representations and architectures for learning transcriptomic embeddings"
-    venue: "IRIC International Symposium, Montréal, Canada"
-    year: "Oct 2025"
-
-  - title: "Evaluating input representations and architectures for learning transcriptomic embeddings"
-    venue: "IVADO Digital Futures, Montréal, Canada"
-    year: "Oct 2025"
-
-  - title: "Evaluating deep learning-based representations for modelling transcriptomic variation and function"
-    venue: "IRIC Scientific Day, Montréal, Canada"
-    year: "Jun 2025"
-
-  - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
-    venue: "RTi3 Conference, Toronto, Canada"
-    year: "Mar 2024"
-
-  - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
-    venue: "Canadian Undergraduate Conference on Healthcare (CUCOH), Toronto, Canada"
-    year: "Jan 2024"
+  - id: "hpa-axis"
+    title: "Housing insecurity and the HPA axis in children"
+    role: "Supervisor: Dr. Krysta Andrews, Offord Centre for Child Studies"
+    year: "Sep 2022 – Apr 2023"
+    note: >-
+      A systematic review of how socioenvironmental housing instability affects
+      HPA axis functioning in children, alongside analysis of salivary cortisol
+      data linking housing quality to long-term neuroendocrine stress
+      dysregulation.
+    tags: ["systematic review", "biomarkers"]
+    links:
+      - name: "poster (pdf)"
+        url: "/assets/docs/hpa-poster.pdf"

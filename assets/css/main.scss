@@ -462,9 +462,10 @@ code {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
   gap: 1rem;
   margin-top: 1.25rem;
+  align-items: start;   /* don't stretch short cards to match tall neighbours */
 }
 
 .card__thumb {
@@ -476,6 +477,134 @@ code {
   margin-bottom: .85rem;
   background: var(--tint);
 }
+
+/* ─── expandable project card ─────────────────────────────────────────────── */
+
+/* Built on <details>/<summary>: keyboard operable and correctly announced with
+   no JavaScript at all. */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  transition: box-shadow .18s ease, border-color .18s ease;
+}
+
+.card:hover { border-color: var(--tint-deep); }
+
+/* An opened card takes the whole row rather than stretching its neighbours to
+   match — long descriptions read badly in a narrow grid column. */
+.card[open] {
+  grid-column: 1 / -1;
+  box-shadow: var(--shadow);
+  border-color: var(--tint-deep);
+}
+
+.card__face {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1.05rem 1.25rem;
+  cursor: pointer;
+  list-style: none;          /* Firefox */
+  border-radius: var(--radius);
+}
+
+/* Safari/Chrome draw their own triangle; we supply a chevron instead. */
+.card__face::-webkit-details-marker { display: none; }
+
+.card__face:hover .card__title { color: var(--accent); }
+
+.card__text { flex: 1 1 auto; min-width: 0; }
+
+.card__title {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.card__year {
+  display: block;
+  margin-top: .3rem;
+  color: var(--ink-muted);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The chevron. Rotates to point down when the card is open. */
+.card__face::after {
+  content: "";
+  flex: 0 0 auto;
+  width: .5rem;
+  height: .5rem;
+  margin-left: .1rem;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+  transform-origin: center;
+  align-self: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card__face::after { transition: transform .2s ease; }
+}
+
+.card[open] .card__face::after { transform: rotate(45deg); }
+
+.card__body {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--rule);
+  margin-top: -.15rem;
+  padding-top: 1rem;
+}
+
+.card__role {
+  color: var(--ink-muted);
+  font-size: .9rem;
+  margin: 0 0 .5rem;
+}
+
+.card__note { margin: 0 0 .5rem; }
+
+.card__subhead {
+  font-family: var(--sans);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 1.5rem 0 .5rem;
+}
+
+.card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card__list > li {
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.card__list > li:last-child { border-bottom: 0; }
+
+.card__list-title {
+  display: block;
+  font-size: .95rem;
+  line-height: 1.45;
+}
+
+.card__list-meta {
+  display: block;
+  color: var(--ink-muted);
+  font-size: .87rem;
+}
+
+/* Inside a card the gallery is already indented, so pull it flush. */
+.card__body .gallery { margin-top: 1rem; }
 
 /* ─── cv ──────────────────────────────────────────────────────────────────── */
 
@@ -684,7 +813,12 @@ code {
   h2 { font-size: 12.5pt; margin-top: 1.1rem; page-break-after: avoid; }
   h3 { font-size: 11pt; page-break-after: avoid; }
 
-  .cv-item, .entry { page-break-inside: avoid; break-inside: avoid; }
+  .cv-item, .entry, .card { page-break-inside: avoid; break-inside: avoid; }
+
+  /* The chevron is an affordance for clicking; it means nothing on paper. */
+  .card { box-shadow: none; }
+  .card__face { padding-left: 0; cursor: auto; }
+  .card__face::after { display: none; }
 
   .entry { border: 0; padding: 0 0 .5rem; background: none; }
 

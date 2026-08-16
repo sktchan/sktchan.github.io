@@ -1,22 +1,13 @@
-# Research projects and software, newest first. Rendered as cards on /projects/.
+# Coursework and side projects, newest first. Rendered on /projects/ as a card
+# grid: the card face shows title + year, clicking opens the rest.
+#
+# Supervised research positions live in research.yml instead.
 #
 # `gallery` is optional — a list of {file, alt} under assets/img/projects/,
-# rendered as a small lightbox gallery beneath the card. Only the PyMOL project
-# uses it.
+# rendered inside the expanded card. Only the PyMOL project uses it.
 
-- title: "Transcriptomic foundation model tokenization"
-  role: "Supervisor: Dr. Sébastien Lemieux, Université de Montréal"
-  year: "Jan 2025 – present"
-  note: >-
-    Building an evaluation framework that varies tokenization, pre-training
-    objective and architecture together, to see which combinations actually help
-    on downstream perturbation prediction.
-  tags: ["Julia", "Flux.jl", "transformers", "transcriptomics"]
-  links:
-    - name: "code"
-      url: "https://github.com/lemieux-lab/LTformers"
-
-- title: "Protein embeddings and local alignments"
+- id: "protein-embeddings"
+  title: "Protein embeddings and local alignments"
   role: "Prof: Dr. Nadia El-Mabrouk, Université de Montréal"
   year: "Sep 2025 – Dec 2025"
   note: >-
@@ -28,7 +19,8 @@
     - name: "slides (pdf)"
       url: "/assets/docs/alignments-slides.pdf"
 
-- title: "Energy consumption prediction"
+- id: "energy-forecasting"
+  title: "Energy consumption prediction"
   role: "Prof: Dr. Vincent Taboga, Mila — Quebec AI Institute"
   year: "Jan 2025 – Apr 2025"
   note: >-
@@ -40,7 +32,8 @@
     - name: "code"
       url: "https://github.com/sktchan/energy-forecasting"
 
-- title: "Computational design of anti-aptamers"
+- id: "anti-aptamers"
+  title: "Computational design of anti-aptamers"
   role: "Prof: Dr. François Major, Université de Montréal"
   year: "Jan 2025 – Apr 2025"
   note: >-
@@ -54,7 +47,8 @@
     - name: "code"
       url: "https://github.com/sktchan/anti-aptamers"
 
-- title: "Structural visualization of viral RNA complexes"
+- id: "viral-rna"
+  title: "Structural visualization of viral RNA complexes"
   role: "Prof: Dr. François Major, Université de Montréal"
   year: "Jan 2025 – Apr 2025"
   note: >-
@@ -93,7 +87,8 @@
     - file: "pymol/6sx0-hbonds3.jpg"
       alt: "PyMOL render of hydrogen bonding in structure 6SX0, third view"
 
-- title: "Brain tumor classification in MRI scans"
+- id: "tumor-mri"
+  title: "Brain tumor classification in MRI scans"
   role: "Prof: Dr. Erik Sorensen, McMaster University"
   year: "Jan 2024 – Apr 2024"
   note: >-
@@ -104,29 +99,3 @@
   links:
     - name: "code"
       url: "https://github.com/sktchan/tumor-classification"
-
-- title: "OSMS for head and neck radiation therapy"
-  role: "Supervisor: Dr. Orest Ostapiak, Juravinski Cancer Centre"
-  year: "Sep 2023 – Apr 2024"
-  note: >-
-    Evaluated immobilization systems for minimizing 6D interfractional and
-    intrafractional motion, and benchmarked AlignRT optical surface monitoring
-    against cone-beam CT image registration.
-  tags: ["radiation oncology", "image registration"]
-  links:
-    - name: "report (pdf)"
-      url: "/assets/docs/osms-report.pdf"
-    - name: "code"
-      url: "https://github.com/sktchan/alignRT-preprocessing"
-
-- title: "Housing insecurity and the HPA axis in children"
-  role: "Supervisor: Dr. Krysta Andrews, Offord Centre for Child Studies"
-  year: "Sep 2022 – Apr 2023"
-  note: >-
-    A systematic review of how socioenvironmental housing instability affects HPA
-    axis functioning in children, alongside analysis of salivary cortisol data
-    linking housing quality to long-term neuroendocrine stress dysregulation.
-  tags: ["systematic review", "biomarkers"]
-  links:
-    - name: "poster (pdf)"
-      url: "/assets/docs/hpa-poster.pdf"

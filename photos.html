@@ -7,10 +7,6 @@ wide: true
 
 {%- assign p = site.data.photos -%}
 
-{%- if p.intro -%}
-  <p>{{ p.intro }}</p>
-{%- endif -%}
-
 {%- if p.photos and p.photos.size > 0 -%}
   {% include gallery.html items=p.photos base="/assets/img/photos/" %}
   {% include lightbox.html %}

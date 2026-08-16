@@ -6,26 +6,23 @@ permalink: /research/
 
 {%- assign r = site.data.research -%}
 
-{%- if r.statement -%}
-  <p>{{ r.statement }}</p>
-{%- endif -%}
-
 {%- comment -%}
-  Papers, posters and work-in-progress are separate sections rather than one
-  flat list — a single paper reads as a highlight in its own section, and as a
-  thin list anywhere else.
+  Papers are listed here as well as inside the project they came from, so a
+  reader finds them either by skimming or by clicking into the work.
 {%- endcomment -%}
-
 {%- if r.papers and r.papers.size > 0 -%}
-  <h2><span class="section-title">papers</span></h2>
+  <h2><span class="section-title">publications</span></h2>
   <div class="entries">
     {%- for item in r.papers %}{% include entry.html item=item %}{% endfor -%}
   </div>
 {%- endif -%}
 
-{%- if r.presentations and r.presentations.size > 0 -%}
-  <h2><span class="section-title">presentations</span></h2>
-  <div class="entries">
-    {%- for item in r.presentations %}{% include entry.html item=item %}{% endfor -%}
+{%- if r.projects and r.projects.size > 0 -%}
+  <h2><span class="section-title">projects</span></h2>
+  <div class="cards">
+    {%- for item in r.projects %}{% include project-card.html item=item %}{% endfor -%}
   </div>
 {%- endif -%}
+
+{%- comment -%} No galleries on this page today, but a card may gain one. {%- endcomment -%}
+{% include lightbox.html %}

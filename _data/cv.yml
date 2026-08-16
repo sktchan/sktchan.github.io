@@ -1,15 +1,10 @@
 # The CV. This page is canonical — there is no separate PDF; the print
 # stylesheet turns Cmd-P into a clean document.
 #
-# Talks live in research.yml, and leadership/mentoring/volunteering live in
-# community.yml. Both are pulled into the CV page automatically, so you never
-# enter anything twice.
-
-summary: >-
-  MSc student in computer science at Université de Montréal, working on
-  transcriptomic representation learning with Dr. Sébastien Lemieux, and
-  affiliated with Mila — Quebec AI Institute and the Institute for Research in
-  Immunology and Cancer. Based in Montréal, QC.
+# Papers and presentations are pulled from research.yml automatically.
+#
+# Leadership, mentoring and volunteering are NOT shown on the CV — they live on
+# /community/, and rendering them in both places made this page a duplicate.
 
 education:
   - when: "Jan 2025 – present"

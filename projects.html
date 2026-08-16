@@ -2,24 +2,13 @@
 layout: page
 title: projects
 permalink: /projects/
-intro: "Research projects and coursework, newest first. Reports, slides and code where they exist."
 ---
 
 {%- assign projects = site.data.projects -%}
 
 {%- if projects and projects.size > 0 -%}
-  <div class="entries">
-    {%- for item in projects %}
-      {% include entry.html item=item %}
-
-      {%- comment -%}
-        A project can carry its own image gallery. It sits outside the card so
-        the masonry can use the full page width.
-      {%- endcomment -%}
-      {%- if item.gallery and item.gallery.size > 0 -%}
-        {% include gallery.html items=item.gallery base="/assets/img/projects/" %}
-      {%- endif -%}
-    {%- endfor %}
+  <div class="cards">
+    {%- for item in projects %}{% include project-card.html item=item %}{% endfor -%}
   </div>
 
   {%- comment -%} One shared lightbox drives every gallery on the page. {%- endcomment -%}

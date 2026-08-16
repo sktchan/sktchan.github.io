@@ -10,18 +10,17 @@ wide: true
   stylesheet in main.scss strips the nav, footer, colours and backgrounds, so
   Cmd-P → "Save as PDF" produces a clean black-on-white document.
 
-  Papers, posters and talks are pulled from _data/research.yml; workshops,
-  mentoring and volunteering from _data/community.yml. Nothing is entered twice.
+  Papers and presentations are pulled from _data/research.yml, so they are never
+  entered twice.
+
+  Leadership, mentoring and volunteering deliberately do NOT appear here — they
+  have their own page at /community/, and rendering them in both places made the
+  CV a duplicate of it.
 {%- endcomment -%}
 
 {%- assign cv = site.data.cv -%}
 {%- assign r  = site.data.research -%}
-{%- assign c  = site.data.community -%}
 {%- assign l  = site.data.links -%}
-
-{%- if cv.summary -%}
-  <p>{{ cv.summary }}</p>
-{%- endif -%}
 
 <p class="cv-actions">
   <button class="button" type="button" onclick="window.print()">print / save as pdf</button>
@@ -80,10 +79,22 @@ wide: true
   </div>
 {%- endif -%}
 
-{%- if r.presentations and r.presentations.size > 0 -%}
+{%- comment -%}
+  Presentations now live inside the research project they came out of, so the CV
+  flattens them back into one list. `concat` needs an array on both sides, hence
+  the empty-array seed.
+{%- endcomment -%}
+{%- assign all_talks = '' | split: '' -%}
+{%- for proj in r.projects -%}
+  {%- if proj.presentations -%}
+    {%- assign all_talks = all_talks | concat: proj.presentations -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if all_talks.size > 0 -%}
   <h2><span class="section-title">presentations</span></h2>
   <div class="cv-group">
-    {%- for item in r.presentations %}
+    {%- for item in all_talks %}
       <div class="cv-item">
         <div class="cv-item__when">{{ item.year }}</div>
         <div class="cv-item__what">
@@ -105,71 +116,6 @@ wide: true
           <div class="cv-item__title">{{ item.title }}</div>
           {%- if item.where %}<div class="cv-item__where">{{ item.where }}</div>{% endif -%}
           {%- if item.detail %}<div class="cv-item__detail">{{ item.detail }}</div>{% endif -%}
-        </div>
-      </div>
-    {%- endfor %}
-  </div>
-{%- endif -%}
-
-{%- comment -%}
-  Leadership, workshops, mentoring and volunteering come from community.yml, so
-  they're written once and appear both on /community/ and here.
-{%- endcomment -%}
-
-{%- if c.leadership and c.leadership.size > 0 -%}
-  <h2><span class="section-title">leadership and organizing</span></h2>
-  <div class="cv-group">
-    {%- for item in c.leadership %}
-      <div class="cv-item">
-        <div class="cv-item__when">{{ item.year }}</div>
-        <div class="cv-item__what">
-          <div class="cv-item__title">{{ item.title }}</div>
-          {%- if item.venue %}<div class="cv-item__where">{{ item.venue }}</div>{% endif -%}
-        </div>
-      </div>
-    {%- endfor %}
-  </div>
-{%- endif -%}
-
-{%- if c.workshops and c.workshops.size > 0 -%}
-  <h2><span class="section-title">workshops</span></h2>
-  <div class="cv-group">
-    {%- for item in c.workshops %}
-      <div class="cv-item">
-        <div class="cv-item__when">{{ item.year }}</div>
-        <div class="cv-item__what">
-          <div class="cv-item__title">{{ item.title }}</div>
-          {%- if item.role %}<div class="cv-item__where">{{ item.role }}{% if item.venue %} &middot; {{ item.venue }}{% endif %}</div>{% endif -%}
-        </div>
-      </div>
-    {%- endfor %}
-  </div>
-{%- endif -%}
-
-{%- if c.mentoring and c.mentoring.size > 0 -%}
-  <h2><span class="section-title">mentoring</span></h2>
-  <div class="cv-group">
-    {%- for item in c.mentoring %}
-      <div class="cv-item">
-        <div class="cv-item__when">{{ item.year }}</div>
-        <div class="cv-item__what">
-          <div class="cv-item__title">{{ item.title }}</div>
-          {%- if item.venue %}<div class="cv-item__where">{{ item.venue }}</div>{% endif -%}
-        </div>
-      </div>
-    {%- endfor %}
-  </div>
-{%- endif -%}
-
-{%- if c.volunteering and c.volunteering.size > 0 -%}
-  <h2><span class="section-title">volunteering</span></h2>
-  <div class="cv-group">
-    {%- for item in c.volunteering %}
-      <div class="cv-item">
-        <div class="cv-item__when">{{ item.year }}</div>
-        <div class="cv-item__what">
-          <div class="cv-item__title">{{ item.title }}</div>
-          {%- if item.venue %}<div class="cv-item__where">{{ item.venue }}</div>{% endif -%}
         </div>
       </div>
     {%- endfor %}
