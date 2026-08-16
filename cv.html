@@ -3,6 +3,9 @@ layout: page
 title: cv
 permalink: /cv/
 wide: true
+# The document's own header block supplies the name and title, so the page <h1>
+# ("cv") would just sit above it saying the same thing in a different voice.
+hide_title: true
 ---
 
 {%- comment -%}
@@ -22,9 +25,39 @@ wide: true
 {%- assign r  = site.data.research -%}
 {%- assign l  = site.data.links -%}
 
+<div class="cv-doc">
+
 <p class="cv-actions">
   <button class="button" type="button" onclick="window.print()">print / save as pdf</button>
 </p>
+
+{%- comment -%}
+  The document header. This is not decoration: the print stylesheet strips the
+  site header, so without this the printed CV would carry no name at all.
+{%- endcomment -%}
+<header class="cv-head">
+  <p class="cv-head__name">{{ site.author }}</p>
+  <p class="cv-head__title">{{ cv.headline | default: site.tagline }}</p>
+  <p class="cv-head__contact">
+    {%- assign bits = '' | split: '' -%}
+    {%- if cv.location and cv.location != '' -%}
+      {%- assign bits = bits | push: cv.location -%}
+    {%- endif -%}
+    {%- if l.email and l.email != '' -%}
+      {%- capture b %}<a href="mailto:{{ l.email }}">{{ l.email }}</a>{% endcapture -%}
+      {%- assign bits = bits | push: b -%}
+    {%- endif -%}
+    {%- if l.linkedin and l.linkedin != '' -%}
+      {%- capture b %}<a href="{{ l.linkedin }}">{{ l.linkedin | remove: 'https://www.' }}</a>{% endcapture -%}
+      {%- assign bits = bits | push: b -%}
+    {%- endif -%}
+    {%- if l.github and l.github != '' -%}
+      {%- capture b %}<a href="{{ l.github }}">{{ l.github | remove: 'https://' }}</a>{% endcapture -%}
+      {%- assign bits = bits | push: b -%}
+    {%- endif -%}
+    {{ bits | join: ' &middot; ' }}
+  </p>
+</header>
 
 {%- comment -%} A reusable block for each labelled CV group. {%- endcomment -%}
 
@@ -134,7 +167,9 @@ wide: true
   </div>
 {%- endif -%}
 
-{%- if l.email and l.email != '' -%}
-  <h2><span class="section-title">contact</span></h2>
-  <p><a href="mailto:{{ l.email }}">{{ l.email }}</a></p>
-{%- endif -%}
+{%- comment -%}
+  No trailing contact section — the header block at the top carries it, which is
+  where a reader (and a printed page) expects to find it.
+{%- endcomment -%}
+
+</div><!-- /.cv-doc -->

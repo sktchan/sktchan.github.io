@@ -6,6 +6,10 @@
 # Leadership, mentoring and volunteering are NOT shown on the CV — they live on
 # /community/, and rendering them in both places made this page a duplicate.
 
+# Shown under your name in the CV header block, on screen and in print.
+headline: "MSc student in computer science · Université de Montréal, Mila, IRIC"
+location: "Montréal, QC"
+
 education:
   - when: "Jan 2025 – present"
     title: "Master of Computer Science"

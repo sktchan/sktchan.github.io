@@ -1,10 +1,14 @@
 # Workshops, leadership, mentoring and volunteering — the /community/ page.
-# Rendered as small tiles you click into, in the order the groups appear below.
+# Rendered as photo tiles, in the order the groups appear below.
 # Any group you empty out disappears from the page.
 #
-# Except for workshops, a tile is headed by the institute (`venue`) rather than
-# the role — the role moves inside. Workshops are headed by their title, since
-# that's the useful thing about a workshop.
+# Each entry is a square photo tile. Hovering shows `venue` (or `title`, for
+# workshops, which have no venue) with the role beneath. Set `photo:` to an image
+# under assets/img/community/; until you do, the tile shows a pink wash with the
+# label permanently visible.
+#
+# `note:` is kept but NOT rendered anywhere — /community/ is photos and labels
+# only now. Delete the notes, or restore the rendering, whenever you like.
 #
 # Talks live in research.yml, next to the work they're about.
 
@@ -13,6 +17,7 @@
 # linked to the folder for each workshop.
 workshops:
   - title: "Debugging and Profiling in Julia"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Demonstrated advanced debugging techniques using Debugger.jl and
       Infiltrator.jl, and guided participants through performance profiling with
@@ -27,6 +32,7 @@ workshops:
         url: "https://github.com/sktchan/lab-demos/tree/main/profiling"
 
   - title: "CUDA GPU Kernels in Julia"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Taught the fundamentals of GPU architecture and custom kernel programming,
       covering thread hierarchy, memory synchronization, dynamic shared memory
@@ -39,6 +45,7 @@ workshops:
         url: "https://github.com/sktchan/lab-demos/tree/main/gpu_opt"
 
   - title: "Nvidia Nsight Systems Performance Analysis"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Led a system-wide performance analysis workshop, covering CLI data
       collection with nsys profile, hardware bottleneck identification, and GUI
@@ -51,6 +58,7 @@ workshops:
         url: "https://github.com/sktchan/lab-demos/tree/main/nsight"
 
   - title: "Introduction to Quantum Computing"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Presented the theoretical foundations of quantum mechanics and led a
       practical tutorial on simulating multi-qubit circuits, entanglement and
@@ -63,6 +71,7 @@ workshops:
         url: "https://github.com/sktchan/lab-demos/tree/main/quantum"
 
   - title: "Calcul Québec HPC Infrastructure"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Facilitated technical onboarding for Calcul Québec's high-performance
       computing clusters (Fir, Narval, Nibi, Rorqual, Trillium), covering SLURM
@@ -78,6 +87,7 @@ workshops:
 # ─── leadership and organizing ───────────────────────────────────────────────
 leadership:
   - title: "Equity, Diversity & Inclusion (EDI) Team"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "Mila — Quebec AI Institute"
     year: "Apr 2025 – present"
     note: >-
@@ -85,6 +95,7 @@ leadership:
       and diverse environment across the AI research community.
 
   - title: "Vice President"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "McMaster Chinese Students' Association"
     year: "Apr 2022 – Apr 2023"
     note: >-
@@ -92,6 +103,7 @@ leadership:
       meetings.
 
   - title: "Design Review Team"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "McMaster IMPACT Initiative"
     year: "Mar 2021 – Jan 2022"
     note: >-
@@ -101,6 +113,7 @@ leadership:
 # ─── mentoring and advising ──────────────────────────────────────────────────
 mentoring:
   - title: "Advisor"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "Independent consulting"
     year: "Jan 2025 – present"
     note: >-
@@ -108,6 +121,7 @@ mentoring:
       biological feasibility, ML code development, and market audience strategy.
 
   - title: "SciComm Consultant"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "STEM Fellowship"
     year: "Mar 2022 – present"
     note: >-
@@ -115,6 +129,7 @@ mentoring:
       material from consultee assessments.
 
   - title: "Undergraduate Mentor"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "McMaster Women in STEM"
     year: "Sep 2021 – Apr 2022"
     note: >-
@@ -124,18 +139,21 @@ mentoring:
 # ─── volunteering ────────────────────────────────────────────────────────────
 volunteering:
   - title: "Inpatient Volunteer"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "St. Joseph's Health Care Centre"
     year: "Nov 2018 – Nov 2019"
     note: >-
       Provided compassionate nonmedical care and support to inpatients.
 
   - title: "Winter Fair Executive"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "Ernestine's Women's Shelter"
     year: "Sep 2017 – Dec 2018"
     note: >-
       Organized and led weekly subcommittee meetings to plan events.
 
   - title: "Restaurant Volunteer"
+    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "St. Francis Table"
     year: "Nov 2017"
     note: >-

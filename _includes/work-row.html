@@ -1,0 +1,46 @@
+{%- comment -%}
+  One row on /work/ — year, title, links, and any talks or papers as nested
+  lines beneath.
+
+  Usage:  {% include work-row.html item=item %}
+
+  Reuses the .cv-item shape (year column, content column, hairline rule) so
+  /work/ and /cv/ read as the same kind of document rather than two designs.
+
+  `note` is deliberately NOT rendered: /work/ is title-and-links only. The text
+  is still in _data/*.yml if it's ever wanted back.
+{%- endcomment -%}
+
+{%- assign item = include.item -%}
+
+<div class="cv-item">
+  <div class="cv-item__when">{{ item.year }}</div>
+  <div class="cv-item__what">
+    <div class="work-row__head">
+      <span class="cv-item__title">{{ item.title }}</span>
+      {%- if item.links -%}
+        <span class="work-row__links">
+          {%- for link in item.links %}
+            <a href="{{ link.url }}">{{ link.name }}</a>
+          {%- endfor -%}
+        </span>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Papers first, then talks — both as plain nested lines. {%- endcomment -%}
+    {%- if item.publications or item.presentations -%}
+      <ul class="work-row__sub">
+        {%- for pub in item.publications %}
+          <li>
+            {{ pub.title }} &middot;
+            <em>{{ pub.venue }}</em>, {{ pub.year }}
+            {%- for link in pub.links %} <a href="{{ link.url }}">{{ link.name }}</a>{% endfor -%}
+          </li>
+        {%- endfor -%}
+        {%- for talk in item.presentations %}
+          <li><em>{{ talk.venue }}</em>, {{ talk.year }}</li>
+        {%- endfor %}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>
