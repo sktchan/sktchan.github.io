@@ -66,13 +66,13 @@ projects:
     bullets:
       - "Evaluated immobilization systems and softwares for minimizing 6D interfractional and intrafractional motion in head and neck cancer patients."
       - "Benchmarked AlignRT optical surface monitoring precision by comparing real-time surface tracking against Cone-Beam Computed Tomography (CBCT) image registration."
+    # Report deliberately not linked — the published paper covers the same work.
+    # assets/docs/osms-report.pdf is still in the repo if it's ever wanted back.
     links:
-      - name: "Report"
-        url: "/assets/docs/osms-report.pdf"
-      - name: "Code"
-        url: "https://github.com/sktchan/alignRT-preprocessing"
       - name: "Paper"
         url: "https://doi.org/10.26685/urncst.750"
+      - name: "Code"
+        url: "https://github.com/sktchan/alignRT-preprocessing"
     presentations:
       - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
         venue: "RTi3 Conference, Toronto, Canada"

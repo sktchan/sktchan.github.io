@@ -572,9 +572,13 @@ html { scroll-behavior: smooth; }
 
 .cmap { margin-top: .6rem; }
 
+.cmap__panel { max-width: 30rem; }
+
 .cmap__frame {
   position: relative;
   width: 100%;
+  /* Deliberately small — the map is context, not the point of the section. */
+  max-width: 30rem;
   /* 1.638:1 is the projection's own aspect ratio (Δlng in radians over the
      Mercator Δy for these bounds). Any other ratio stretches the geography,
      because the x and y percentages are each normalised independently. */
@@ -953,17 +957,17 @@ html { scroll-behavior: smooth; }
 
 /* ─── photo gallery ───────────────────────────────────────────────────────── */
 
-/* Denser than before: 15 photos sit inside the one-pager, so they read as a
-   thumbnail grid rather than three big columns. */
+/* Denser still: 15 photos inside the one-pager read as contact-sheet
+   thumbnails rather than a feature gallery. */
 .gallery {
-  columns: 5 9rem;
-  column-gap: .6rem;
+  columns: 7 6.5rem;
+  column-gap: .45rem;
   margin-top: 1rem;
 }
 
 .gallery__item {
   break-inside: avoid;
-  margin: 0 0 .6rem;
+  margin: 0 0 .45rem;
 }
 
 .gallery__button {

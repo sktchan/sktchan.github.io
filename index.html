@@ -25,29 +25,37 @@ wide: true
   <div class="intro__body">
     <h1>Hi, I'm {{ site.author | split: ' ' | first }} <span class="heart" aria-hidden="true">&#9829;</span></h1>
 
+    {%- comment -%}
+      Bolding is limited to the things a reader should catch while skimming —
+      the degree, the two research phrases, and the pitch. Bolding the linked
+      institution names too would leave almost nothing unemphasised.
+    {%- endcomment -%}
     <p>
-      I'm a Master's student in Computer Science at
-      <strong>Université de Montréal</strong>, working with
+      I'm a <strong>Master's student in Computer Science</strong> at
+      <a href="https://www.umontreal.ca/en/">Université de Montréal</a>, working with
       <a href="https://www.iric.ca/en/research/principal-investigators/sebastien-lemieux">Dr. Sébastien Lemieux</a>
       at <a href="https://mila.quebec">Mila — Quebec AI Institute</a> and the
       <a href="https://www.iric.ca/en">Institute for Research in Immunology and Cancer</a>.
     </p>
     <p>
-      My research focuses on representation learning for transcriptomics. My goal
-      is to advance virtual cell models capable of accurately predicting cellular
-      states under chemical and genetic perturbations.
+      My research focuses on <strong>representation learning for
+      transcriptomics</strong>. My goal is to advance <strong>virtual cell
+      models</strong> capable of accurately predicting cellular states under
+      chemical and genetic perturbations.
     </p>
     <p>
-      Before this, my background spanned clinical pediatrics and radiation
-      oncology research. Working directly with patients showed me how often our
-      most advanced tools rarely reach the people who need them most. I want to
-      pursue science to bridge this gap — building scalable, equitable AI for the
-      realities of global healthcare.
+      Before this, my background spanned <strong>clinical pediatrics and
+      radiation oncology research</strong> at
+      <a href="https://www.mcmaster.ca/">McMaster University</a>. Working directly
+      with patients showed me how often our most advanced tools rarely reach the
+      people who need them most. I want to pursue science to bridge this gap —
+      building <strong>scalable, equitable AI</strong> for the realities of
+      global healthcare.
     </p>
     <p>
       Outside the lab, you can find me reading, baking, or in the wilderness
-      shooting film! (because sometimes it's nice to create a representation I
-      can actually hold).
+      <a href="#photos">shooting film</a>! (because sometimes it's nice to create
+      a representation I can actually hold).
     </p>
 
     {%- comment -%}
