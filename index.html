@@ -104,16 +104,22 @@ wide: true
 
   {%- if c.workshops and c.workshops.size > 0 -%}
     <h3 class="band__sub">Workshops</h3>
-    <div class="rows">
-      {%- for item in c.workshops %}{% include community-row.html item=item %}{% endfor -%}
+    <div class="wtiles">
+      {%- for item in c.workshops %}{% include workshop-tile.html item=item %}{% endfor -%}
     </div>
   {%- endif -%}
 
+  {%- comment -%}
+    Collapsed to keep the page short. Reuses the same <details> component as the
+    conference dropdowns, so it's keyboard operable with no JavaScript.
+  {%- endcomment -%}
   {%- if c.leadership and c.leadership.size > 0 -%}
-    <h3 class="band__sub">Leadership and volunteering</h3>
-    <div class="rows">
-      {%- for item in c.leadership %}{% include community-row.html item=item %}{% endfor -%}
-    </div>
+    <details class="drop drop--group">
+      <summary class="drop__face">Leadership and volunteering</summary>
+      <div class="rows">
+        {%- for item in c.leadership %}{% include community-row.html item=item %}{% endfor -%}
+      </div>
+    </details>
   {%- endif -%}
 
   {%- if c.mentorship and c.mentorship.size > 0 -%}

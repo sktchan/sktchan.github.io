@@ -4,10 +4,25 @@
   <body>
     <a class="skip-link" href="#main">skip to content</a>
 
-    <header class="site-header">
+    {%- comment -%}
+      Decorative sparkle band in place of a name and tagline. aria-hidden
+      because a screen reader reading out two dozen star characters would be
+      actively hostile — the name is carried by <title>, the SEO metadata, and
+      the "Hi, I'm Serena" heading below.
+
+      Two flex rows with space-between, so the band spans any viewport width
+      without JavaScript. Sizes and opacities vary by nth-child in the CSS.
+    {%- endcomment -%}
+    <header class="site-header" aria-hidden="true">
       <div class="wrap {% if page.wide %}wrap--wide{% endif %}">
-        <p class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></p>
-        {% if site.tagline %}<p class="site-tagline">{{ site.tagline }}</p>{% endif %}
+        <div class="sparkles">
+          <div class="sparkles__row">
+            <span>&#10022;</span><span>&#8902;</span><span>&#10023;</span><span>&#10036;</span><span>&#8901;</span><span>&#10022;</span><span>&#10037;</span><span>&#8902;</span><span>&#10023;</span><span>&#8901;</span><span>&#10036;</span><span>&#10022;</span><span>&#8902;</span><span>&#10023;</span>
+          </div>
+          <div class="sparkles__row sparkles__row--two">
+            <span>&#8901;</span><span>&#10037;</span><span>&#8902;</span><span>&#10023;</span><span>&#10036;</span><span>&#8901;</span><span>&#10022;</span><span>&#8902;</span><span>&#10037;</span><span>&#10023;</span><span>&#8901;</span><span>&#10022;</span>
+          </div>
+        </div>
       </div>
     </header>
 

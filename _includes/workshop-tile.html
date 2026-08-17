@@ -1,0 +1,33 @@
+{%- comment -%}
+  One workshop: a photo with the title over it and the links beneath.
+
+  Usage:  {% include workshop-tile.html item=item %}
+
+  Links sit below the image rather than on it so they're real, hittable text on
+  touch as well as pointer — an overlay would need a hover fallback.
+
+  Source photos vary from 1.03:1 to 1.35:1, so the tile fixes a 4:3 box and
+  crops with object-fit: cover to keep the grid even.
+{%- endcomment -%}
+
+{%- assign item = include.item -%}
+
+<div class="wtile">
+  <div class="wtile__media">
+    {%- if item.photo and item.photo != '' -%}
+      <img src="{{ item.photo | relative_url }}" alt="{{ item.title | escape }}"
+           loading="lazy" decoding="async">
+    {%- else -%}
+      <span class="wtile__empty" aria-hidden="true"></span>
+    {%- endif -%}
+    <span class="wtile__title">{{ item.title }}</span>
+  </div>
+
+  {%- if item.links -%}
+    <ul class="wtile__links">
+      {%- for link in item.links %}
+        <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>

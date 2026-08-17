@@ -13,7 +13,7 @@
     inside Smith-Waterman dynamic programming, weighed against traditional
     BLOSUM substitution matrices.
   links:
-    - name: "Slides (PDF)"
+    - name: "Slides"
       url: "/assets/docs/alignments-slides.pdf"
 
 - id: "energy-forecasting"
@@ -37,7 +37,7 @@
     Nile Virus 5′ UTR stem-loop B, and hydrogen bonding in the H7N1 NS1
     RNA-binding domain.
   links:
-    - name: "Report (PDF)"
+    - name: "Report"
       url: "/assets/docs/pymol-report.pdf"
 
 - id: "tumor-mri"
@@ -62,5 +62,5 @@
     data linking housing quality to long-term neuroendocrine stress
     dysregulation.
   links:
-    - name: "Poster (PDF)"
+    - name: "Poster"
       url: "/assets/docs/hpa-poster.pdf"

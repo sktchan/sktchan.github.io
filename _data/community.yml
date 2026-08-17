@@ -19,20 +19,8 @@ intro: >-
 # Slides live in assets/docs/; code lives in github.com/sktchan/lab-demos, deep
 # linked to the folder for each workshop.
 workshops:
-  - title: "Debugging and Profiling in Julia"
-    note: >-
-      Demonstrated advanced debugging techniques using Debugger.jl and
-      Infiltrator.jl, and guided participants through performance profiling with
-      @profview and Nvidia Nsight Systems.
-    links:
-      - name: "Slides (PDF)"
-        url: "/assets/docs/workshop-debugging.pdf"
-      - name: "Debugging code"
-        url: "https://github.com/sktchan/lab-demos/tree/main/debugging"
-      - name: "Profiling code"
-        url: "https://github.com/sktchan/lab-demos/tree/main/profiling"
-
   - title: "CUDA GPU Kernels in Julia"
+    photo: "/assets/img/workshops/kernels.jpg"
     note: >-
       Taught the fundamentals of GPU architecture and custom kernel programming,
       covering thread hierarchy, memory synchronization, dynamic shared memory
@@ -44,35 +32,38 @@ workshops:
         url: "https://github.com/sktchan/lab-demos/tree/main/gpu_opt"
 
   - title: "Nvidia Nsight Systems Performance Analysis"
+    photo: "/assets/img/workshops/nsight.jpg"
     note: >-
       Led a system-wide performance analysis workshop, covering CLI data
       collection with nsys profile, hardware bottleneck identification, and GUI
       timeline visualization across CPU and GPU tasks.
     links:
-      - name: "Slides (PDF)"
+      - name: "Slides"
         url: "/assets/docs/workshop-nsight.pdf"
       - name: "Code"
         url: "https://github.com/sktchan/lab-demos/tree/main/nsight"
 
   - title: "Introduction to Quantum Computing"
+    photo: "/assets/img/workshops/quantum.jpg"
     note: >-
       Presented the theoretical foundations of quantum mechanics and led a
       practical tutorial on simulating multi-qubit circuits, entanglement and
       state measurements using the Snowflurry.jl framework.
     links:
-      - name: "Slides (PDF)"
+      - name: "Slides"
         url: "/assets/docs/workshop-quantum.pdf"
       - name: "Code"
         url: "https://github.com/sktchan/lab-demos/tree/main/quantum"
 
   - title: "Calcul Québec HPC Infrastructure"
+    photo: "/assets/img/workshops/calcul-quebec.jpg"
     note: >-
       Facilitated technical onboarding for Calcul Québec's high-performance
       computing clusters (Fir, Narval, Nibi, Rorqual, Trillium), covering SLURM
       job scheduling, reference GPU unit (RGU) allocation and Globus file
       transfers.
     links:
-      - name: "Slides (PDF)"
+      - name: "Slides"
         url: "/assets/docs/workshop-calcul-quebec.pdf"
       - name: "Code"
         url: "https://github.com/sktchan/lab-demos/tree/main/calcul_quebec"

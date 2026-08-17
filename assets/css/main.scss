@@ -68,8 +68,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 1.0625rem;
-  line-height: 1.7;
+  font-size: .95rem;
+  line-height: 1.55;
   font-synthesis-weight: none;
   -webkit-font-smoothing: antialiased;
 }
@@ -83,11 +83,11 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 
-h1 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem); }
-h2 { font-size: 1.5rem; margin-top: 3rem; }
-h3 { font-size: 1.15rem; margin-top: 2rem; }
+h1 { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.2rem); }
+h2 { font-size: 1.3rem; margin-top: 1.75rem; }
+h3 { font-size: 1.05rem; margin-top: 1.25rem; }
 
-p { margin: 0 0 1rem; }
+p { margin: 0 0 .7rem; }
 
 a {
   color: var(--accent);
@@ -158,13 +158,13 @@ code {
 
 .wrap--wide { max-width: var(--wide); }
 
-.site-main { padding-bottom: 5rem; }
+.site-main { padding-bottom: 2.5rem; }
 
 /* Two soft pink blobs behind the header. Pure CSS — no image requests, and
    they are what keeps the page from reading as a plain document. */
 .site-header {
   position: relative;
-  padding: 3rem 0 1.5rem;
+  padding: 1.4rem 0 .9rem;
   overflow: hidden;
 }
 
@@ -183,26 +183,43 @@ code {
 
 .site-header > * { position: relative; z-index: 1; }
 
-.site-title {
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0;
-  letter-spacing: -0.015em;
+/* ─── sparkle band ────────────────────────────────────────────────────────── */
+
+/* Two rows of star glyphs standing in for the old name and tagline.
+   `space-between` makes the band fill any viewport width without JavaScript;
+   nth-child varies size and opacity so it reads as scattered rather than as a
+   repeating pattern. The markup carries aria-hidden. */
+.sparkles {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  color: var(--accent);
+  line-height: 1;
+  user-select: none;
 }
 
-.site-title a {
-  color: var(--ink);
-  text-decoration: none;
+.sparkles__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.site-title a:hover { color: var(--accent); }
-
-.site-tagline {
-  color: var(--ink-muted);
-  font-size: .95rem;
-  margin: .15rem 0 0;
+/* Second row inset and lighter, so the two don't line up into a grid. */
+.sparkles__row--two {
+  padding-inline: 6%;
+  opacity: .6;
 }
+
+.sparkles span { font-size: .7rem; opacity: .5; }
+
+.sparkles span:nth-child(3n + 1) { font-size: 1.15rem; opacity: .85; }
+.sparkles span:nth-child(4n + 3) { font-size: .5rem;  opacity: .4; }
+.sparkles span:nth-child(5n + 2) { font-size: .9rem;  opacity: .65; }
+.sparkles span:nth-child(7n + 5) { font-size: 1.35rem; opacity: .95; }
+
+/* Nudge alternate glyphs off the baseline so the row isn't perfectly level. */
+.sparkles span:nth-child(even) { transform: translateY(-.3em); }
+.sparkles span:nth-child(3n)   { transform: translateY(.25em); }
 
 /* ─── nav ─────────────────────────────────────────────────────────────────── */
 
@@ -215,8 +232,8 @@ code {
   z-index: 20;
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
-  padding: .55rem 0;
-  margin-bottom: 2.5rem;
+  padding: .45rem 0;
+  margin-bottom: 1.4rem;
 }
 
 .nav {
@@ -256,8 +273,8 @@ html { scroll-behavior: smooth; }
 
 .site-footer {
   border-top: 1px solid var(--rule);
-  margin-top: 4rem;
-  padding: 2rem 0 3rem;
+  margin-top: 2.25rem;
+  padding: 1.2rem 0 1.75rem;
   color: var(--ink-muted);
   font-size: .875rem;
 }
@@ -289,15 +306,15 @@ html { scroll-behavior: smooth; }
 
 .intro {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .intro__photo {
   flex: 0 0 auto;
-  width: 9.5rem;
-  height: 9.5rem;
+  width: 8rem;
+  height: 8rem;
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -319,7 +336,7 @@ html { scroll-behavior: smooth; }
   gap: .5rem;
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0 0;
+  margin: 1rem 0 0;
 }
 
 .linkrow a {
@@ -345,7 +362,7 @@ html { scroll-behavior: smooth; }
 .news li {
   display: flex;
   gap: 1rem;
-  padding: .6rem 0;
+  padding: .4rem 0;
   border-bottom: 1px solid var(--rule);
   font-size: .97rem;
 }
@@ -367,7 +384,7 @@ html { scroll-behavior: smooth; }
 
 /* ─── sections on the one-pager ───────────────────────────────────────────── */
 
-.band { margin-top: 3.5rem; }
+.band { margin-top: 2rem; }
 
 .band__sub {
   font-family: var(--sans);
@@ -375,7 +392,7 @@ html { scroll-behavior: smooth; }
   font-weight: 600;
   letter-spacing: .04em;
   color: var(--ink-muted);
-  margin: 2rem 0 .35rem;
+  margin: 1.25rem 0 .3rem;
 }
 
 .band__note {
@@ -386,7 +403,7 @@ html { scroll-behavior: smooth; }
 /* One introductory sentence under a section heading. */
 .band__intro {
   max-width: var(--measure);
-  margin: .5rem 0 1.25rem;
+  margin: .35rem 0 .9rem;
   color: var(--ink-muted);
 }
 
@@ -397,7 +414,7 @@ html { scroll-behavior: smooth; }
 .rows { display: grid; }
 
 .row {
-  padding: .7rem 0;
+  padding: .45rem 0;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -439,6 +456,61 @@ html { scroll-behavior: smooth; }
   color: var(--ink-muted);
   font-size: .9rem;
   line-height: 1.5;
+}
+
+/* ─── workshop photo tiles ────────────────────────────────────────────────── */
+
+.wtiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: .8rem;
+  margin-top: .6rem;
+}
+
+.wtile__media {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--tint);
+  aspect-ratio: 4 / 3;
+}
+
+.wtile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wtile__empty {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(140deg, var(--tint) 0%, var(--tint-deep) 100%);
+}
+
+/* Title sits over the image, on a scrim dark enough to stay legible whatever
+   the photo underneath happens to be. */
+.wtile__title {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.4rem .7rem .55rem;
+  background: linear-gradient(to top, rgba(43, 40, 38, .88) 0%, rgba(43, 40, 38, .5) 55%, transparent 100%);
+  color: #fff;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: .88rem;
+  line-height: 1.25;
+}
+
+.wtile__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  list-style: none;
+  padding: 0;
+  margin: .4rem 0 0;
+  font-size: .82rem;
 }
 
 /* ─── conference dropdown ─────────────────────────────────────────────────── */
@@ -496,6 +568,22 @@ html { scroll-behavior: smooth; }
   border-radius: 50%;
   background: var(--tint-deep);
 }
+
+/* A whole section collapsed rather than a footnote to one row, so its summary
+   is sized like the section subheads it sits among. */
+.drop--group { margin: 1.25rem 0 0; }
+
+.drop--group > .drop__face {
+  font-family: var(--sans);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink-muted);
+}
+
+.drop--group > .drop__face::after { border-color: var(--accent); }
+
+.drop--group[open] > .drop__face { margin-bottom: .2rem; }
 
 /* ─── the heart beside the homepage greeting ──────────────────────────────── */
 
@@ -651,7 +739,7 @@ html { scroll-behavior: smooth; }
 .gallery {
   columns: 5 9rem;
   column-gap: .6rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .gallery__item {

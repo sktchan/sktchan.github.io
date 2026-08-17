@@ -57,7 +57,7 @@ projects:
       CoV2-6C3 RNA aptamer using mfold and RNAfold, then simulated hybridization
       and competitive inhibition with NUPACK thermodynamics and HDOCK docking.
     links:
-      - name: "Report (PDF)"
+      - name: "Report"
         url: "/assets/docs/aptamers-report.pdf"
       - name: "Code"
         url: "https://github.com/sktchan/anti-aptamers"
@@ -71,7 +71,7 @@ projects:
       intrafractional motion, and benchmarked AlignRT optical surface monitoring
       against cone-beam CT image registration.
     links:
-      - name: "Report (PDF)"
+      - name: "Report"
         url: "/assets/docs/osms-report.pdf"
       - name: "Code"
         url: "https://github.com/sktchan/alignRT-preprocessing"
