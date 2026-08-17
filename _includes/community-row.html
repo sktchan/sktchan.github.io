@@ -3,11 +3,12 @@
 
   Usage:  {% include community-row.html item=item %}
 
-  Workshops have no `venue`, so their title is the main line and their links
-  (slides plus the lab-demos folder) sit beside it. Everything else leads with
-  the institute and puts the role underneath.
+  Workshops have no `venue`, `year` or `location`, so their title is the main
+  line and their links (slides plus the lab-demos folder) sit beside it.
+  Everything else leads with the institute and puts the role, and then the
+  location, underneath — with the dates on the right of the lead line.
 
-  No dates, and `note` is not rendered.
+  `note` is not rendered.
 {%- endcomment -%}
 
 {%- assign item = include.item -%}
@@ -23,10 +24,21 @@
         {%- endfor -%}
       </span>
     {%- endif -%}
+    {%- if item.year %}<span class="row__when">{{ item.year }}</span>{% endif -%}
   </div>
 
-  {%- comment -%} Only shown when it isn't just repeating the lead line. {%- endcomment -%}
+  {%- comment -%}
+    Role and location, joined only when both exist so a lone value never trails
+    a stray separator.
+  {%- endcomment -%}
+  {%- assign bits = '' | split: '' -%}
   {%- if item.venue and item.title != item.venue -%}
-    <p class="row__sub">{{ item.title }}</p>
+    {%- assign bits = bits | push: item.title -%}
+  {%- endif -%}
+  {%- if item.location and item.location != '' -%}
+    {%- assign bits = bits | push: item.location -%}
+  {%- endif -%}
+  {%- if bits.size > 0 -%}
+    <p class="row__sub">{{ bits | join: ' &middot; ' }}</p>
   {%- endif -%}
 </div>

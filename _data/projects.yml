@@ -1,10 +1,8 @@
-# Coursework and side projects, newest first. Rendered on /projects/ as a card
-# grid: the card face shows title + year, clicking opens the rest.
+# Additional projects — coursework and side work. Selected work lives in
+# research.yml.
 #
-# Supervised research positions live in research.yml instead.
-#
-# `gallery` is optional — a list of {file, alt} under assets/img/projects/,
-# rendered inside the expanded card. Only the PyMOL project uses it.
+# `gallery` is optional but currently unused: rows are flat, so there is nowhere
+# to render one. The PyMOL entries are kept in case galleries come back.
 
 - id: "protein-embeddings"
   title: "Protein embeddings and local alignments"
@@ -14,9 +12,8 @@
     A review of protein language model embeddings and cosine similarity scoring
     inside Smith-Waterman dynamic programming, weighed against traditional
     BLOSUM substitution matrices.
-  tags: ["protein language models", "sequence alignment"]
   links:
-    - name: "slides (pdf)"
+    - name: "Slides (PDF)"
       url: "/assets/docs/alignments-slides.pdf"
 
 - id: "energy-forecasting"
@@ -27,25 +24,9 @@
     Engineered multi-horizon time-series features — cyclical time
     representations, wind chill, heat indices — and trained LSTM networks in
     PyTorch to forecast building power demand.
-  tags: ["PyTorch", "LSTM", "time series"]
   links:
-    - name: "code"
+    - name: "Code"
       url: "https://github.com/sktchan/energy-forecasting"
-
-- id: "anti-aptamers"
-  title: "Computational design of anti-aptamers"
-  role: "Prof: Dr. François Major, Université de Montréal"
-  year: "Jan 2025 – Apr 2025"
-  note: >-
-    Designed single-loop and bivalent DNA antidotes to neutralize the SARS-CoV-2
-    CoV2-6C3 RNA aptamer using mfold and RNAfold, then simulated hybridization
-    and competitive inhibition with NUPACK thermodynamics and HDOCK docking.
-  tags: ["RNA structure", "NUPACK", "molecular docking"]
-  links:
-    - name: "report (pdf)"
-      url: "/assets/docs/aptamers-report.pdf"
-    - name: "code"
-      url: "https://github.com/sktchan/anti-aptamers"
 
 - id: "viral-rna"
   title: "Structural visualization of viral RNA complexes"
@@ -55,37 +36,9 @@
     Rendered 3D structural models in PyMOL to analyze base-pairing in the West
     Nile Virus 5′ UTR stem-loop B, and hydrogen bonding in the H7N1 NS1
     RNA-binding domain.
-  tags: ["PyMOL", "structural biology"]
   links:
-    - name: "report (pdf)"
+    - name: "Report (PDF)"
       url: "/assets/docs/pymol-report.pdf"
-  gallery:
-    - file: "pymol/6u79-loop1.jpg"
-      alt: "PyMOL render of structure 6U79 showing a highlighted RNA loop region"
-    - file: "pymol/6u79-loop2.jpg"
-      alt: "PyMOL render of structure 6U79, loop region from a second angle"
-    - file: "pymol/6u79-loop3.jpg"
-      alt: "PyMOL render of structure 6U79, loop region from a third angle"
-    - file: "pymol/6u79-loop4.jpg"
-      alt: "PyMOL render of structure 6U79, loop region from a fourth angle"
-    - file: "pymol/6u79-stacked1.jpg"
-      alt: "PyMOL render of stacked base pairs in structure 6U79"
-    - file: "pymol/6u79-stacked2.jpg"
-      alt: "PyMOL render of stacked base pairs in structure 6U79, second view"
-    - file: "pymol/6u79-stacked3.jpg"
-      alt: "PyMOL render of stacked base pairs in structure 6U79, third view"
-    - file: "pymol/6u79-stacked4.jpg"
-      alt: "PyMOL render of stacked base pairs in structure 6U79, fourth view"
-    - file: "pymol/6u79-stacked5.jpg"
-      alt: "PyMOL render of stacked base pairs in structure 6U79, fifth view"
-    - file: "pymol/6sx0.jpg"
-      alt: "PyMOL render of the overall fold of structure 6SX0"
-    - file: "pymol/6sx0-hbonds1.jpg"
-      alt: "PyMOL render of structure 6SX0 with hydrogen bonds displayed"
-    - file: "pymol/6sx0-hbonds2.jpg"
-      alt: "PyMOL render of hydrogen bonding in structure 6SX0, second view"
-    - file: "pymol/6sx0-hbonds3.jpg"
-      alt: "PyMOL render of hydrogen bonding in structure 6SX0, third view"
 
 - id: "tumor-mri"
   title: "Brain tumor classification in MRI scans"
@@ -95,7 +48,19 @@
     Built an image processing pipeline with data augmentation and standard
     normalization for multi-modal MRI datasets, then trained a CNN in TensorFlow
     to classify four distinct tumor types.
-  tags: ["TensorFlow", "CNN", "medical imaging"]
   links:
-    - name: "code"
+    - name: "Code"
       url: "https://github.com/sktchan/tumor-classification"
+
+- id: "hpa-axis"
+  title: "Housing insecurity and the HPA axis in children"
+  role: "Supervisor: Dr. Krysta Andrews, Offord Centre for Child Studies"
+  year: "Sep 2022 – Apr 2023"
+  note: >-
+    A systematic review of how socioenvironmental housing instability affects
+    HPA axis functioning in children, alongside analysis of salivary cortisol
+    data linking housing quality to long-term neuroendocrine stress
+    dysregulation.
+  links:
+    - name: "Poster (PDF)"
+      url: "/assets/docs/hpa-poster.pdf"

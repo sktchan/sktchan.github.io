@@ -39,9 +39,7 @@
 
   {%- if item.presentations and item.presentations.size > 0 -%}
     <details class="drop">
-      <summary class="drop__face">
-        conferences <span class="drop__count">{{ item.presentations.size }}</span>
-      </summary>
+      <summary class="drop__face">Conferences</summary>
       <ul class="drop__list">
         {%- for talk in item.presentations %}
           <li><em>{{ talk.venue }}</em>, {{ talk.year }}</li>

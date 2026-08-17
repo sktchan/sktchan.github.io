@@ -1,161 +1,153 @@
-# Workshops, leadership, mentoring and volunteering — the /community/ page.
-# Rendered as photo tiles, in the order the groups appear below.
-# Any group you empty out disappears from the page.
+# Workshops, leadership and volunteering, and mentorship — the Community
+# section on the home page. Any group you empty out disappears.
 #
-# Each entry is a square photo tile. Hovering shows `venue` (or `title`, for
-# workshops, which have no venue) with the role beneath. Set `photo:` to an image
-# under assets/img/community/; until you do, the tile shows a pink wash with the
-# label permanently visible.
+# A row shows `venue` as the lead line, with `title` (the role), `year` and
+# `location` beneath. Workshops have no venue, year or location — their title
+# leads and their links sit beside it.
 #
-# `note:` is kept but NOT rendered anywhere — /community/ is photos and labels
-# only now. Delete the notes, or restore the rendering, whenever you like.
+# `note:` is kept but NOT rendered anywhere. Delete the notes, or restore the
+# rendering, whenever you like.
 #
 # Talks live in research.yml, next to the work they're about.
+
+intro: >-
+  Work outside the lab — teaching the tools I use, mentoring students through
+  the transitions I found hardest, and showing up for the communities I've
+  lived in.
 
 # ─── workshops you've run ────────────────────────────────────────────────────
 # Slides live in assets/docs/; code lives in github.com/sktchan/lab-demos, deep
 # linked to the folder for each workshop.
 workshops:
   - title: "Debugging and Profiling in Julia"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Demonstrated advanced debugging techniques using Debugger.jl and
       Infiltrator.jl, and guided participants through performance profiling with
       @profview and Nvidia Nsight Systems.
-    tags: ["Julia", "debugging", "profiling"]
     links:
-      - name: "slides (pdf)"
+      - name: "Slides (PDF)"
         url: "/assets/docs/workshop-debugging.pdf"
-      - name: "debugging code"
+      - name: "Debugging code"
         url: "https://github.com/sktchan/lab-demos/tree/main/debugging"
-      - name: "profiling code"
+      - name: "Profiling code"
         url: "https://github.com/sktchan/lab-demos/tree/main/profiling"
 
   - title: "CUDA GPU Kernels in Julia"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Taught the fundamentals of GPU architecture and custom kernel programming,
       covering thread hierarchy, memory synchronization, dynamic shared memory
       and atomic operations.
-    tags: ["Julia", "CUDA", "GPU"]
     links:
       # Slides deliberately not hosted — the source PDF is 11MB, too heavy to
       # serve. The notebook in the repo covers the same material.
-      - name: "code"
+      - name: "Code"
         url: "https://github.com/sktchan/lab-demos/tree/main/gpu_opt"
 
   - title: "Nvidia Nsight Systems Performance Analysis"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Led a system-wide performance analysis workshop, covering CLI data
       collection with nsys profile, hardware bottleneck identification, and GUI
       timeline visualization across CPU and GPU tasks.
-    tags: ["Nsight", "profiling", "GPU"]
     links:
-      - name: "slides (pdf)"
+      - name: "Slides (PDF)"
         url: "/assets/docs/workshop-nsight.pdf"
-      - name: "code"
+      - name: "Code"
         url: "https://github.com/sktchan/lab-demos/tree/main/nsight"
 
   - title: "Introduction to Quantum Computing"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Presented the theoretical foundations of quantum mechanics and led a
       practical tutorial on simulating multi-qubit circuits, entanglement and
       state measurements using the Snowflurry.jl framework.
-    tags: ["Julia", "quantum computing", "Snowflurry.jl"]
     links:
-      - name: "slides (pdf)"
+      - name: "Slides (PDF)"
         url: "/assets/docs/workshop-quantum.pdf"
-      - name: "code"
+      - name: "Code"
         url: "https://github.com/sktchan/lab-demos/tree/main/quantum"
 
   - title: "Calcul Québec HPC Infrastructure"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     note: >-
       Facilitated technical onboarding for Calcul Québec's high-performance
       computing clusters (Fir, Narval, Nibi, Rorqual, Trillium), covering SLURM
       job scheduling, reference GPU unit (RGU) allocation and Globus file
       transfers.
-    tags: ["HPC", "SLURM", "Calcul Québec"]
     links:
-      - name: "slides (pdf)"
+      - name: "Slides (PDF)"
         url: "/assets/docs/workshop-calcul-quebec.pdf"
-      - name: "code"
+      - name: "Code"
         url: "https://github.com/sktchan/lab-demos/tree/main/calcul_quebec"
 
-# ─── leadership and organizing ───────────────────────────────────────────────
+# ─── leadership and volunteering ─────────────────────────────────────────────
+# One combined group, newest first.
 leadership:
   - title: "Equity, Diversity & Inclusion (EDI) Team"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "Mila — Quebec AI Institute"
+    location: "Montréal, Canada"
     year: "Apr 2025 – present"
     note: >-
       Organizing institute-wide initiatives to build a more equitable, inclusive
       and diverse environment across the AI research community.
 
   - title: "Vice President"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "McMaster Chinese Students' Association"
+    location: "Hamilton, Canada"
     year: "Apr 2022 – Apr 2023"
     note: >-
       Ran events logistics, booking and promotion, and led weekly subcommittee
       meetings.
 
   - title: "Design Review Team"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "McMaster IMPACT Initiative"
+    location: "Hamilton, Canada"
     year: "Mar 2021 – Jan 2022"
     note: >-
       Reviewed engineering prototypes custom-designed with students and
       professors to increase accessibility for clients.
 
-# ─── mentoring and advising ──────────────────────────────────────────────────
-mentoring:
+  - title: "Inpatient Volunteer"
+    venue: "St. Joseph's Health Care Centre"
+    location: "Toronto, Canada"
+    year: "Nov 2018 – Nov 2019"
+    note: >-
+      Provided compassionate nonmedical care and support to inpatients.
+
+  - title: "Winter Fair Executive"
+    venue: "Ernestine's Women's Shelter"
+    location: "Toronto, Canada"
+    year: "Sep 2017 – Dec 2018"
+    note: >-
+      Organized and led weekly subcommittee meetings to plan events.
+
+  - title: "Restaurant Volunteer"
+    venue: "St. Francis Table"
+    location: "Toronto, Canada"
+    year: "Nov 2017"
+    note: >-
+      Served meals in a welcoming space to those physically or mentally unable
+      to work.
+
+# ─── mentorship ──────────────────────────────────────────────────────────────
+mentorship:
   - title: "Advisor"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "Independent consulting"
+    location: "Montréal, Canada"
     year: "Jan 2025 – present"
     note: >-
       Multidisciplinary strategic guidance to an early-stage biotech startup —
       biological feasibility, ML code development, and market audience strategy.
 
   - title: "SciComm Consultant"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "STEM Fellowship"
+    location: "Hamilton, Canada"
     year: "Mar 2022 – present"
     note: >-
       Identified gaps in business processes and built tailored presentation
       material from consultee assessments.
 
   - title: "Undergraduate Mentor"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
     venue: "McMaster Women in STEM"
+    location: "Hamilton, Canada"
     year: "Sep 2021 – Apr 2022"
     note: >-
       One-on-one mentoring of first-year students on academics and
       extracurriculars, through the return from online to in-person schooling.
-
-# ─── volunteering ────────────────────────────────────────────────────────────
-volunteering:
-  - title: "Inpatient Volunteer"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
-    venue: "St. Joseph's Health Care Centre"
-    year: "Nov 2018 – Nov 2019"
-    note: >-
-      Provided compassionate nonmedical care and support to inpatients.
-
-  - title: "Winter Fair Executive"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
-    venue: "Ernestine's Women's Shelter"
-    year: "Sep 2017 – Dec 2018"
-    note: >-
-      Organized and led weekly subcommittee meetings to plan events.
-
-  - title: "Restaurant Volunteer"
-    photo: ""   # e.g. "/assets/img/community/mila.jpg"
-    venue: "St. Francis Table"
-    year: "Nov 2017"
-    note: >-
-      Served meals in a welcoming space to those physically or mentally unable
-      to work.

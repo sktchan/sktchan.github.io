@@ -13,11 +13,11 @@
       {%- assign parts = parts | push: p -%}
     {%- endif -%}
     {%- if l.scholar and l.scholar != '' -%}
-      {%- capture p %}<a href="{{ l.scholar }}">google scholar</a>{% endcapture -%}
+      {%- capture p %}<a href="{{ l.scholar }}">Google Scholar</a>{% endcapture -%}
       {%- assign parts = parts | push: p -%}
     {%- endif -%}
     {%- if l.github and l.github != '' -%}
-      {%- capture p %}<a href="{{ l.github }}">github</a>{% endcapture -%}
+      {%- capture p %}<a href="{{ l.github }}">GitHub</a>{% endcapture -%}
       {%- assign parts = parts | push: p -%}
     {%- endif -%}
     {%- if parts.size > 0 -%}

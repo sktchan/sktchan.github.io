@@ -1,6 +1,6 @@
 # ─── site ────────────────────────────────────────────────────────────────────
 title: Serena Chan
-tagline: computational biology + machine learning
+tagline: Computational biology + machine learning
 description: >-
   Serena Chan is an MSc student in computer science at Université de Montréal,
   affiliated with Mila and IRIC, working on representation learning for
@@ -47,13 +47,13 @@ exclude:
 # The site is one scrolling page, so these are in-page anchors — except /cv/,
 # which is a real page of its own.
 nav:
-  - title: news
+  - title: News
     url: "#news"
-  - title: work
+  - title: Work
     url: "#work"
-  - title: community
+  - title: Community
     url: "#community"
-  - title: photos
+  - title: Photos
     url: "#photos"
-  - title: cv
+  - title: CV
     url: /cv/

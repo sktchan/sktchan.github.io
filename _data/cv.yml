@@ -19,43 +19,47 @@ education:
   - when: "Sep 2020 – Apr 2024"
     title: "BSc, Honours Life Sciences"
     where: "McMaster University, Hamilton, ON"
-    detail: "Graduated with Distinction. Coursework: Genetics, Organic Chemistry, Data Structures & Algorithms, Statistics, Data Science, Calculus, Neuroscience."
+    detail: "Coursework: Genetics, Organic Chemistry, Data Structures & Algorithms, Statistics, Data Science, Calculus, Neuroscience."
 
+# `detail` may be a single string or a list — a list renders as bullets, which is
+# what the Offord Centre entry needs.
 experience:
-  - when: "Jan 2025 – present"
+  - when: "January 2025 – Present"
     title: "Research Affiliate"
-    where: "Mila — Quebec AI Institute"
-    detail: "Benchmarking transformer, autoencoder and feedforward architectures, analyzing pre-training objectives and interpretability in transcriptomic representation learning."
+    where: "Mila - Quebec AI Institute"
+    detail: "Benchmarking transformer, autoencoder, and feedforward architectures while analyzing pre-training objectives and interpretability in transcriptomic representation learning."
 
-  - when: "Jan 2025 – present"
+  - when: "January 2025 – Present"
     title: "Research Affiliate"
     where: "Institute for Research in Immunology and Cancer"
-    detail: "Modeling gene dependencies from bulk and single-cell RNA-seq, evaluating rank-normalized inputs against raw expression counts for biological inference."
+    detail: "Modeling gene dependencies using bulk and single-cell RNA-seq datasets, evaluating the impact of rank-normalized inputs versus raw expression counts on biological inference."
 
-  - when: "Feb 2025 – Apr 2025"
+  - when: "February 2025 – April 2025"
     title: "AI/NLP Intern"
     where: "Ubineer"
-    detail: "Built and optimized a text parsing pipeline with NLTK and POS tagging to clean and structure 250+ documents, improving dataset quality for LLM training."
+    detail: "Developed and optimized a text parsing pipeline using NLTK and POS tagging in Python to clean and structure 250+ text documents, improving dataset quality for LLM training."
 
-  - when: "May 2024 – Dec 2024"
+  - when: "May 2024 – December 2024"
     title: "Medical Administrative Assistant"
     where: "The Clinic @ College Corner, Toronto, ON"
-    detail: "Maintained patient records — medical histories, test results, billing, treatment plans and inquiries — in the PS Suite EMR system."
+    detail: "Maintained efficient patient records by accurately inputting and updating medical histories, test results, billing histories, treatment plans, and patient inquiries using EMR system PS Suite."
 
-  - when: "May 2024 – Dec 2024"
+  - when: "May 2024 – December 2024"
     title: "Research Assistant"
     where: "AI Atlas, Hamilton, ON"
-    detail: "Investigated self-learning AI-based arrhythmia detection algorithms with engineers, bringing clinical expertise to bear on model architecture and clinical utility."
+    detail: "Collaborated with engineers to investigate self-learning AI-based arrhythmia detection algorithms, incorporating clinical expertise and feedback to research model architectures and optimize clinical utility."
 
-  - when: "Sep 2023 – Apr 2024"
+  - when: "September 2023 – April 2024"
     title: "Research Affiliate"
     where: "Juravinski Cancer Centre, Hamilton, ON"
-    detail: "Ran Optical Surface Monitoring Systems (OSMS) and ARIA software to collect, transfer and verify the fidelity of positional and CT image registration data."
+    detail: "Facilitated the use of Optical Surface Monitoring Systems (OSMS) and ARIA software to collect, transfer, and verify fidelity of both positional and CT image registration data."
 
-  - when: "Sep 2022 – May 2024"
+  - when: "September 2022 – May 2024"
     title: "Research Assistant"
     where: "Offord Centre for Child Studies, Hamilton, ON"
-    detail: "Verified compliance and fidelity from clinical session audio for a multi-institutional positive-parenting study; ran abstract and full-text screening for an ongoing systematic review on child development, family trauma and family functioning."
+    detail:
+      - "Analyzed audio recordings of clinical sessions and interviews to verify compliance and fidelity for a multi-institutional study on positive parenting technique therapy."
+      - "Completed abstract and full-text screenings, as well as a background review on literature surrounding child development, family trauma, and family functioning using Excel for an ongoing systematic review."
 
 awards:
   - when: "2026"

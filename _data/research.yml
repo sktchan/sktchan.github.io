@@ -1,25 +1,24 @@
-# Research — supervised positions, each owning the presentations that came out of
-# it, plus the peer-reviewed papers.
+# Selected work — the strongest three, each owning the talks and papers that
+# came out of it, plus the peer-reviewed papers list.
 #
-# Rendered on /research/ as a card grid: the card face shows title + year, and
-# clicking opens the description, links and presentations.
+# Everything else lives in projects.yml under "Additional projects".
 #
 # Your name is bolded automatically inside `authors` — write the list exactly as
 # it appears in the citation.
 
 # ─── peer-reviewed papers ────────────────────────────────────────────────────
-# Also listed inside the project they came from, so a reader finds them either
-# way: skimming the top of /research/, or clicking into the work itself.
+# Also listed inside the project they came from. Both copies must carry the same
+# DOI, or the site shows two different links for one paper.
 papers:
   - title: "Evaluating Accufix head and neck shoulder immobilization for head and neck radiation therapy"
     authors: "Chan S, Ostapiak O, VanSantvoort T, Chow T"
     venue: "URNCST Journal 9(2)"
-    year: 2025
+    year: "Feb 2025"
     links:
-      - name: "article"
-        url: "https://urncst.com/index.php/urncst/article/view/750"
+      - name: "DOI"
+        url: "https://doi.org/10.26685/urncst.750"
 
-# ─── research projects ───────────────────────────────────────────────────────
+# ─── selected work ───────────────────────────────────────────────────────────
 projects:
   - id: "tokenization"
     title: "Transcriptomic foundation model tokenization"
@@ -29,9 +28,8 @@ projects:
       Building an evaluation framework that varies tokenization, pre-training
       objective and architecture together, to see which combinations actually
       help on downstream perturbation prediction.
-    tags: ["Julia", "Flux.jl", "transformers", "transcriptomics"]
     links:
-      - name: "code"
+      - name: "Code"
         url: "https://github.com/lemieux-lab/LTformers"
     presentations:
       - title: "The limits of transformers for transcriptomic representation learning"
@@ -50,6 +48,20 @@ projects:
         venue: "IRIC Scientific Day, Montréal, Canada"
         year: "Jun 2025"
 
+  - id: "anti-aptamers"
+    title: "Computational design of anti-aptamers"
+    role: "Prof: Dr. François Major, Université de Montréal"
+    year: "Jan 2025 – Apr 2025"
+    note: >-
+      Designed single-loop and bivalent DNA antidotes to neutralize the SARS-CoV-2
+      CoV2-6C3 RNA aptamer using mfold and RNAfold, then simulated hybridization
+      and competitive inhibition with NUPACK thermodynamics and HDOCK docking.
+    links:
+      - name: "Report (PDF)"
+        url: "/assets/docs/aptamers-report.pdf"
+      - name: "Code"
+        url: "https://github.com/sktchan/anti-aptamers"
+
   - id: "osms"
     title: "OSMS for head and neck radiation therapy"
     role: "Supervisor: Dr. Orest Ostapiak, Juravinski Cancer Centre"
@@ -58,20 +70,19 @@ projects:
       Evaluated immobilization systems for minimizing 6D interfractional and
       intrafractional motion, and benchmarked AlignRT optical surface monitoring
       against cone-beam CT image registration.
-    tags: ["radiation oncology", "image registration"]
     links:
-      - name: "report (pdf)"
+      - name: "Report (PDF)"
         url: "/assets/docs/osms-report.pdf"
-      - name: "code"
+      - name: "Code"
         url: "https://github.com/sktchan/alignRT-preprocessing"
     publications:
       - title: "Evaluating Accufix head and neck shoulder immobilization for head and neck radiation therapy"
         authors: "Chan S, Ostapiak O, VanSantvoort T, Chow T"
         venue: "URNCST Journal 9(2)"
-        year: 2025
+        year: "Feb 2025"
         links:
-          - name: "article"
-            url: "https://urncst.com/index.php/urncst/article/view/750"
+          - name: "DOI"
+            url: "https://doi.org/10.26685/urncst.750"
     presentations:
       - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
         venue: "RTi3 Conference, Toronto, Canada"
@@ -79,17 +90,3 @@ projects:
       - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
         venue: "Canadian Undergraduate Conference on Healthcare (CUCOH), Toronto, Canada"
         year: "Jan 2024"
-
-  - id: "hpa-axis"
-    title: "Housing insecurity and the HPA axis in children"
-    role: "Supervisor: Dr. Krysta Andrews, Offord Centre for Child Studies"
-    year: "Sep 2022 – Apr 2023"
-    note: >-
-      A systematic review of how socioenvironmental housing instability affects
-      HPA axis functioning in children, alongside analysis of salivary cortisol
-      data linking housing quality to long-term neuroendocrine stress
-      dysregulation.
-    tags: ["systematic review", "biomarkers"]
-    links:
-      - name: "poster (pdf)"
-        url: "/assets/docs/hpa-poster.pdf"

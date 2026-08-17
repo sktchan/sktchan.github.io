@@ -23,7 +23,7 @@ wide: true
        width="380" height="380">
 
   <div class="intro__body">
-    <h1>hi, i'm {{ site.author | split: ' ' | first | downcase }} <span class="heart" aria-hidden="true">&#9829;</span></h1>
+    <h1>Hi, I'm {{ site.author | split: ' ' | first }} <span class="heart" aria-hidden="true">&#9829;</span></h1>
 
     <p>
       I'm a master's student in computer science at the
@@ -46,14 +46,13 @@ wide: true
       `!= ''` test — otherwise a blank entry in links.yml renders a dead pill.
     {%- endcomment -%}
     <ul class="linkrow">
-      {%- if l.email    and l.email    != '' %}<li><a href="mailto:{{ l.email }}">email</a></li>{% endif -%}
-      {%- if l.scholar  and l.scholar  != '' %}<li><a href="{{ l.scholar }}">google scholar</a></li>{% endif -%}
-      {%- if l.linkedin and l.linkedin != '' %}<li><a href="{{ l.linkedin }}">linkedin</a></li>{% endif -%}
-      {%- if l.github   and l.github   != '' %}<li><a href="{{ l.github }}">github</a></li>{% endif -%}
-      {%- if l.orcid    and l.orcid    != '' %}<li><a href="{{ l.orcid }}">orcid</a></li>{% endif -%}
-      {%- if l.bluesky  and l.bluesky  != '' %}<li><a href="{{ l.bluesky }}">bluesky</a></li>{% endif -%}
-      {%- if l.twitter  and l.twitter  != '' %}<li><a href="{{ l.twitter }}">twitter</a></li>{% endif -%}
-      <li><a href="{{ '/cv/' | relative_url }}">cv</a></li>
+      {%- if l.email    and l.email    != '' %}<li><a href="mailto:{{ l.email }}">Email</a></li>{% endif -%}
+      {%- if l.scholar  and l.scholar  != '' %}<li><a href="{{ l.scholar }}">Google Scholar</a></li>{% endif -%}
+      {%- if l.linkedin and l.linkedin != '' %}<li><a href="{{ l.linkedin }}">LinkedIn</a></li>{% endif -%}
+      {%- if l.github   and l.github   != '' %}<li><a href="{{ l.github }}">GitHub</a></li>{% endif -%}
+      {%- if l.orcid    and l.orcid    != '' %}<li><a href="{{ l.orcid }}">ORCID</a></li>{% endif -%}
+      {%- if l.bluesky  and l.bluesky  != '' %}<li><a href="{{ l.bluesky }}">Bluesky</a></li>{% endif -%}
+      {%- if l.twitter  and l.twitter  != '' %}<li><a href="{{ l.twitter }}">Twitter</a></li>{% endif -%}
     </ul>
   </div>
 </section>
@@ -61,7 +60,7 @@ wide: true
 {%- comment -%} ─── news ──────────────────────────────────────────────── {%- endcomment -%}
 {%- if site.data.news and site.data.news.size > 0 -%}
   <section id="news" class="band">
-    <h2><span class="section-title">news</span></h2>
+    <h2><span class="section-title">News</span></h2>
     <ul class="news">
       {%- for item in site.data.news limit: 5 %}
         <li>
@@ -81,17 +80,17 @@ wide: true
 
 {%- comment -%} ─── work ──────────────────────────────────────────────── {%- endcomment -%}
 <section id="work" class="band">
-  <h2><span class="section-title">work</span></h2>
+  <h2><span class="section-title">Work</span></h2>
 
   {%- if r.projects and r.projects.size > 0 -%}
-    <h3 class="band__sub">research</h3>
+    <h3 class="band__sub">Selected work</h3>
     <div class="rows">
       {%- for item in r.projects %}{% include work-row.html item=item %}{% endfor -%}
     </div>
   {%- endif -%}
 
   {%- if pj and pj.size > 0 -%}
-    <h3 class="band__sub">projects</h3>
+    <h3 class="band__sub">Additional projects</h3>
     <div class="rows">
       {%- for item in pj %}{% include work-row.html item=item %}{% endfor -%}
     </div>
@@ -100,33 +99,27 @@ wide: true
 
 {%- comment -%} ─── community ─────────────────────────────────────────── {%- endcomment -%}
 <section id="community" class="band">
-  <h2><span class="section-title">community</span></h2>
+  <h2><span class="section-title">Community</span></h2>
+  {%- if c.intro and c.intro != '' %}<p class="band__intro">{{ c.intro }}</p>{% endif -%}
 
   {%- if c.workshops and c.workshops.size > 0 -%}
-    <h3 class="band__sub">workshops</h3>
+    <h3 class="band__sub">Workshops</h3>
     <div class="rows">
       {%- for item in c.workshops %}{% include community-row.html item=item %}{% endfor -%}
     </div>
   {%- endif -%}
 
   {%- if c.leadership and c.leadership.size > 0 -%}
-    <h3 class="band__sub">leadership and organizing</h3>
+    <h3 class="band__sub">Leadership and volunteering</h3>
     <div class="rows">
       {%- for item in c.leadership %}{% include community-row.html item=item %}{% endfor -%}
     </div>
   {%- endif -%}
 
-  {%- if c.mentoring and c.mentoring.size > 0 -%}
-    <h3 class="band__sub">mentoring</h3>
+  {%- if c.mentorship and c.mentorship.size > 0 -%}
+    <h3 class="band__sub">Mentorship</h3>
     <div class="rows">
-      {%- for item in c.mentoring %}{% include community-row.html item=item %}{% endfor -%}
-    </div>
-  {%- endif -%}
-
-  {%- if c.volunteering and c.volunteering.size > 0 -%}
-    <h3 class="band__sub">volunteering</h3>
-    <div class="rows">
-      {%- for item in c.volunteering %}{% include community-row.html item=item %}{% endfor -%}
+      {%- for item in c.mentorship %}{% include community-row.html item=item %}{% endfor -%}
     </div>
   {%- endif -%}
 </section>
@@ -134,16 +127,17 @@ wide: true
 {%- comment -%} ─── photos ────────────────────────────────────────────── {%- endcomment -%}
 {%- if ph.photos and ph.photos.size > 0 -%}
   <section id="photos" class="band">
-    <h2><span class="section-title">photos</span></h2>
+    <h2><span class="section-title">Photos</span></h2>
+    {%- if ph.intro and ph.intro != '' %}<p class="band__intro">{{ ph.intro }}</p>{% endif -%}
     {% include gallery.html items=ph.photos base="/assets/img/photos/" %}
   </section>
 {%- endif -%}
 
 {%- comment -%} ─── cv ────────────────────────────────────────────────── {%- endcomment -%}
 <section id="cv" class="band band--cv">
-  <h2><span class="section-title">cv</span></h2>
+  <h2><span class="section-title">CV</span></h2>
   <p>
-    <a class="button" href="{{ '/cv/' | relative_url }}">read my cv &rarr;</a>
+    <a class="button" href="{{ '/cv/' | relative_url }}">Read my CV &rarr;</a>
   </p>
   <p class="band__note">Opens as a page you can print or save as a PDF.</p>
 </section>
