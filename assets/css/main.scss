@@ -84,7 +84,7 @@ h1, h2, h3, h4 {
 }
 
 h1 { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.2rem); }
-h2 { font-size: 1.3rem; margin-top: 1.75rem; }
+h2 { font-size: 1.3rem; margin-top: 1.4rem; }
 h3 { font-size: 1.05rem; margin-top: 1.25rem; }
 
 p { margin: 0 0 .7rem; }
@@ -158,7 +158,7 @@ code {
 
 .wrap--wide { max-width: var(--wide); }
 
-.site-main { padding-bottom: 2.5rem; }
+.site-main { padding-bottom: 2rem; }
 
 /* Two soft pink blobs behind the header. Pure CSS — no image requests, and
    they are what keeps the page from reading as a plain document. */
@@ -308,24 +308,30 @@ html { scroll-behavior: smooth; }
   display: flex;
   gap: 1.5rem;
   align-items: flex-start;
-  margin-bottom: .5rem;
+  margin-bottom: .25rem;
 }
 
 .intro__photo {
   flex: 0 0 auto;
-  width: 8rem;
-  height: 8rem;
+  width: 10.5rem;
+  height: 10.5rem;
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
 .intro__body { flex: 1 1 auto; min-width: 0; }
+
+/* The intro is four short paragraphs read as one block, so it's set tighter
+   than body copy elsewhere — closer leading and smaller gaps between them. */
+.intro__body { line-height: 1.45; }
+.intro__body p { margin-bottom: .38rem; }
+.intro__body h1 { margin-bottom: .3rem; }
 .intro__body > :last-child { margin-bottom: 0; }
 
 @media (max-width: 34rem) {
   .intro { flex-direction: column; gap: 1.25rem; }
-  .intro__photo { width: 7.5rem; height: 7.5rem; }
+  .intro__photo { width: 8.5rem; height: 8.5rem; }
 }
 
 /* ─── link row (email / scholar / github …) ───────────────────────────────── */
@@ -336,7 +342,7 @@ html { scroll-behavior: smooth; }
   gap: .5rem;
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin: .8rem 0 0;
 }
 
 .linkrow a {
@@ -394,7 +400,7 @@ html { scroll-behavior: smooth; }
 
 /* ─── sections on the one-pager ───────────────────────────────────────────── */
 
-.band { margin-top: 2rem; }
+.band { margin-top: 1.5rem; }
 
 .band__sub {
   font-family: var(--sans);
@@ -402,7 +408,7 @@ html { scroll-behavior: smooth; }
   font-weight: 600;
   letter-spacing: .04em;
   color: var(--ink-muted);
-  margin: 1.25rem 0 .3rem;
+  margin: .95rem 0 .25rem;
 }
 
 .band__note {
@@ -413,7 +419,7 @@ html { scroll-behavior: smooth; }
 /* One introductory sentence under a section heading. */
 .band__intro {
   max-width: var(--measure);
-  margin: .35rem 0 .9rem;
+  margin: .3rem 0 .7rem;
   color: var(--ink-muted);
 }
 
@@ -479,7 +485,7 @@ html { scroll-behavior: smooth; }
   flex-wrap: wrap;
   align-items: baseline;
   gap: .3rem .9rem;
-  padding: .5rem 0;
+  padding: .4rem 0;
   border-bottom: 1px solid var(--rule);
 }
 
