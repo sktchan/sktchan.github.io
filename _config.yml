@@ -47,8 +47,6 @@ exclude:
 # The site is one scrolling page, so these are in-page anchors — except /cv/,
 # which is a real page of its own.
 nav:
-  - title: News
-    url: "#news"
   - title: Work
     url: "#work"
   - title: Community

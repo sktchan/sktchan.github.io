@@ -233,7 +233,7 @@ code {
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
   padding: .45rem 0;
-  margin-bottom: 1.4rem;
+  margin-bottom: 2.6rem;
 }
 
 .nav {
@@ -458,12 +458,201 @@ html { scroll-behavior: smooth; }
   line-height: 1.5;
 }
 
+/* ─── work tiles ──────────────────────────────────────────────────────────── */
+
+/* minmax(0, 1fr) rather than 1fr: a bare 1fr track can't shrink below its
+   content's min-content width, so a long title would push the grid wider than
+   the viewport. */
+.wks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .6rem;
+  margin-top: .6rem;
+  align-items: start;
+}
+
+.wk {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.wk:hover { border-color: var(--tint-deep); }
+
+/* Open tiles take the whole row: a description squeezed into a third of the
+   width reads badly, and the neighbours would stretch to match. */
+.wk[open] {
+  grid-column: 1 / -1;
+  border-color: var(--tint-deep);
+  box-shadow: var(--shadow);
+}
+
+.wk__face {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  padding: .7rem .85rem;
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--radius);
+}
+
+.wk__face::-webkit-details-marker { display: none; }
+
+.wk__face:hover .wk__title { color: var(--accent); }
+
+.wk__title {
+  flex: 1 1 auto;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: .92rem;
+  line-height: 1.3;
+}
+
+.wk__face::after {
+  content: "";
+  flex: 0 0 auto;
+  margin-top: .3em;
+  width: .35rem;
+  height: .35rem;
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wk__face::after { transition: transform .2s ease; }
+}
+
+.wk[open] .wk__face::after { transform: rotate(45deg); }
+
+.wk__body {
+  padding: .2rem .85rem .8rem;
+  border-top: 1px solid var(--rule);
+  padding-top: .6rem;
+}
+
+.wk__role {
+  color: var(--ink-muted);
+  font-size: .85rem;
+  margin: 0 0 .4rem;
+}
+
+.wk__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .9rem;
+}
+
+.wk__bullets > li { padding-left: .9rem; position: relative; margin-bottom: .2rem; }
+
+.wk__bullets > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: .3rem;
+  height: .3rem;
+  border-radius: 50%;
+  background: var(--tint-deep);
+}
+
+.wk__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  list-style: none;
+  padding: 0;
+  margin: .6rem 0 0;
+  font-size: .84rem;
+}
+
+@media (max-width: 46rem) {
+  .wks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 30rem) {
+  .wks { grid-template-columns: 1fr; }
+}
+
+/* ─── community cluster ───────────────────────────────────────────────────── */
+
+.cluster { margin-top: 1.5rem; }
+
+.cluster__names {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem 1.1rem;
+  max-width: 46rem;
+}
+
+/* Buttons, not spans — that's what makes the cluster reachable by keyboard and
+   usable on touch. Stripped back to look like plain text. */
+.cluster__name {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: .1rem .15rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink-muted);
+  cursor: pointer;
+  line-height: 1.2;
+  transition: color .18s ease, transform .18s ease;
+}
+
+/* Scattered by fixed steps: sizes cycle and rotations alternate, so it reads as
+   hand-placed without needing randomness Liquid can't provide. */
+.cluster__name:nth-child(4n + 1) { font-size: 1.35rem; transform: rotate(-3deg); }
+.cluster__name:nth-child(4n + 2) { font-size: 1rem;    transform: rotate(2deg); }
+.cluster__name:nth-child(4n + 3) { font-size: 1.6rem;  transform: rotate(1.5deg); }
+.cluster__name:nth-child(4n + 4) { font-size: 1.15rem; transform: rotate(-2deg); }
+.cluster__name:nth-child(3n)     { color: var(--ink); }
+
+.cluster__name:hover,
+.cluster__name:focus-visible,
+.cluster__name.is-active {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cluster__name:hover,
+  .cluster__name.is-active { transform: rotate(0deg) scale(1.06); }
+}
+
+/* min-height reserved so the page doesn't jump as the panel fills. */
+.cluster__panel {
+  min-height: 3.2rem;
+  margin: 1.1rem 0 0;
+  padding-top: .7rem;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-size: .9rem;
+}
+
+.cluster__lead {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.cluster__detail {
+  display: block;
+  color: var(--ink-muted);
+  font-size: .87rem;
+}
+
 /* ─── workshop photo tiles ────────────────────────────────────────────────── */
 
 .wtiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: .8rem;
+  grid-template-columns: repeat(4, minmax(0, 7.5rem));
+  gap: .7rem;
   margin-top: .6rem;
 }
 
@@ -491,16 +680,21 @@ html { scroll-behavior: smooth; }
 
 /* Title sits over the image, on a scrim dark enough to stay legible whatever
    the photo underneath happens to be. */
+/* At half size the longest titles run to three lines, so the scrim covers the
+   whole tile rather than just the lower edge — otherwise the top lines sit on
+   bare photo and become unreadable. */
 .wtile__title {
   position: absolute;
-  inset: auto 0 0 0;
-  padding: 1.4rem .7rem .55rem;
-  background: linear-gradient(to top, rgba(43, 40, 38, .88) 0%, rgba(43, 40, 38, .5) 55%, transparent 100%);
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: .5rem;
+  background: linear-gradient(to top, rgba(43, 40, 38, .9) 0%, rgba(43, 40, 38, .72) 45%, rgba(43, 40, 38, .35) 100%);
   color: #fff;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: .88rem;
-  line-height: 1.25;
+  font-size: .74rem;
+  line-height: 1.2;
 }
 
 .wtile__links {
@@ -568,22 +762,6 @@ html { scroll-behavior: smooth; }
   border-radius: 50%;
   background: var(--tint-deep);
 }
-
-/* A whole section collapsed rather than a footnote to one row, so its summary
-   is sized like the section subheads it sits among. */
-.drop--group { margin: 1.25rem 0 0; }
-
-.drop--group > .drop__face {
-  font-family: var(--sans);
-  font-size: .82rem;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: var(--ink-muted);
-}
-
-.drop--group > .drop__face::after { border-color: var(--accent); }
-
-.drop--group[open] > .drop__face { margin-bottom: .2rem; }
 
 /* ─── the heart beside the homepage greeting ──────────────────────────────── */
 

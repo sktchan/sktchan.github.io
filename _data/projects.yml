@@ -8,10 +8,8 @@
   title: "Protein embeddings and local alignments"
   role: "Prof: Dr. Nadia El-Mabrouk, Université de Montréal"
   year: "Sep 2025 – Dec 2025"
-  note: >-
-    A review of protein language model embeddings and cosine similarity scoring
-    inside Smith-Waterman dynamic programming, weighed against traditional
-    BLOSUM substitution matrices.
+  bullets:
+    - "Review of protein language model embeddings and cosine similarity scoring in Smith-Waterman dynamic programming over traditional BLOSUM matrices."
   links:
     - name: "Slides"
       url: "/assets/docs/alignments-slides.pdf"
@@ -20,10 +18,9 @@
   title: "Energy consumption prediction"
   role: "Prof: Dr. Vincent Taboga, Mila — Quebec AI Institute"
   year: "Jan 2025 – Apr 2025"
-  note: >-
-    Engineered multi-horizon time-series features — cyclical time
-    representations, wind chill, heat indices — and trained LSTM networks in
-    PyTorch to forecast building power demand.
+  bullets:
+    - "Engineered multi-horizon time-series features, incorporating cyclical time representations, wind chill, and heat indices."
+    - "Trained and evaluated LSTM neural networks in PyTorch to forecast building power demand."
   links:
     - name: "Code"
       url: "https://github.com/sktchan/energy-forecasting"
@@ -32,10 +29,8 @@
   title: "Structural visualization of viral RNA complexes"
   role: "Prof: Dr. François Major, Université de Montréal"
   year: "Jan 2025 – Apr 2025"
-  note: >-
-    Rendered 3D structural models in PyMOL to analyze base-pairing in the West
-    Nile Virus 5′ UTR stem-loop B, and hydrogen bonding in the H7N1 NS1
-    RNA-binding domain.
+  bullets:
+    - "Rendered 3D structural models in PyMOL to analyze base-pairing in the West Nile Virus 5’ UTR stem-loop B and hydrogen bonding interactions in the H7N1 NS1 RNA-binding domain."
   links:
     - name: "Report"
       url: "/assets/docs/pymol-report.pdf"
@@ -44,10 +39,9 @@
   title: "Brain tumor classification in MRI scans"
   role: "Prof: Dr. Erik Sorensen, McMaster University"
   year: "Jan 2024 – Apr 2024"
-  note: >-
-    Built an image processing pipeline with data augmentation and standard
-    normalization for multi-modal MRI datasets, then trained a CNN in TensorFlow
-    to classify four distinct tumor types.
+  bullets:
+    - "Built an image processing pipeline incorporating data augmentation and standard normalization for multi-modal MRI datasets."
+    - "Trained a CNN in TensorFlow to classify four distinct brain tumor types."
   links:
     - name: "Code"
       url: "https://github.com/sktchan/tumor-classification"
@@ -56,11 +50,9 @@
   title: "Housing insecurity and the HPA axis in children"
   role: "Supervisor: Dr. Krysta Andrews, Offord Centre for Child Studies"
   year: "Sep 2022 – Apr 2023"
-  note: >-
-    A systematic review of how socioenvironmental housing instability affects
-    HPA axis functioning in children, alongside analysis of salivary cortisol
-    data linking housing quality to long-term neuroendocrine stress
-    dysregulation.
+  bullets:
+    - "Conducted a systematic literature review evaluating the impact of socioenvironmental housing instability on HPA axis functioning in children."
+    - "Analyzed salivary cortisol biomarker data to identify physiological links between housing quality and long-term neuroendocrine stress response dysregulation."
   links:
     - name: "Poster"
       url: "/assets/docs/hpa-poster.pdf"

@@ -1,0 +1,42 @@
+{%- comment -%}
+  One work item as an expandable tile.
+
+  Usage:  {% include work-tile.html item=item %}
+
+  Collapsed face is the title alone; opening reveals the supervisor line, the
+  bullets and the links, and the tile spans the full grid row so long text isn't
+  squeezed into a third of the width.
+
+  Native <details>: keyboard operable and announced correctly with no
+  JavaScript. No dates — those were dropped deliberately; `year` is still in the
+  data files if they're ever wanted back.
+
+  `presentations` is NOT rendered here. It stays in _data/research.yml because
+  cv.html flattens it into the CV's Presentations section.
+{%- endcomment -%}
+
+{%- assign item = include.item -%}
+
+<details class="wk" {% if item.id %}id="{{ item.id }}"{% endif %}>
+  <summary class="wk__face">
+    <span class="wk__title">{{ item.title }}</span>
+  </summary>
+
+  <div class="wk__body">
+    {%- if item.role %}<p class="wk__role">{{ item.role }}</p>{% endif -%}
+
+    {%- if item.bullets and item.bullets.size > 0 -%}
+      <ul class="wk__bullets">
+        {%- for line in item.bullets %}<li>{{ line }}</li>{% endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if item.links -%}
+      <ul class="wk__links">
+        {%- for link in item.links %}
+          <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</details>

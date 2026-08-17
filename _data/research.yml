@@ -24,10 +24,8 @@ projects:
     title: "Transcriptomic foundation model tokenization"
     role: "Supervisor: Dr. Sébastien Lemieux, Université de Montréal"
     year: "Jan 2025 – present"
-    note: >-
-      Building an evaluation framework that varies tokenization, pre-training
-      objective and architecture together, to see which combinations actually
-      help on downstream perturbation prediction.
+    bullets:
+      - "Developing an evaluation framework integrating various tokenization, pre-training, and architectural variations to assess model performance on downstream perturbation predictions."
     links:
       - name: "Code"
         url: "https://github.com/lemieux-lab/LTformers"
@@ -52,10 +50,9 @@ projects:
     title: "Computational design of anti-aptamers"
     role: "Prof: Dr. François Major, Université de Montréal"
     year: "Jan 2025 – Apr 2025"
-    note: >-
-      Designed single-loop and bivalent DNA antidotes to neutralize the SARS-CoV-2
-      CoV2-6C3 RNA aptamer using mfold and RNAfold, then simulated hybridization
-      and competitive inhibition with NUPACK thermodynamics and HDOCK docking.
+    bullets:
+      - "Designed single-loop and bivalent DNA antidotes to neutralize the SARS-CoV-2 CoV2-6C3 RNA aptamer using mfold and RNAfold."
+      - "Simulated aptamer-antidote hybridization and competitive inhibition using NUPACK thermodynamics and HDOCK 3D molecular docking."
     links:
       - name: "Report"
         url: "/assets/docs/aptamers-report.pdf"
@@ -66,23 +63,16 @@ projects:
     title: "OSMS for head and neck radiation therapy"
     role: "Supervisor: Dr. Orest Ostapiak, Juravinski Cancer Centre"
     year: "Sep 2023 – Apr 2024"
-    note: >-
-      Evaluated immobilization systems for minimizing 6D interfractional and
-      intrafractional motion, and benchmarked AlignRT optical surface monitoring
-      against cone-beam CT image registration.
+    bullets:
+      - "Evaluated immobilization systems and softwares for minimizing 6D interfractional and intrafractional motion in head and neck cancer patients."
+      - "Benchmarked AlignRT optical surface monitoring precision by comparing real-time surface tracking against Cone-Beam Computed Tomography (CBCT) image registration."
     links:
       - name: "Report"
         url: "/assets/docs/osms-report.pdf"
       - name: "Code"
         url: "https://github.com/sktchan/alignRT-preprocessing"
-    publications:
-      - title: "Evaluating Accufix head and neck shoulder immobilization for head and neck radiation therapy"
-        authors: "Chan S, Ostapiak O, VanSantvoort T, Chow T"
-        venue: "URNCST Journal 9(2)"
-        year: "Feb 2025"
-        links:
-          - name: "DOI"
-            url: "https://doi.org/10.26685/urncst.750"
+      - name: "Paper"
+        url: "https://doi.org/10.26685/urncst.750"
     presentations:
       - title: "Evaluating OSMS and shoulder immobilization for larynx cancer patients"
         venue: "RTi3 Conference, Toronto, Canada"

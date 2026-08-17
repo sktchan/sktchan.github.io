@@ -1,0 +1,56 @@
+{%- comment -%}
+  Community as a scattered cluster of organisation names. Hovering or focusing
+  one fills the panel beneath it.
+
+  Usage:  {% include community-cluster.html items=list %}
+
+  Each name is a <button>, not a styled span, and that is the whole reason this
+  works for anyone not using a mouse: buttons are focusable, so the panel fills
+  on keyboard focus, and tappable, so it fills on touch.
+
+  Every button also carries an aria-label with the COMPLETE record. A screen
+  reader therefore gets everything from the buttons themselves and never has to
+  depend on the visual panel, which is aria-hidden decoration. Hover-reveal
+  patterns usually strand screen reader users; this one doesn't.
+
+  Scatter comes from nth-child size and rotation steps in the CSS — Liquid has
+  no random filter, and a fixed pattern is what "hand-scattered" needs anyway.
+{%- endcomment -%}
+
+<div class="cluster">
+  <div class="cluster__names">
+    {%- for item in include.items -%}
+      {%- assign lead = item.venue | default: item.title -%}
+      {%- comment -%} Build the full record once, for both the label and the panel. {%- endcomment -%}
+      {%- assign bits = '' | split: '' -%}
+      {%- if item.venue and item.title != item.venue -%}
+        {%- assign bits = bits | push: item.title -%}
+      {%- endif -%}
+      {%- if item.location and item.location != '' -%}
+        {%- assign bits = bits | push: item.location -%}
+      {%- endif -%}
+      {%- if item.year and item.year != '' -%}
+        {%- assign bits = bits | push: item.year -%}
+      {%- endif -%}
+      {%- assign detail = bits | join: ' · ' -%}
+
+      <button type="button"
+              class="cluster__name"
+              data-lead="{{ lead | escape }}"
+              data-detail="{{ detail | escape }}"
+              aria-label="{{ lead | escape }}{% if detail != '' %}, {{ detail | escape }}{% endif %}">{{ lead }}</button>
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%}
+    Decorative mirror of whatever is hovered or focused. Screen readers already
+    have this from the buttons, so it's hidden from them to avoid saying it all
+    twice. min-height is reserved in CSS so the page never jumps as it fills.
+  {%- endcomment -%}
+  <p class="cluster__panel" aria-hidden="true">
+    <span class="cluster__lead"></span>
+    <span class="cluster__detail">Hover a name to see the role.</span>
+  </p>
+</div>
+
+<script src="{{ '/assets/js/cluster.js' | relative_url }}" defer></script>

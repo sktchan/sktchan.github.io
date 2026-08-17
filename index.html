@@ -57,42 +57,21 @@ wide: true
   </div>
 </section>
 
-{%- comment -%} ─── news ──────────────────────────────────────────────── {%- endcomment -%}
-{%- if site.data.news and site.data.news.size > 0 -%}
-  <section id="news" class="band">
-    <h2><span class="section-title">News</span></h2>
-    <ul class="news">
-      {%- for item in site.data.news limit: 5 %}
-        <li>
-          <span class="news__date">{{ item.date }}</span>
-          <span class="news__text">
-            {%- if item.url and item.url != '' -%}
-              <a href="{{ item.url }}">{{ item.text }}</a>
-            {%- else -%}
-              {{ item.text }}
-            {%- endif -%}
-          </span>
-        </li>
-      {%- endfor %}
-    </ul>
-  </section>
-{%- endif -%}
-
 {%- comment -%} ─── work ──────────────────────────────────────────────── {%- endcomment -%}
 <section id="work" class="band">
   <h2><span class="section-title">Work</span></h2>
 
+  {%- comment -%} No sub-label on the first group — it sits straight under "Work". {%- endcomment -%}
   {%- if r.projects and r.projects.size > 0 -%}
-    <h3 class="band__sub">Selected work</h3>
-    <div class="rows">
-      {%- for item in r.projects %}{% include work-row.html item=item %}{% endfor -%}
+    <div class="wks">
+      {%- for item in r.projects %}{% include work-tile.html item=item %}{% endfor -%}
     </div>
   {%- endif -%}
 
   {%- if pj and pj.size > 0 -%}
     <h3 class="band__sub">Additional projects</h3>
-    <div class="rows">
-      {%- for item in pj %}{% include work-row.html item=item %}{% endfor -%}
+    <div class="wks">
+      {%- for item in pj %}{% include work-tile.html item=item %}{% endfor -%}
     </div>
   {%- endif -%}
 </section>
@@ -110,23 +89,11 @@ wide: true
   {%- endif -%}
 
   {%- comment -%}
-    Collapsed to keep the page short. Reuses the same <details> component as the
-    conference dropdowns, so it's keyboard operable with no JavaScript.
+    Leadership, volunteering and mentorship merged into one interactive cluster.
   {%- endcomment -%}
-  {%- if c.leadership and c.leadership.size > 0 -%}
-    <details class="drop drop--group">
-      <summary class="drop__face">Leadership and volunteering</summary>
-      <div class="rows">
-        {%- for item in c.leadership %}{% include community-row.html item=item %}{% endfor -%}
-      </div>
-    </details>
-  {%- endif -%}
-
-  {%- if c.mentorship and c.mentorship.size > 0 -%}
-    <h3 class="band__sub">Mentorship</h3>
-    <div class="rows">
-      {%- for item in c.mentorship %}{% include community-row.html item=item %}{% endfor -%}
-    </div>
+  {%- assign people = c.leadership | concat: c.mentorship -%}
+  {%- if people.size > 0 -%}
+    {% include community-cluster.html items=people %}
   {%- endif -%}
 </section>
 
