@@ -1,0 +1,97 @@
+{%- comment -%}
+  Community as a map of the Windsor–Québec corridor.
+
+  Usage:  {% include community-map.html items=list %}
+
+  Inline SVG with no mapping library and no tile provider: the site makes zero
+  third-party requests and this keeps it that way.
+
+  Marker positions come from `map_x` / `map_y` percentages in the data. A
+  Mercator projection needs log/tan, which Liquid doesn't have, so they're
+  precomputed — see _data/community.yml for the bounds and the note about why
+  markers within a city are spread apart.
+
+  Each marker is a <button> carrying the full record in aria-label, and the
+  popup fills on hover AND focus, so this works by keyboard and on touch rather
+  than only under a mouse. Below 40rem the map is hidden and the city list
+  below takes over — dots this small aren't tappable.
+{%- endcomment -%}
+
+{%- assign items = include.items -%}
+
+<div class="cmap">
+  <div class="cmap__frame">
+    <svg class="cmap__svg" viewBox="0 0 100 100" preserveAspectRatio="none"
+         role="img" aria-label="Map of southern Ontario and Québec showing where Serena has volunteered and organised.">
+      {%- comment -%} Water, drawn from real coordinates on the same projection. {%- endcomment -%}
+      <path class="cmap__water" d="M10.3,83.3 L11.5,79.3 L14.4,73.5 L16.0,72.3 L21.8,66.2 L30.8,63.9 L38.5,63.9 L44.9,59.5 L51.9,56.6 L54.5,61.0 L56.4,66.8 L55.1,75.5 L42.3,81.3 L30.8,83.3 L19.9,84.2 Z"/>
+      <path class="cmap__water" d="M0.0,100.0 L9.0,95.4 L17.9,94.3 L19.9,100.0 Z"/>
+      <path class="cmap__river" d="M53.8,56.6 L64.1,44.8 L75.6,33.0 L84.6,24.1 L90.4,17.5 L96.2,10.6 L99.4,3.0"/>
+      <path class="cmap__river" d="M85.9,20.5 L76.9,20.5 L62.8,18.1 L53.8,14.5"/>
+    </svg>
+
+    {%- comment -%} City labels, positioned like the markers. {%- endcomment -%}
+    <span class="cmap__city" style="left: 15.6%; top: 72.5%">Toronto</span>
+    <span class="cmap__city" style="left: 9.3%;  top: 84.0%">Hamilton</span>
+    <span class="cmap__city" style="left: 90.1%; top: 18.0%">Montréal</span>
+
+    {%- for item in items -%}
+      {%- if item.map_x -%}
+        {%- assign lead = item.venue | default: item.title -%}
+        {%- assign bits = '' | split: '' -%}
+        {%- if item.venue and item.title != item.venue -%}
+          {%- assign bits = bits | push: item.title -%}
+        {%- endif -%}
+        {%- if item.location and item.location != '' -%}
+          {%- assign bits = bits | push: item.location -%}
+        {%- endif -%}
+        {%- if item.year and item.year != '' -%}
+          {%- assign bits = bits | push: item.year -%}
+        {%- endif -%}
+        {%- assign detail = bits | join: ' · ' -%}
+
+        <button type="button"
+                class="cmap__dot"
+                style="left: {{ item.map_x }}%; top: {{ item.map_y }}%"
+                data-lead="{{ lead | escape }}"
+                data-detail="{{ detail | escape }}"
+                aria-label="{{ lead | escape }}{% if detail != '' %}, {{ detail | escape }}{% endif %}"></button>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%}
+    Decorative mirror of the hovered or focused marker — screen readers already
+    have it from the aria-labels. min-height reserved so nothing jumps.
+  {%- endcomment -%}
+  <p class="cmap__panel" aria-hidden="true">
+    <span class="cmap__lead"></span>
+    <span class="cmap__detail">Hover a dot to see the role.</span>
+  </p>
+
+  {%- comment -%}
+    The same records as a grouped list. Hidden on wide screens where the map
+    does the work; it replaces the map below 40rem, where the dots are too
+    small to hit.
+  {%- endcomment -%}
+  <div class="cmap__list">
+    {%- assign cities = "Montréal, Canada|Hamilton, Canada|Toronto, Canada" | split: "|" -%}
+    {%- for city in cities -%}
+      <div class="cmap__city-group">
+        <h4 class="cmap__city-name">{{ city | split: "," | first }}</h4>
+        <ul>
+          {%- for item in items -%}
+            {%- if item.location == city -%}
+              <li>
+                <span class="cmap__list-lead">{{ item.venue | default: item.title }}</span>
+                <span class="cmap__list-detail">{{ item.title }} · {{ item.year }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<script src="{{ '/assets/js/map.js' | relative_url }}" defer></script>

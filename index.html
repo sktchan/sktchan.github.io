@@ -89,11 +89,12 @@ wide: true
   {%- endif -%}
 
   {%- comment -%}
-    Leadership, volunteering and mentorship merged into one interactive cluster.
+    Leadership, volunteering and mentorship merged into one map.
   {%- endcomment -%}
   {%- assign people = c.leadership | concat: c.mentorship -%}
   {%- if people.size > 0 -%}
-    {% include community-cluster.html items=people %}
+    <h3 class="band__sub">Leadership, volunteering and mentorship</h3>
+    {% include community-map.html items=people %}
   {%- endif -%}
 </section>
 
@@ -105,14 +106,5 @@ wide: true
     {% include gallery.html items=ph.photos base="/assets/img/photos/" %}
   </section>
 {%- endif -%}
-
-{%- comment -%} ─── cv ────────────────────────────────────────────────── {%- endcomment -%}
-<section id="cv" class="band band--cv">
-  <h2><span class="section-title">CV</span></h2>
-  <p>
-    <a class="button" href="{{ '/cv/' | relative_url }}">Read my CV &rarr;</a>
-  </p>
-  <p class="band__note">Opens as a page you can print or save as a PDF.</p>
-</section>
 
 {% include lightbox.html %}

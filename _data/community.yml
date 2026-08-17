@@ -9,6 +9,23 @@
 # rendering, whenever you like.
 #
 # Talks live in research.yml, next to the work they're about.
+#
+# ─── map coordinates ─────────────────────────────────────────────────────────
+# `map_x` / `map_y` are percentages inside the map box, precomputed from real
+# lat/lng on a Mercator projection bounded by 46.10/42.70 N and 80.60/72.80 W.
+# They're baked in because Liquid has no log or tan and can't project at render
+# time; regenerate them if the bounds ever change.
+#
+# Everything within a city projects to within 1% of everything else, which would
+# stack the dots on top of each other — so markers are spread radially around
+# their city. The map is schematic at this scale, not survey-accurate.
+#
+# The three McMaster roles share one campus coordinate, so only the first
+# carries a marker; the others appear in the list beneath the map.
+#
+# ERNESTINE'S IS DELIBERATELY IMPRECISE — it sits at Toronto centre, not at its
+# real address. Women's shelters keep their locations confidential for resident
+# safety. Please don't "correct" this.
 
 intro: >-
   Work outside the lab — teaching the tools I use, mentoring students through
@@ -73,6 +90,8 @@ workshops:
 leadership:
   - title: "Equity, Diversity & Inclusion (EDI) Team"
     venue: "Mila — Quebec AI Institute"
+    map_x: 89.85
+    map_y: 14.0
     location: "Montréal, Canada"
     year: "Apr 2025 – present"
     note: >-
@@ -81,6 +100,8 @@ leadership:
 
   - title: "Vice President"
     venue: "McMaster Chinese Students' Association"
+    map_x: 9.03
+    map_y: 80.35
     location: "Hamilton, Canada"
     year: "Apr 2022 – Apr 2023"
     note: >-
@@ -96,7 +117,9 @@ leadership:
       professors to increase accessibility for clients.
 
   - title: "Inpatient Volunteer"
-    venue: "St. Joseph's Health Care Centre"
+    venue: "St. Joseph's Health Centre"
+    map_x: 15.1
+    map_y: 69.2
     location: "Toronto, Canada"
     year: "Nov 2018 – Nov 2019"
     note: >-
@@ -104,6 +127,8 @@ leadership:
 
   - title: "Winter Fair Executive"
     venue: "Ernestine's Women's Shelter"
+    map_x: 18.74
+    map_y: 74.56
     location: "Toronto, Canada"
     year: "Sep 2017 – Dec 2018"
     note: >-
@@ -111,6 +136,8 @@ leadership:
 
   - title: "Restaurant Volunteer"
     venue: "St. Francis Table"
+    map_x: 11.47
+    map_y: 74.56
     location: "Toronto, Canada"
     year: "Nov 2017"
     note: >-
@@ -121,6 +148,8 @@ leadership:
 mentorship:
   - title: "Advisor"
     venue: "Independent consulting"
+    map_x: 89.85
+    map_y: 21.14
     location: "Montréal, Canada"
     year: "Jan 2025 – present"
     note: >-
@@ -129,6 +158,8 @@ mentorship:
 
   - title: "SciComm Consultant"
     venue: "STEM Fellowship"
+    map_x: 9.03
+    map_y: 87.49
     location: "Hamilton, Canada"
     year: "Mar 2022 – present"
     note: >-

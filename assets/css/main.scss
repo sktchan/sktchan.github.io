@@ -458,44 +458,44 @@ html { scroll-behavior: smooth; }
   line-height: 1.5;
 }
 
-/* ─── work tiles ──────────────────────────────────────────────────────────── */
+/* ─── work rows ──────────────────────────────────────────────────────────── */
 
-/* minmax(0, 1fr) rather than 1fr: a bare 1fr track can't shrink below its
-   content's min-content width, so a long title would push the grid wider than
-   the viewport. */
-.wks {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .6rem;
-  margin-top: .6rem;
-  align-items: start;
-}
+/* Flat rows, no card chrome: boxes with chevrons in a grid read as product UI,
+   which is not what an academic page wants. */
+.wks { margin-top: .5rem; }
 
 .wk {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  transition: border-color .18s ease, box-shadow .18s ease;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .3rem .9rem;
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--rule);
 }
 
-.wk:hover { border-color: var(--tint-deep); }
+.wk:last-child { border-bottom: 0; }
 
-/* Open tiles take the whole row: a description squeezed into a third of the
-   width reads badly, and the neighbours would stretch to match. */
-.wk[open] {
-  grid-column: 1 / -1;
-  border-color: var(--tint-deep);
-  box-shadow: var(--shadow);
+/* The <details> takes the width so the body lands under the full row; the link
+   list sits beside the title on the same line. */
+.wk__d { flex: 1 1 22rem; min-width: 0; order: 1; }
+
+.wk__links {
+  order: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .84rem;
 }
 
 .wk__face {
   display: flex;
-  align-items: flex-start;
-  gap: .6rem;
-  padding: .7rem .85rem;
+  align-items: baseline;
+  gap: .5rem;
   cursor: pointer;
   list-style: none;
-  border-radius: var(--radius);
 }
 
 .wk__face::-webkit-details-marker { display: none; }
@@ -503,40 +503,33 @@ html { scroll-behavior: smooth; }
 .wk__face:hover .wk__title { color: var(--accent); }
 
 .wk__title {
-  flex: 1 1 auto;
-  font-family: var(--serif);
   font-weight: 600;
-  font-size: .92rem;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .wk__face::after {
   content: "";
   flex: 0 0 auto;
-  margin-top: .3em;
-  width: .35rem;
-  height: .35rem;
+  align-self: center;
+  width: .32rem;
+  height: .32rem;
   border-right: 1.5px solid var(--accent);
   border-bottom: 1.5px solid var(--accent);
-  transform: rotate(-45deg);
+  transform: rotate(45deg) translate(-1px, -1px);
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .wk__face::after { transition: transform .2s ease; }
 }
 
-.wk[open] .wk__face::after { transform: rotate(45deg); }
+.wk__d[open] .wk__face::after { transform: rotate(225deg) translate(-2px, -2px); }
 
-.wk__body {
-  padding: .2rem .85rem .8rem;
-  border-top: 1px solid var(--rule);
-  padding-top: .6rem;
-}
+.wk__body { padding: .35rem 0 .3rem; }
 
 .wk__role {
   color: var(--ink-muted);
   font-size: .85rem;
-  margin: 0 0 .4rem;
+  margin: 0 0 .3rem;
 }
 
 .wk__bullets {
@@ -546,7 +539,7 @@ html { scroll-behavior: smooth; }
   font-size: .9rem;
 }
 
-.wk__bullets > li { padding-left: .9rem; position: relative; margin-bottom: .2rem; }
+.wk__bullets > li { padding-left: .9rem; position: relative; margin-bottom: .15rem; }
 
 .wk__bullets > li::before {
   content: "";
@@ -559,99 +552,131 @@ html { scroll-behavior: smooth; }
   background: var(--tint-deep);
 }
 
-.wk__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .55rem;
-  list-style: none;
-  padding: 0;
-  margin: .6rem 0 0;
-  font-size: .84rem;
+/* ─── community map ───────────────────────────────────────────────────────── */
+
+.cmap { margin-top: .6rem; }
+
+.cmap__frame {
+  position: relative;
+  width: 100%;
+  /* 1.638:1 is the projection's own aspect ratio (Δlng in radians over the
+     Mercator Δy for these bounds). Any other ratio stretches the geography,
+     because the x and y percentages are each normalised independently. */
+  aspect-ratio: 1.638 / 1;
+  /* Land tint as the ground, water in the deeper tint on top — without the
+     contrast the outline reads as a stray blob rather than a map. */
+  background: #f0ece5;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
-@media (max-width: 46rem) {
-  .wks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cmap__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-@media (max-width: 30rem) {
-  .wks { grid-template-columns: 1fr; }
+/* Water needs to carry the whole shape here, so it's the deeper tint. */
+.cmap__water { fill: var(--tint-deep); stroke: none; }
+
+.cmap__river {
+  fill: none;
+  stroke: var(--tint-deep);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
-/* ─── community cluster ───────────────────────────────────────────────────── */
-
-.cluster { margin-top: 1.5rem; }
-
-.cluster__names {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: .35rem 1.1rem;
-  max-width: 46rem;
-}
-
-/* Buttons, not spans — that's what makes the cluster reachable by keyboard and
-   usable on touch. Stripped back to look like plain text. */
-.cluster__name {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: .1rem .15rem;
-  font-family: var(--serif);
-  font-weight: 600;
+.cmap__city {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: .72rem;
   color: var(--ink-muted);
-  cursor: pointer;
-  line-height: 1.2;
-  transition: color .18s ease, transform .18s ease;
+  letter-spacing: .04em;
+  pointer-events: none;
+  opacity: .8;
+  white-space: nowrap;
 }
 
-/* Scattered by fixed steps: sizes cycle and rotations alternate, so it reads as
-   hand-placed without needing randomness Liquid can't provide. */
-.cluster__name:nth-child(4n + 1) { font-size: 1.35rem; transform: rotate(-3deg); }
-.cluster__name:nth-child(4n + 2) { font-size: 1rem;    transform: rotate(2deg); }
-.cluster__name:nth-child(4n + 3) { font-size: 1.6rem;  transform: rotate(1.5deg); }
-.cluster__name:nth-child(4n + 4) { font-size: 1.15rem; transform: rotate(-2deg); }
-.cluster__name:nth-child(3n)     { color: var(--ink); }
-
-.cluster__name:hover,
-.cluster__name:focus-visible,
-.cluster__name.is-active {
-  color: var(--accent);
+/* Markers are buttons — that's what makes them focusable by keyboard and
+   tappable, rather than mouse-only. */
+.cmap__dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  appearance: none;
+  padding: 0;
+  width: .72rem;
+  height: .72rem;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  opacity: .75;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .cluster__name:hover,
-  .cluster__name.is-active { transform: rotate(0deg) scale(1.06); }
+  .cmap__dot { transition: transform .18s ease, opacity .18s ease; }
 }
 
-/* min-height reserved so the page doesn't jump as the panel fills. */
-.cluster__panel {
-  min-height: 3.2rem;
-  margin: 1.1rem 0 0;
-  padding-top: .7rem;
-  border-top: 1px solid var(--rule);
+.cmap__dot:hover,
+.cmap__dot:focus-visible,
+.cmap__dot.is-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.cmap__panel {
+  min-height: 2.9rem;
+  margin: .7rem 0 0;
   text-align: center;
   font-size: .9rem;
 }
 
-.cluster__lead {
+.cmap__lead {
   display: block;
   font-family: var(--serif);
   font-weight: 600;
   color: var(--ink);
 }
 
-.cluster__detail {
+.cmap__detail {
   display: block;
   color: var(--ink-muted);
   font-size: .87rem;
+}
+
+/* The list replaces the map on narrow screens, where dots this small can't be
+   hit reliably. */
+.cmap__list { display: none; }
+
+.cmap__city-name {
+  font-family: var(--sans);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink-muted);
+  margin: 0 0 .2rem;
+}
+
+.cmap__city-group ul { list-style: none; padding: 0; margin: 0 0 .9rem; }
+.cmap__city-group li { margin-bottom: .35rem; }
+
+.cmap__list-lead { display: block; font-weight: 600; font-size: .9rem; }
+.cmap__list-detail { display: block; color: var(--ink-muted); font-size: .84rem; }
+
+@media (max-width: 40rem) {
+  .cmap__frame, .cmap__panel { display: none; }
+  .cmap__list { display: block; margin-top: .6rem; }
 }
 
 /* ─── workshop photo tiles ────────────────────────────────────────────────── */
 
 .wtiles {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 7.5rem));
+  grid-template-columns: repeat(4, minmax(0, 10.5rem));
   gap: .7rem;
   margin-top: .6rem;
 }

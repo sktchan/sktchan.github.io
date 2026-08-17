@@ -1,15 +1,18 @@
 {%- comment -%}
-  One work item as an expandable tile.
+  One work item as a full-width row: title and links on one line, supervisor and
+  bullets revealed on expand.
 
   Usage:  {% include work-tile.html item=item %}
 
-  Collapsed face is the title alone; opening reveals the supervisor line, the
-  bullets and the links, and the tile spans the full grid row so long text isn't
-  squeezed into a third of the width.
+  The links sit OUTSIDE the <details> — they're the most actionable thing on the
+  row and shouldn't need a click to reach. They also can't live inside
+  <summary>: a link nested in a summary is a click-target conflict, where
+  following the link would also toggle the row. So the row is a flex container
+  holding the <details> and the link list as siblings, with only the title
+  inside <summary>.
 
-  Native <details>: keyboard operable and announced correctly with no
-  JavaScript. No dates — those were dropped deliberately; `year` is still in the
-  data files if they're ever wanted back.
+  No dates and no `note` — both dropped deliberately; the values are still in
+  the data files.
 
   `presentations` is NOT rendered here. It stays in _data/research.yml because
   cv.html flattens it into the CV's Presentations section.
@@ -17,26 +20,28 @@
 
 {%- assign item = include.item -%}
 
-<details class="wk" {% if item.id %}id="{{ item.id }}"{% endif %}>
-  <summary class="wk__face">
-    <span class="wk__title">{{ item.title }}</span>
-  </summary>
+<div class="wk" {% if item.id %}id="{{ item.id }}"{% endif %}>
+  <details class="wk__d">
+    <summary class="wk__face">
+      <span class="wk__title">{{ item.title }}</span>
+    </summary>
 
-  <div class="wk__body">
-    {%- if item.role %}<p class="wk__role">{{ item.role }}</p>{% endif -%}
+    <div class="wk__body">
+      {%- if item.role %}<p class="wk__role">{{ item.role }}</p>{% endif -%}
 
-    {%- if item.bullets and item.bullets.size > 0 -%}
-      <ul class="wk__bullets">
-        {%- for line in item.bullets %}<li>{{ line }}</li>{% endfor -%}
-      </ul>
-    {%- endif -%}
+      {%- if item.bullets and item.bullets.size > 0 -%}
+        <ul class="wk__bullets">
+          {%- for line in item.bullets %}<li>{{ line }}</li>{% endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </details>
 
-    {%- if item.links -%}
-      <ul class="wk__links">
-        {%- for link in item.links %}
-          <li><a href="{{ link.url }}">{{ link.name }}</a></li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
-  </div>
-</details>
+  {%- if item.links -%}
+    <ul class="wk__links">
+      {%- for link in item.links %}
+        <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
