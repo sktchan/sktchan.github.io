@@ -355,6 +355,16 @@ html { scroll-behavior: smooth; }
   border-color: var(--tint-deep);
 }
 
+/* The CV lives in this row rather than the nav, so it's filled to read as the
+   primary action among the profile links. */
+.linkrow__cv {
+  background: var(--tint);
+  border-color: var(--tint-deep);
+  font-weight: 500;
+}
+
+.linkrow__cv:hover { background: var(--tint-deep); }
+
 /* ─── news ────────────────────────────────────────────────────────────────── */
 
 .news { list-style: none; padding: 0; margin: 0; }

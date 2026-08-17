@@ -10,9 +10,10 @@
 #
 # Ordered for how the masonry grid looks rather than chronologically.
 
+# Rendered as HTML so "a lot" can be italicised.
 intro: >-
-  Shot on 35mm film, mostly while travelling — cities, mountains, and whatever
-  the light was doing that day.
+  A moment through my eyes, a variety of cameras, and <em>a lot</em> of 35mm
+  film.
 
 photos:
   - file: "img-2983.jpg"

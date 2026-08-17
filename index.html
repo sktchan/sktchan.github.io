@@ -26,19 +26,28 @@ wide: true
     <h1>Hi, I'm {{ site.author | split: ' ' | first }} <span class="heart" aria-hidden="true">&#9829;</span></h1>
 
     <p>
-      I'm a master's student in computer science at the
+      I'm a Master's student in Computer Science at
       <strong>Université de Montréal</strong>, working with
-      <a href="https://www.iric.ca/en/research/principal-investigators/sebastien-lemieux">Dr. Sébastien Lemieux</a>.
-      I'm affiliated with <a href="https://mila.quebec">Mila — Quebec AI Institute</a>
-      and the <a href="https://www.iric.ca/en">Institute for Research in Immunology and Cancer</a>.
+      <a href="https://www.iric.ca/en/research/principal-investigators/sebastien-lemieux">Dr. Sébastien Lemieux</a>
+      at <a href="https://mila.quebec">Mila — Quebec AI Institute</a> and the
+      <a href="https://www.iric.ca/en">Institute for Research in Immunology and Cancer</a>.
     </p>
     <p>
-      I work on representation learning for transcriptomics — what it takes to
-      turn gene expression measurements into something a model can reason over,
-      and which architectures and pre-training objectives actually earn their
-      keep. Before this I worked in radiation oncology physics and child health
-      research. Outside the lab I shoot
-      <a href="#photos">film photography</a>.
+      My research focuses on representation learning for transcriptomics. My goal
+      is to advance virtual cell models capable of accurately predicting cellular
+      states under chemical and genetic perturbations.
+    </p>
+    <p>
+      Before this, my background spanned clinical pediatrics and radiation
+      oncology research. Working directly with patients showed me how often our
+      most advanced tools rarely reach the people who need them most. I want to
+      pursue science to bridge this gap — building scalable, equitable AI for the
+      realities of global healthcare.
+    </p>
+    <p>
+      Outside the lab, I can be found reading, baking, or in the wilderness with
+      a camera. Because sometimes, you need representations that you can hold in
+      your hands.
     </p>
 
     {%- comment -%}
@@ -53,6 +62,8 @@ wide: true
       {%- if l.orcid    and l.orcid    != '' %}<li><a href="{{ l.orcid }}">ORCID</a></li>{% endif -%}
       {%- if l.bluesky  and l.bluesky  != '' %}<li><a href="{{ l.bluesky }}">Bluesky</a></li>{% endif -%}
       {%- if l.twitter  and l.twitter  != '' %}<li><a href="{{ l.twitter }}">Twitter</a></li>{% endif -%}
+      {%- comment -%} CV lives here rather than in the nav. {%- endcomment -%}
+      <li><a class="linkrow__cv" href="{{ '/cv/' | relative_url }}">CV</a></li>
     </ul>
   </div>
 </section>

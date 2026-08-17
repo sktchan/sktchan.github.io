@@ -44,8 +44,8 @@ exclude:
 # ─── navigation ──────────────────────────────────────────────────────────────
 # Reorder or comment out a line to change the nav. `url` must match the page's
 # permalink exactly (trailing slash included) for the active state to light up.
-# The site is one scrolling page, so these are in-page anchors — except /cv/,
-# which is a real page of its own.
+# The site is one scrolling page, so these are all in-page anchors. /cv/ is a
+# real page but is linked from the intro's link row, not the nav.
 nav:
   - title: Work
     url: "#work"
@@ -53,5 +53,3 @@ nav:
     url: "#community"
   - title: Photos
     url: "#photos"
-  - title: CV
-    url: /cv/

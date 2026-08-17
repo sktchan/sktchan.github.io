@@ -13,6 +13,5 @@ cv:       "/cv/"
 # Phone number deliberately not listed — a public page gets scraped, and a
 # personal mobile is near-impossible to take back once it's out there.
 
-# Your portrait for the homepage. TODO: drop a real photo in assets/img/ and
-# point this at it (a square crop around 600×600 looks best).
-photo:    "/assets/img/profile.svg"
+# Portrait for the homepage — square crop, 600×600.
+photo:    "/assets/img/profile.jpg"
