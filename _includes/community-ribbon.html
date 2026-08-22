@@ -150,4 +150,5 @@
   </ul>
 </div>
 
-<script src="{{ '/assets/js/ribbon.js' | relative_url }}" defer></script>
+{%- comment -%} ?v= is the same cache buster as the stylesheet; see head.html. {%- endcomment -%}
+<script src="{{ '/assets/js/ribbon.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

@@ -15,7 +15,21 @@
   <link rel="preload" href="{{ '/assets/fonts/fraunces.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/inter.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  {%- comment -%}
+    The `?v=` is a cache buster, and it is not optional.
+
+    GitHub Pages serves assets with `cache-control: max-age=600` and no
+    fingerprint in the filename. Inside that window a browser reuses its copy
+    WITHOUT revalidating — an ordinary refresh included. So anyone who had
+    visited before a deploy kept getting the previous stylesheet against the new
+    HTML, which renders the page unstyled in whatever section just changed.
+    That is exactly how the community ribbon shipped looking broken.
+
+    `site.time` is the build timestamp, so every deploy mints a new URL and the
+    browser is forced to fetch. The cost is re-downloading ~20KB after each
+    deploy even when the CSS itself didn't change; that is the right trade.
+  {%- endcomment -%}
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ '/assets/favicon.svg' | relative_url }}">
