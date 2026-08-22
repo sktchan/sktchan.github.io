@@ -717,14 +717,6 @@ html { scroll-behavior: smooth; }
 .cribbon__bar--2 { --c: var(--city-2); }
 .cribbon__bar--3 { --c: var(--city-3); }
 
-/* Kind rides on fill, city rides on hue — two encodings that don't collide.
-   inset box-shadow rather than a border, so the outlined bar is exactly the
-   same size as the solid one. */
-.cribbon__bar--mentorship {
-  background: transparent;
-  box-shadow: inset 0 0 0 2px var(--c);
-}
-
 /* One month is about a pixel wide; round it into a deliberate dot. */
 .cribbon__bar.is-tick { border-radius: 50%; }
 
@@ -842,32 +834,15 @@ html { scroll-behavior: smooth; }
   color: var(--ink);
 }
 
-/* ── key ── */
+/* ── hint ── */
 
-.cribbon__key {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .35rem 1.1rem;
-  list-style: none;
+.cribbon__hint {
   margin: 1.1rem 0 0;
-  padding: 0;
+  text-align: right;
   font-size: .76rem;
+  font-style: italic;
   color: var(--ink-muted);
 }
-
-.cribbon__swatch {
-  display: inline-block;
-  width: 1.15rem;
-  height: .38rem;
-  border-radius: var(--radius-pill);
-  margin-right: .4rem;
-  vertical-align: .05em;
-}
-
-.cribbon__swatch--leadership { background: var(--city-2); }
-.cribbon__swatch--mentorship { box-shadow: inset 0 0 0 2px var(--city-2); }
-
-.cribbon__key-hint { margin-left: auto; font-style: italic; }
 
 /* ── narrow screens ──────────────────────────────────────────────────────────
    The ribbon stays a ribbon — the map it replaced used to vanish entirely here,
@@ -918,7 +893,7 @@ html { scroll-behavior: smooth; }
     z-index: 20;
   }
 
-  .cribbon__key-hint { display: none; }
+  .cribbon__hint { display: none; }
 }
 
 /* ─── workshop photo tiles ────────────────────────────────────────────────── */

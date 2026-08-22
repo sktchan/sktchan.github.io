@@ -108,10 +108,10 @@ wide: true
   {%- endif -%}
 
   {%- comment -%}
-    Leadership, volunteering and mentorship merged into one ribbon. The merge
-    is why every entry carries `kind` — it's the only thing left telling the
-    two groups apart once they're in the same list, and the ribbon draws
-    mentorship outlined on the strength of it.
+    Leadership, volunteering and mentorship merged into one ribbon, and drawn
+    identically once they're there — nothing downstream cares which group an
+    entry came from. The two keys in community.yml survive only because they're
+    a convenient way to edit that file.
   {%- endcomment -%}
   {%- assign people = c.leadership | concat: c.mentorship -%}
   {%- if people.size > 0 -%}

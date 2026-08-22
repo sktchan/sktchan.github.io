@@ -5,7 +5,7 @@
 # to render one. The PyMOL entries are kept in case galleries come back.
 
 - id: "protein-embeddings"
-  title: "Protein embeddings and local alignments"
+  title: "Protein language model embeddings for sequence alignment"
   role: "Prof: Dr. Nadia El-Mabrouk, Université de Montréal"
   year: "Sep 2025 – Dec 2025"
   bullets:
@@ -15,7 +15,7 @@
       url: "/assets/docs/alignments-slides.pdf"
 
 - id: "energy-forecasting"
-  title: "Energy consumption prediction"
+  title: "Forecasting building energy demand with LSTMs"
   role: "Prof: Dr. Vincent Taboga, Mila — Quebec AI Institute"
   year: "Jan 2025 – Apr 2025"
   bullets:
@@ -26,7 +26,7 @@
       url: "https://github.com/sktchan/energy-consumption"
 
 - id: "viral-rna"
-  title: "Structural visualization of viral RNA complexes"
+  title: "Visualizing base-pairing in viral RNA structures"
   role: "Prof: Dr. François Major, Université de Montréal"
   year: "Jan 2025 – Apr 2025"
   bullets:
@@ -40,7 +40,7 @@
       url: "/assets/docs/pymol-6u79.pdf"
 
 - id: "tumor-mri"
-  title: "Brain tumor classification in MRI scans"
+  title: "Brain tumor classification from multi-modal MRI"
   role: "Prof: Dr. Erik Sorensen, McMaster University"
   year: "Jan 2024 – Apr 2024"
   bullets:
@@ -51,7 +51,7 @@
       url: "https://github.com/sktchan/tumor-classification"
 
 - id: "hpa-axis"
-  title: "Housing insecurity and the HPA axis in children"
+  title: "Housing insecurity and the childhood stress response"
   role: "Supervisor: Dr. Krysta Andrews, Offord Centre for Child Studies"
   year: "Sep 2022 – Apr 2023"
   bullets:

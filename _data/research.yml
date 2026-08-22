@@ -21,7 +21,7 @@ papers:
 # ─── selected work ───────────────────────────────────────────────────────────
 projects:
   - id: "tokenization"
-    title: "Transcriptomic foundation model tokenization"
+    title: "Transcriptomic foundation models for perturbation prediction"
     role: "Supervisor: Dr. Sébastien Lemieux, Université de Montréal"
     year: "Jan 2025 – present"
     bullets:
@@ -47,7 +47,7 @@ projects:
         year: "Jun 2025"
 
   - id: "anti-aptamers"
-    title: "Computational design of anti-aptamers"
+    title: "DNA antidotes for a SARS-CoV-2 RNA aptamer"
     role: "Prof: Dr. François Major, Université de Montréal"
     year: "Jan 2025 – Apr 2025"
     bullets:
@@ -60,7 +60,7 @@ projects:
         url: "https://github.com/sktchan/anti-aptamers"
 
   - id: "osms"
-    title: "OSMS for head and neck radiation therapy"
+    title: "Optical surface monitoring in head and neck radiotherapy"
     role: "Supervisor: Dr. Orest Ostapiak, Juravinski Cancer Centre"
     year: "Sep 2023 – Apr 2024"
     bullets:

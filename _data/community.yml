@@ -27,9 +27,9 @@
 # same width wherever it falls. There is currently one such break, the fifteen
 # months between St. Joseph's ending and IMPACT starting.
 #
-# `kind` is either "leadership" or "mentorship". The home page merges the two
-# groups into one ribbon, which would otherwise lose the distinction; the
-# ribbon draws mentorship bars outlined and leadership bars solid.
+# The home page merges leadership and mentorship into one ribbon and draws every
+# bar the same way. The two groups below are kept only because they're a handy
+# way to edit this file — nothing rendered depends on which one an entry is in.
 #
 # ─── retired map coordinates ─────────────────────────────────────────────────
 # `map_x` / `map_y` positioned dots on the old inline-SVG map, which the ribbon
@@ -105,14 +105,13 @@ leadership:
     map_y: 14.0
     location: "Montréal, Canada"
     year: "Apr 2025 – present"
-    kind: "leadership"
     start: "2025-04"
     end: "present"
     x: 82.27
     w: 17.73
     note: >-
-      Organizing institute-wide initiatives to build a more equitable, inclusive
-      and diverse environment across the AI research community.
+      Institute-wide initiatives for a more equitable and inclusive research
+      community.
 
   - title: "Vice President"
     venue: "McMaster Chinese Students' Association"
@@ -120,27 +119,24 @@ leadership:
     map_y: 80.35
     location: "Hamilton, Canada"
     year: "Apr 2022 – Apr 2023"
-    kind: "leadership"
     start: "2022-04"
     end: "2023-04"
     x: 44.72
     w: 13.56
     note: >-
-      Ran events logistics, booking and promotion, and led weekly subcommittee
-      meetings.
+      Ran event logistics and promotion, and led weekly subcommittee meetings.
 
   - title: "Design Review Team"
     venue: "McMaster IMPACT Initiative"
     location: "Hamilton, Canada"
     year: "Mar 2021 – Jan 2022"
-    kind: "leadership"
     start: "2021-03"
     end: "2022-01"
     x: 31.16
     w: 11.47
     note: >-
-      Reviewed engineering prototypes custom-designed with students and
-      professors to increase accessibility for clients.
+      Reviewed student-built prototypes designed to increase accessibility for
+      clients.
 
   - title: "Inpatient Volunteer"
     venue: "St. Joseph's Health Centre"
@@ -148,13 +144,12 @@ leadership:
     map_y: 69.2
     location: "Toronto, Canada"
     year: "Nov 2018 – Nov 2019"
-    kind: "leadership"
     start: "2018-11"
     end: "2019-11"
     x: 14.60
     w: 13.56
     note: >-
-      Provided compassionate nonmedical care and support to inpatients.
+      Provided nonmedical care and support to inpatients.
 
   - title: "Winter Fair Executive"
     venue: "Ernestine's Women's Shelter"
@@ -162,13 +157,12 @@ leadership:
     map_y: 74.56
     location: "Toronto, Canada"
     year: "Sep 2017 – Dec 2018"
-    kind: "leadership"
     start: "2017-09"
     end: "2018-12"
     x: 0.00
     w: 16.69
     note: >-
-      Organized and led weekly subcommittee meetings to plan events.
+      Led weekly subcommittee meetings to plan the winter fair.
 
   - title: "Restaurant Volunteer"
     venue: "St. Francis Table"
@@ -176,14 +170,12 @@ leadership:
     map_y: 74.56
     location: "Toronto, Canada"
     year: "Nov 2017"
-    kind: "leadership"
     start: "2017-11"
     end: "2017-11"
     x: 2.09
     w: 1.04
     note: >-
-      Served meals in a welcoming space to those physically or mentally unable
-      to work.
+      Served meals in a welcoming space to those unable to work.
 
 # ─── mentorship ──────────────────────────────────────────────────────────────
 mentorship:
@@ -193,14 +185,13 @@ mentorship:
     map_y: 21.14
     location: "Montréal, Canada"
     year: "Jan 2025 – present"
-    kind: "mentorship"
     start: "2025-01"
     end: "present"
     x: 79.14
     w: 20.86
     note: >-
-      Multidisciplinary strategic guidance to an early-stage biotech startup —
-      biological feasibility, ML code development, and market audience strategy.
+      Guided an early-stage biotech startup on feasibility, ML development and
+      market strategy.
 
   - title: "SciComm Consultant"
     venue: "STEM Fellowship"
@@ -208,27 +199,25 @@ mentorship:
     map_y: 87.49
     location: "Hamilton, Canada"
     year: "Mar 2022 – present"
-    kind: "mentorship"
     start: "2022-03"
     end: "present"
     x: 43.68
     w: 56.32
     note: >-
       Identified gaps in business processes and built tailored presentation
-      material from consultee assessments.
+      material.
 
   - title: "Undergraduate Mentor"
     venue: "McMaster Women in STEM"
     location: "Hamilton, Canada"
     year: "Sep 2021 – Apr 2022"
-    kind: "mentorship"
     start: "2021-09"
     end: "2022-04"
     x: 37.42
     w: 8.34
     note: >-
-      One-on-one mentoring of first-year students on academics and
-      extracurriculars, through the return from online to in-person schooling.
+      One-on-one mentoring of first-year students through the return to in-person
+      schooling.
 
 # ─── ribbon axis ─────────────────────────────────────────────────────────────
 # GENERATED by scripts/timeline.sh alongside the x/w values above — paste both
