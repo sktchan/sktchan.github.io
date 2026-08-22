@@ -23,7 +23,7 @@
     - "Trained and evaluated LSTM neural networks in PyTorch to forecast building power demand."
   links:
     - name: "Code"
-      url: "https://github.com/sktchan/energy-forecasting"
+      url: "https://github.com/sktchan/energy-consumption"
 
 - id: "viral-rna"
   title: "Structural visualization of viral RNA complexes"
@@ -34,6 +34,10 @@
   links:
     - name: "Report"
       url: "/assets/docs/pymol-report.pdf"
+    - name: "6SX0"
+      url: "/assets/docs/pymol-6sx0.pdf"
+    - name: "6U79"
+      url: "/assets/docs/pymol-6u79.pdf"
 
 - id: "tumor-mri"
   title: "Brain tumor classification in MRI scans"
