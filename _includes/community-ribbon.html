@@ -13,10 +13,14 @@
   because Liquid can't do date arithmetic. Empty stretches of time collapse to
   a break mark; see the comment block in _data/community.yml.
 
-  ─── why the sides are computed here ────────────────────────────────────────
-  A label sitting after a bar that already reaches the right edge would run off
-  the frame, and so would a popover anchored near it. Both flip to the other
-  side past a threshold. That decision is made at BUILD time rather than in
+  ─── nothing is labelled at rest ────────────────────────────────────────────
+  The bars carry no text until a row is hovered or focused, which is the whole
+  point — at rest this is a shape, not a list. The name lives in the popover,
+  and in each button's aria-label, so nothing is lost by leaving it out.
+
+  ─── why the popover side is computed here ──────────────────────────────────
+  A popover anchored near the right edge would run off the frame, so it flips
+  past a threshold. That decision is made at BUILD time rather than in
   JavaScript so the ribbon is correct with JS disabled — ribbon.js only refines
   it against real measured text.
 
@@ -88,17 +92,12 @@
           {%- assign prev_city = city -%}
         {%- endif -%}
 
-        {%- assign ends = item.x | plus: item.w -%}
         {%- assign lead = item.venue | default: item.title -%}
 
         {%- comment -%}
-          Past 62% a label placed after the bar has nowhere to go, so it flips
-          to the left of the bar's start and right-aligns against it.
+          Past 55% a popover anchored to the bar's start would run off the right
+          edge, so it flips and right-aligns against that start instead.
         {%- endcomment -%}
-        {%- if ends > 62 -%}{%- assign label_side = 'before' -%}
-        {%- else -%}{%- assign label_side = 'after' -%}{%- endif -%}
-
-        {%- comment -%} Same idea for the popover, measured from the bar's start. {%- endcomment -%}
         {%- if item.x > 55 -%}{%- assign pop_side = 'right' -%}
         {%- else -%}{%- assign pop_side = 'left' -%}{%- endif -%}
 
@@ -121,8 +120,6 @@
                   aria-label="{{ lead | escape }}{% if meta != '' %}, {{ meta | escape }}{% endif %}{% if item.note %}. {{ item.note | strip_newlines | escape }}{% endif %}">
             <span class="cribbon__bar cribbon__bar--{{ step }}{% if item.end == 'present' %} is-open{% endif %}{% if item.w < 2 %} is-tick{% endif %}"
                   style="--x: {{ item.x }}%; --w: {{ item.w }}%"></span>
-            <span class="cribbon__label cribbon__label--{{ label_side }}"
-                  style="--x: {{ item.x }}%; --end: {{ ends }}%">{{ lead }}</span>
           </button>
 
           <span class="cribbon__pop cribbon__pop--{{ pop_side }} cribbon__pop--{{ pop_v }}"
@@ -139,9 +136,9 @@
   </div>
 
   {%- comment -%}
-    Leadership, volunteering and mentorship are drawn identically — there's no
-    encoding left to explain, so the key is just the one hint. The tints stand
-    for cities, which are already labelled inside the ribbon.
+    Leadership, volunteering and mentorship are drawn identically, so there's no
+    encoding to explain — and with the bars unlabelled, this line is the only
+    thing telling a visitor the rows do anything. It earns its place.
   {%- endcomment -%}
   <p class="cribbon__hint">Hover or focus a row for details</p>
 </div>
