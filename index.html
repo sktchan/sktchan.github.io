@@ -108,12 +108,15 @@ wide: true
   {%- endif -%}
 
   {%- comment -%}
-    Leadership, volunteering and mentorship merged into one map.
+    Leadership, volunteering and mentorship merged into one ribbon. The merge
+    is why every entry carries `kind` — it's the only thing left telling the
+    two groups apart once they're in the same list, and the ribbon draws
+    mentorship outlined on the strength of it.
   {%- endcomment -%}
   {%- assign people = c.leadership | concat: c.mentorship -%}
   {%- if people.size > 0 -%}
     <h3 class="band__sub">Leadership, volunteering and mentorship</h3>
-    {% include community-map.html items=people %}
+    {% include community-ribbon.html items=people %}
   {%- endif -%}
 </section>
 

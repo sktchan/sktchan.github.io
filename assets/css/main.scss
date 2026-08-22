@@ -37,6 +37,15 @@
   --ink-muted:  #6b6461;
   --rule:       #e7e2dc;
 
+  /* The community ribbon's three cities, as one pink deepening toward the
+     present — which, because the rows run in date order, also deepens eastward.
+     Contrast on --bg: 3.19:1, 4.47:1, 6.55:1, all clearing the 3:1 that AA asks
+     of non-text UI. Colour never carries meaning alone here: the rows are
+     grouped and labelled by city, and the popover names the place. */
+  --city-1:     #c96d82;   /* Toronto  */
+  --city-2:     #b3506b;   /* Hamilton */
+  --city-3:     #96354f;   /* Montréal */
+
   /* shape */
   --radius:      14px;
   --radius-sm:   9px;
@@ -568,128 +577,348 @@ html { scroll-behavior: smooth; }
   background: var(--tint-deep);
 }
 
-/* ─── community map ───────────────────────────────────────────────────────── */
+/* ─── community ribbon ────────────────────────────────────────────────────
 
-.cmap { margin-top: .6rem; }
+   A time axis with one row per role, newest at the top. Replaced the inline
+   SVG map, which could only ever say where — never when, and never the notes.
 
-.cmap__panel { max-width: 30rem; }
+   `--x` and `--w` come from the markup as percentages of the track, generated
+   by scripts/timeline.sh. Everything here is driven off those two numbers.
 
-.cmap__frame {
+   The track is a shared positioning context for the gridlines and the rows, so
+   a tick at 41.59% and a bar starting at 41.59% land on the same pixel. The
+   right margin is what gives the "still going" arrows somewhere to sit without
+   changing what 100% means.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.cribbon { margin-top: .8rem; max-width: var(--measure); }
+
+.cribbon__frame { position: relative; }
+
+.cribbon__track {
   position: relative;
-  width: 100%;
-  /* Deliberately small — the map is context, not the point of the section. */
-  max-width: 30rem;
-  /* 1.638:1 is the projection's own aspect ratio (Δlng in radians over the
-     Mercator Δy for these bounds). Any other ratio stretches the geography,
-     because the x and y percentages are each normalised independently. */
-  aspect-ratio: 1.638 / 1;
-  /* Land tint as the ground, water in the deeper tint on top — without the
-     contrast the outline reads as a stray blob rather than a map. */
-  background: #f0ece5;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  overflow: hidden;
+  /* Room for the arrowheads on bars that run to 100%. */
+  margin-right: .55rem;
+  /* Room for the year labels beneath the last row. */
+  padding-bottom: 1.5rem;
 }
 
-.cmap__svg {
+/* ── axis ── */
+
+.cribbon__axis {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cribbon__tick {
+  position: absolute;
+  top: .2rem;
+  bottom: 1.5rem;
+  width: 0;
+  border-left: 1px solid var(--rule);
+}
+
+.cribbon__tick i {
+  position: absolute;
+  bottom: -1.35rem;
+  left: 0;
+  transform: translateX(-50%);
+  font-style: normal;
+  font-size: .68rem;
+  letter-spacing: .03em;
+  color: var(--ink-muted);
+}
+
+/* Where the axis skips dead time. Hatched rather than blank, so it reads as
+   "something was removed here" instead of as an accidental gap. */
+.cribbon__break {
+  position: absolute;
+  top: .2rem;
+  bottom: 1.5rem;
+  border-left: 1px dashed var(--rule);
+  border-right: 1px dashed var(--rule);
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0 3px,
+    var(--rule) 3px 4px
+  );
+  opacity: .7;
+}
+
+/* ── rows ── */
+
+.cribbon__rows {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* City headings between groups. Sorting by date happens to make the cities
+   contiguous, so these cost one short row each and keep the tints from being
+   the only thing telling them apart. */
+.cribbon__city {
+  position: relative;
+  height: 1.5rem;
+}
+
+.cribbon__city span {
+  position: absolute;
+  left: 0;
+  bottom: .15rem;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.cribbon__row { position: relative; height: 1.8rem; }
+
+/* The whole row is the hit target, not just the bar — a .44rem bar is a cruel
+   thing to ask anyone to point at. */
+.cribbon__hit {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
-}
-
-/* Water needs to carry the whole shape here, so it's the deeper tint. */
-.cmap__water { fill: var(--tint-deep); stroke: none; }
-
-.cmap__river {
-  fill: none;
-  stroke: var(--tint-deep);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.cmap__city {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-size: .72rem;
-  color: var(--ink-muted);
-  letter-spacing: .04em;
-  pointer-events: none;
-  opacity: .8;
-  white-space: nowrap;
-}
-
-/* Markers are buttons — that's what makes them focusable by keyboard and
-   tappable, rather than mouse-only. */
-.cmap__dot {
-  position: absolute;
-  transform: translate(-50%, -50%);
   appearance: none;
+  background: none;
+  border: 0;
   padding: 0;
-  width: .72rem;
-  height: .72rem;
-  border: 2px solid var(--surface);
-  border-radius: 50%;
-  background: var(--accent);
   cursor: pointer;
-  opacity: .75;
+}
+
+/* A ring around a full-width transparent button says nothing, so it goes on
+   the bar instead. */
+.cribbon__hit:focus-visible { outline: none; }
+
+.cribbon__hit:focus-visible .cribbon__bar {
+  outline: 2.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-pill);
+}
+
+/* ── bars ── */
+
+.cribbon__bar {
+  position: absolute;
+  left: var(--x);
+  width: var(--w);
+  top: 50%;
+  transform: translateY(-50%);
+  height: .44rem;
+  min-width: .44rem;
+  border-radius: var(--radius-pill);
+  background: var(--c);
+}
+
+.cribbon__bar--1 { --c: var(--city-1); }
+.cribbon__bar--2 { --c: var(--city-2); }
+.cribbon__bar--3 { --c: var(--city-3); }
+
+/* Kind rides on fill, city rides on hue — two encodings that don't collide.
+   inset box-shadow rather than a border, so the outlined bar is exactly the
+   same size as the solid one. */
+.cribbon__bar--mentorship {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--c);
+}
+
+/* One month is about a pixel wide; round it into a deliberate dot. */
+.cribbon__bar.is-tick { border-radius: 50%; }
+
+/* Still running: an open arrowhead instead of a hard end cap. */
+.cribbon__bar.is-open::after {
+  content: "";
+  position: absolute;
+  right: -.34rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: .36rem solid var(--c);
+  border-top: .3rem solid transparent;
+  border-bottom: .3rem solid transparent;
+}
+
+/* ── labels ── */
+
+.cribbon__label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .78rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink-muted);
+}
+
+.cribbon__label--after {
+  left: calc(var(--end) + .55rem);
+  max-width: calc(100% - var(--end) - .7rem);
+}
+
+/* Bars that reach the right edge have no room after them, so their label sits
+   before the start and right-aligns against it. */
+.cribbon__label--before {
+  right: calc(100% - var(--x) + .55rem);
+  max-width: calc(var(--x) - .7rem);
+  text-align: right;
+}
+
+.cribbon__hit:hover .cribbon__label,
+.cribbon__hit:focus-visible .cribbon__label,
+.cribbon__hit.is-active .cribbon__label { color: var(--ink); }
+
+/* Everything else fades back, so the row being read is the only bright thing.
+   :has() is a progressive nicety — without it the ribbon just doesn't dim. */
+.cribbon__rows:has(.cribbon__hit:hover) .cribbon__row:not(:hover),
+.cribbon__rows:has(.cribbon__hit:focus-visible) .cribbon__row:not(:focus-within),
+.cribbon__rows:has(.cribbon__hit.is-active) .cribbon__row:not(:has(.is-active)) {
+  opacity: .45;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .cmap__dot { transition: transform .18s ease, opacity .18s ease; }
+  .cribbon__row { transition: opacity .18s ease; }
+  .cribbon__label { transition: color .18s ease; }
+  .cribbon__pop { transition: opacity .14s ease; }
 }
 
-.cmap__dot:hover,
-.cmap__dot:focus-visible,
-.cmap__dot.is-active {
+/* ── popover ── */
+
+.cribbon__pop {
+  position: absolute;
+  z-index: 5;
+  width: max-content;
+  max-width: 20rem;
+  padding: .6rem .75rem .65rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lift);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cribbon__pop--left  { left: var(--x); }
+.cribbon__pop--right { right: calc(100% - var(--x)); }
+.cribbon__pop--up    { bottom: calc(100% - .25rem); }
+.cribbon__pop--down  { top: calc(100% - .25rem); }
+
+/* ribbon.js adds this when the side the build guessed turns out to overflow
+   once the text has actually been laid out. It simply inverts the choice. */
+.cribbon__pop--left.is-flipped  { left: auto; right: calc(100% - var(--x)); }
+.cribbon__pop--right.is-flipped { right: auto; left: var(--x); }
+
+.cribbon__hit:hover ~ .cribbon__pop,
+.cribbon__hit:focus-visible ~ .cribbon__pop,
+.cribbon__hit.is-active ~ .cribbon__pop {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1.5);
+  visibility: visible;
 }
 
-.cmap__panel {
-  min-height: 2.9rem;
-  margin: .7rem 0 0;
-  text-align: center;
-  font-size: .9rem;
-}
-
-.cmap__lead {
+.cribbon__pop-lead {
   display: block;
   font-family: var(--serif);
   font-weight: 600;
+  font-size: .92rem;
   color: var(--ink);
 }
 
-.cmap__detail {
+.cribbon__pop-meta {
   display: block;
+  font-size: .76rem;
   color: var(--ink-muted);
-  font-size: .87rem;
+  margin-bottom: .35rem;
 }
 
-/* The list replaces the map on narrow screens, where dots this small can't be
-   hit reliably. */
-.cmap__list { display: none; }
-
-.cmap__city-name {
-  font-family: var(--sans);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: var(--ink-muted);
-  margin: 0 0 .2rem;
+.cribbon__pop-note {
+  display: block;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--ink);
 }
 
-.cmap__city-group ul { list-style: none; padding: 0; margin: 0 0 .9rem; }
-.cmap__city-group li { margin-bottom: .35rem; }
+/* ── key ── */
 
-.cmap__list-lead { display: block; font-weight: 600; font-size: .9rem; }
-.cmap__list-detail { display: block; color: var(--ink-muted); font-size: .84rem; }
+.cribbon__key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.1rem;
+  list-style: none;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  font-size: .76rem;
+  color: var(--ink-muted);
+}
+
+.cribbon__swatch {
+  display: inline-block;
+  width: 1.15rem;
+  height: .38rem;
+  border-radius: var(--radius-pill);
+  margin-right: .4rem;
+  vertical-align: .05em;
+}
+
+.cribbon__swatch--leadership { background: var(--city-2); }
+.cribbon__swatch--mentorship { box-shadow: inset 0 0 0 2px var(--city-2); }
+
+.cribbon__key-hint { margin-left: auto; font-style: italic; }
+
+/* ── narrow screens ──────────────────────────────────────────────────────────
+   The ribbon stays a ribbon — the map it replaced used to vanish entirely here,
+   which left phones with nothing. Labels move onto their own line above each
+   bar so they never have to compete with it for width, and the popover becomes
+   a pinned sheet, because a floating one has nowhere to float to.
+   ────────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 40rem) {
-  .cmap__frame, .cmap__panel { display: none; }
-  .cmap__list { display: block; margin-top: .6rem; }
+  .cribbon__row { height: 2.6rem; }
+
+  .cribbon__label--after,
+  .cribbon__label--before {
+    left: 0;
+    right: auto;
+    top: .15rem;
+    max-width: 100%;
+    transform: none;
+    text-align: left;
+    font-size: .8rem;
+    color: var(--ink);
+  }
+
+  .cribbon__bar {
+    top: auto;
+    bottom: .5rem;
+    transform: none;
+  }
+
+  .cribbon__hit:focus-visible .cribbon__bar { outline-offset: 2px; }
+
+  /* Only the ends of the axis survive; intermediate years are unreadable at
+     this width and the gridlines alone still show the spacing. */
+  .cribbon__tick i { display: none; }
+  .cribbon__tick.is-end i { display: block; }
+
+  .cribbon__pop.cribbon__pop--left,
+  .cribbon__pop.cribbon__pop--right,
+  .cribbon__pop.cribbon__pop--up,
+  .cribbon__pop.cribbon__pop--down {
+    position: fixed;
+    left: .75rem;
+    right: .75rem;
+    top: auto;
+    bottom: .75rem;
+    width: auto;
+    max-width: none;
+    z-index: 20;
+  }
+
+  .cribbon__key-hint { display: none; }
 }
 
 /* ─── workshop photo tiles ────────────────────────────────────────────────── */

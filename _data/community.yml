@@ -5,25 +5,38 @@
 # `location` beneath. Workshops have no venue, year or location — their title
 # leads and their links sit beside it.
 #
-# `note:` is kept but NOT rendered anywhere. Delete the notes, or restore the
-# rendering, whenever you like.
+# `note:` is what the ribbon reveals when a row is hovered or focused, so it
+# carries real weight now — keep them to a sentence or two.
 #
 # Talks live in research.yml, next to the work they're about.
 #
-# ─── map coordinates ─────────────────────────────────────────────────────────
-# `map_x` / `map_y` are percentages inside the map box, precomputed from real
-# lat/lng on a Mercator projection bounded by 46.10/42.70 N and 80.60/72.80 W.
-# They're baked in because Liquid has no log or tan and can't project at render
-# time; regenerate them if the bounds ever change.
+# ─── timeline geometry ───────────────────────────────────────────────────────
+# `start` / `end` are the real dates ("YYYY-MM", or "present" for anything still
+# running) and are the source of truth. `x` / `w` are the bar's left edge and
+# width as percentages of the ribbon, and are GENERATED — don't hand-edit them.
 #
-# Everything within a city projects to within 1% of everything else, which would
-# stack the dots on top of each other — so markers are spread radially around
-# their city. The map is schematic at this scale, not survey-accurate.
+#     ./scripts/timeline.sh        # prints new x/w and a new axis: block
 #
-# The three McMaster roles share one campus coordinate, so only the first
-# carries a marker; the others appear in the list beneath the map.
+# They're baked in because Liquid has no date arithmetic and can't work out bar
+# positions at render time. Because "present" resolves to whenever the script
+# last ran, every number drifts a little on each run; that's expected.
 #
-# ERNESTINE'S IS DELIBERATELY IMPRECISE — it sits at Toronto centre, not at its
+# The axis is piecewise-linear and scale-preserving. Stretches where nothing at
+# all was running collapse to a fixed sliver drawn as a visible break, while
+# every live stretch shares one %-per-month rate — so a two-year role is the
+# same width wherever it falls. There is currently one such break, the fifteen
+# months between St. Joseph's ending and IMPACT starting.
+#
+# `kind` is either "leadership" or "mentorship". The home page merges the two
+# groups into one ribbon, which would otherwise lose the distinction; the
+# ribbon draws mentorship bars outlined and leadership bars solid.
+#
+# ─── retired map coordinates ─────────────────────────────────────────────────
+# `map_x` / `map_y` positioned dots on the old inline-SVG map, which the ribbon
+# replaced. Nothing reads them any more. They're kept in case the map ever comes
+# back — two entries never had them, which is why those two never appeared on it.
+#
+# ERNESTINE'S IS DELIBERATELY IMPRECISE — it sat at Toronto centre, not at its
 # real address. Women's shelters keep their locations confidential for resident
 # safety. Please don't "correct" this.
 
@@ -92,6 +105,11 @@ leadership:
     map_y: 14.0
     location: "Montréal, Canada"
     year: "Apr 2025 – present"
+    kind: "leadership"
+    start: "2025-04"
+    end: "present"
+    x: 82.27
+    w: 17.73
     note: >-
       Organizing institute-wide initiatives to build a more equitable, inclusive
       and diverse environment across the AI research community.
@@ -102,6 +120,11 @@ leadership:
     map_y: 80.35
     location: "Hamilton, Canada"
     year: "Apr 2022 – Apr 2023"
+    kind: "leadership"
+    start: "2022-04"
+    end: "2023-04"
+    x: 44.72
+    w: 13.56
     note: >-
       Ran events logistics, booking and promotion, and led weekly subcommittee
       meetings.
@@ -110,6 +133,11 @@ leadership:
     venue: "McMaster IMPACT Initiative"
     location: "Hamilton, Canada"
     year: "Mar 2021 – Jan 2022"
+    kind: "leadership"
+    start: "2021-03"
+    end: "2022-01"
+    x: 31.16
+    w: 11.47
     note: >-
       Reviewed engineering prototypes custom-designed with students and
       professors to increase accessibility for clients.
@@ -120,6 +148,11 @@ leadership:
     map_y: 69.2
     location: "Toronto, Canada"
     year: "Nov 2018 – Nov 2019"
+    kind: "leadership"
+    start: "2018-11"
+    end: "2019-11"
+    x: 14.60
+    w: 13.56
     note: >-
       Provided compassionate nonmedical care and support to inpatients.
 
@@ -129,6 +162,11 @@ leadership:
     map_y: 74.56
     location: "Toronto, Canada"
     year: "Sep 2017 – Dec 2018"
+    kind: "leadership"
+    start: "2017-09"
+    end: "2018-12"
+    x: 0.00
+    w: 16.69
     note: >-
       Organized and led weekly subcommittee meetings to plan events.
 
@@ -138,6 +176,11 @@ leadership:
     map_y: 74.56
     location: "Toronto, Canada"
     year: "Nov 2017"
+    kind: "leadership"
+    start: "2017-11"
+    end: "2017-11"
+    x: 2.09
+    w: 1.04
     note: >-
       Served meals in a welcoming space to those physically or mentally unable
       to work.
@@ -150,6 +193,11 @@ mentorship:
     map_y: 21.14
     location: "Montréal, Canada"
     year: "Jan 2025 – present"
+    kind: "mentorship"
+    start: "2025-01"
+    end: "present"
+    x: 79.14
+    w: 20.86
     note: >-
       Multidisciplinary strategic guidance to an early-stage biotech startup —
       biological feasibility, ML code development, and market audience strategy.
@@ -160,6 +208,11 @@ mentorship:
     map_y: 87.49
     location: "Hamilton, Canada"
     year: "Mar 2022 – present"
+    kind: "mentorship"
+    start: "2022-03"
+    end: "present"
+    x: 43.68
+    w: 56.32
     note: >-
       Identified gaps in business processes and built tailored presentation
       material from consultee assessments.
@@ -168,6 +221,29 @@ mentorship:
     venue: "McMaster Women in STEM"
     location: "Hamilton, Canada"
     year: "Sep 2021 – Apr 2022"
+    kind: "mentorship"
+    start: "2021-09"
+    end: "2022-04"
+    x: 37.42
+    w: 8.34
     note: >-
       One-on-one mentoring of first-year students on academics and
       extracurriculars, through the return from online to in-person schooling.
+
+# ─── ribbon axis ─────────────────────────────────────────────────────────────
+# GENERATED by scripts/timeline.sh alongside the x/w values above — paste both
+# at the same time or the ticks will disagree with the bars.
+#
+# Januaries that land inside a collapsed stretch are deliberately absent; the
+# break mark stands in for them.
+axis:
+  ticks:
+    - { label: "2018", x: 4.17 }
+    - { label: "2019", x: 16.69 }
+    - { label: "2022", x: 41.59 }
+    - { label: "2023", x: 54.11 }
+    - { label: "2024", x: 66.62 }
+    - { label: "2025", x: 79.14 }
+    - { label: "2026", x: 91.66 }
+  breaks:
+    - { x: 28.16, w: 3.00 }   # 15 months, 2019-12 to 2021-02
