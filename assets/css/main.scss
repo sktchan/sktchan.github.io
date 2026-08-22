@@ -34,11 +34,18 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* colour. --tint-deep is the pastel blue; it is a *surface*, never a text
-     colour — at 1.59:1 it cannot legally carry type. --accent is its darkened
+  /* colour. --tint-deep is the pastel rose; it is a *surface*, never a text
+     colour — at 1.55:1 it cannot legally carry type. --accent is its darkened
      sibling and does all the text work.
 
-     Verified against --bg #fcfcfd: accent 5.66:1, ink-muted 5.77:1, ink 15.4:1.
+     The hue (348) is taken from the portrait's maples. Sampling the foliage —
+     39% of the frame — found the reds spread across hue 340-9: a dusty band at
+     #956771, the maple crimson at #894e52, brick at #8e504b. 348 sits between
+     the first two, so it reads pink rather than terracotta. Saturation is
+     pulled well below the source (0.35 against ~0.43) and far below the site's
+     original #a8415c (0.61) — that gap is the "muted".
+
+     Verified against --bg #fcfcfd: accent 5.61:1, ink-muted 5.77:1, ink 15.4:1.
 
      The ground is near-white rather than pure white — it still reads as white
      but takes the glare off long passages, and it lets --surface (true #ffffff)
@@ -47,21 +54,21 @@
      dirty against a cool white. */
   --bg:         #fcfcfd;
   --surface:    #ffffff;
-  --tint:       #e1effc;
-  --tint-deep:  #afceed;
-  --accent:     #496888;
+  --tint:       #feecf0;
+  --tint-deep:  #edc2cb;
+  --accent:     #885962;
   --ink:        #1f2328;
   --ink-muted:  #5c6570;
   --rule:       #e8eaed;
 
-  /* The community ribbon's three cities, as one blue deepening toward the
+  /* The community ribbon's three cities, as one rose deepening toward the
      present — which, because the rows run in date order, also deepens eastward.
-     Contrast on --bg: 3.12:1, 4.20:1, 5.66:1, all clearing the 3:1 that AA asks
+     Contrast on --bg: 3.19:1, 4.31:1, 5.61:1, all clearing the 3:1 that AA asks
      of non-text UI. Colour never carries meaning alone here: the rows are
      grouped and labelled by city, and the popover names the place. */
-  --city-1:     #7593b1;   /* Toronto  */
-  --city-2:     #5d7d9c;   /* Hamilton */
-  --city-3:     #496888;   /* Montréal */
+  --city-1:     #b0828b;   /* Toronto  */
+  --city-2:     #9b6b75;   /* Hamilton */
+  --city-3:     #885962;   /* Montréal */
 
   /* shape */
   /* Tighter than it was (14/9). Large radii read consumer-app; these read
