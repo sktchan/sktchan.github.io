@@ -6,10 +6,19 @@
    fonts — self-hosted, so the site makes no third-party requests
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Source Serif 4 replaced Fraunces, which is a *display* face with deliberate
+   "wonk" — soft brackets, quirky optical sizing. That playfulness was what read
+   as unserious; the fix was a sober text serif, not dropping serifs entirely.
+
+   The file is the latin subset with its `opsz` axis pinned at 24 and only
+   `wght` left variable. The serif is used for display only (h1–h4, the ribbon
+   popover lead, workshop tile titles, the CV name), so a fixed optical size in
+   that range costs nothing visible and takes the file from 122KB to 51KB —
+   smaller than the 67KB Fraunces it replaces. */
 @font-face {
-  font-family: "Fraunces";
-  src: url("{{ '/assets/fonts/fraunces.woff2' | relative_url }}") format("woff2");
-  font-weight: 100 900;
+  font-family: "Source Serif 4";
+  src: url("{{ '/assets/fonts/source-serif.woff2' | relative_url }}") format("woff2");
+  font-weight: 200 900;
   font-display: swap;
 }
 
@@ -25,40 +34,47 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* colour. --tint is the soft sage; it is a *surface*, never a text colour.
-     --accent is its darkened sibling, the only green readable as type.
-     Contrast on --bg: accent 6.0:1, ink-muted 5.3:1, ink 14:1 — all pass AA.
+  /* colour. --tint-deep is the pastel blue; it is a *surface*, never a text
+     colour — at 1.59:1 it cannot legally carry type. --accent is its darkened
+     sibling and does all the text work.
 
-     The background stays warm (#f6f4f1) while the greens run slightly cool.
-     That's deliberate: the small temperature gap is what keeps the sage from
-     flattening into the paper. */
-  --bg:         #f6f4f1;
+     Verified against --bg #fcfcfd: accent 5.66:1, ink-muted 5.77:1, ink 15.4:1.
+
+     The ground is near-white rather than pure white — it still reads as white
+     but takes the glare off long passages, and it lets --surface (true #ffffff)
+     sit *brighter* than the page, so cards and popovers lift off it instead of
+     dissolving into it. The greys are neutral, not warm: warm greys go visibly
+     dirty against a cool white. */
+  --bg:         #fcfcfd;
   --surface:    #ffffff;
-  --tint:       #e9efe9;
-  --tint-deep:  #d3e0d5;
-  --accent:     #4a6350;
-  --ink:        #2b2826;
-  --ink-muted:  #6b6461;
-  --rule:       #e7e2dc;
+  --tint:       #e1effc;
+  --tint-deep:  #afceed;
+  --accent:     #496888;
+  --ink:        #1f2328;
+  --ink-muted:  #5c6570;
+  --rule:       #e8eaed;
 
-  /* The community ribbon's three cities, as one pink deepening toward the
+  /* The community ribbon's three cities, as one blue deepening toward the
      present — which, because the rows run in date order, also deepens eastward.
-     Contrast on --bg: 3.07:1, 3.88:1, 5.99:1, all clearing the 3:1 that AA asks
+     Contrast on --bg: 3.12:1, 4.20:1, 5.66:1, all clearing the 3:1 that AA asks
      of non-text UI. Colour never carries meaning alone here: the rows are
      grouped and labelled by city, and the popover names the place. */
-  --city-1:     #79927f;   /* Toronto  */
-  --city-2:     #688168;   /* Hamilton */
-  --city-3:     #4a6350;   /* Montréal */
+  --city-1:     #7593b1;   /* Toronto  */
+  --city-2:     #5d7d9c;   /* Hamilton */
+  --city-3:     #496888;   /* Montréal */
 
   /* shape */
-  --radius:      14px;
-  --radius-sm:   9px;
+  /* Tighter than it was (14/9). Large radii read consumer-app; these read
+     editorial. --radius-pill must stay a true pill — the ribbon's bars and
+     their arrowheads are built on it. */
+  --radius:      7px;
+  --radius-sm:   5px;
   --radius-pill: 999px;
-  --shadow:      0 1px 2px rgba(43, 40, 38, .04), 0 8px 24px rgba(43, 40, 38, .06);
-  --shadow-lift: 0 2px 4px rgba(43, 40, 38, .05), 0 14px 32px rgba(43, 40, 38, .09);
+  --shadow:      0 1px 2px rgba(31, 35, 40, .04), 0 8px 24px rgba(31, 35, 40, .06);
+  --shadow-lift: 0 2px 4px rgba(31, 35, 40, .05), 0 14px 32px rgba(31, 35, 40, .09);
 
   /* type */
-  --serif: "Fraunces", "Lora", Georgia, "Times New Roman", serif;
+  --serif: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
   --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
@@ -96,9 +112,12 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 
-h1 { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.2rem); }
-h2 { font-size: 1.3rem; margin-top: 1.4rem; }
-h3 { font-size: 1.05rem; margin-top: 1.25rem; }
+/* Section headings used to sit at 1.3rem — barely above the .95rem body, so
+   the page had almost no structure to read at a glance. Widening that gap is
+   the single largest "this looks considered" lever after the typeface. */
+h1 { font-size: clamp(2rem, 1.55rem + 1.9vw, 2.7rem); }
+h2 { font-size: 1.7rem; margin-top: 2.4rem; }
+h3 { font-size: 1.15rem; margin-top: 1.25rem; }
 
 p { margin: 0 0 .7rem; }
 
@@ -271,8 +290,8 @@ html { scroll-behavior: smooth; }
 
 .nav a {
   display: inline-block;
-  padding: .35rem .9rem;
-  border-radius: var(--radius-pill);
+  padding: .35rem .8rem;
+  border-radius: var(--radius-sm);
   color: var(--ink-muted);
   font-size: .95rem;
   text-decoration: none;
@@ -366,13 +385,15 @@ html { scroll-behavior: smooth; }
   margin: .8rem 0 0;
 }
 
+/* Squared, not pill-shaped. Fully rounded ends were the most app-like thing
+   above the fold; at --radius-sm the row reads as a toolbar instead. */
 .linkrow a {
   display: inline-block;
-  padding: .3rem .85rem;
+  padding: .32rem .7rem;
   border: 1px solid var(--rule);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: var(--surface);
-  font-size: .9rem;
+  font-size: .88rem;
   text-decoration: none;
   transition: background-color .15s ease, border-color .15s ease, transform .15s ease;
 }
@@ -421,15 +442,21 @@ html { scroll-behavior: smooth; }
 
 /* ─── sections on the one-pager ───────────────────────────────────────────── */
 
-.band { margin-top: 1.5rem; }
+.band { margin-top: 2.75rem; }
 
+/* The gap above "Workshops" and above "Leadership, volunteering and mentorship"
+   was always identical — both are .band__sub, and in both cases the preceding
+   element's bottom margin collapses into this top margin. "Leadership" only
+   FELT tighter because it follows the dense block of workshop photo tiles while
+   "Workshops" follows airy text. So the fix is here, and it lifts every
+   sub-label together: they grow, and they stay equal. */
 .band__sub {
   font-family: var(--sans);
   font-size: .82rem;
   font-weight: 600;
   letter-spacing: .04em;
   color: var(--ink-muted);
-  margin: .95rem 0 .25rem;
+  margin: 1.9rem 0 .35rem;
 }
 
 .band__note {
@@ -901,7 +928,7 @@ html { scroll-behavior: smooth; }
   display: flex;
   align-items: flex-end;
   padding: .5rem;
-  background: linear-gradient(to top, rgba(43, 40, 38, .9) 0%, rgba(43, 40, 38, .72) 45%, rgba(43, 40, 38, .35) 100%);
+  background: linear-gradient(to top, rgba(31, 35, 40, .9) 0%, rgba(31, 35, 40, .72) 45%, rgba(31, 35, 40, .35) 100%);
   color: #fff;
   font-family: var(--serif);
   font-weight: 600;
@@ -933,7 +960,7 @@ html { scroll-behavior: smooth; }
   list-style: none;
   color: var(--accent);
   font-size: .85rem;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
 }
 
 .drop__face::-webkit-details-marker { display: none; }
@@ -988,8 +1015,8 @@ html { scroll-behavior: smooth; }
   background: var(--tint);
   color: var(--accent);
   border: 1px solid var(--tint-deep);
-  border-radius: var(--radius-pill);
-  padding: .4rem 1.1rem;
+  border-radius: var(--radius-sm);
+  padding: .4rem 1rem;
   font: inherit;
   font-size: .9rem;
   cursor: pointer;
@@ -1180,7 +1207,7 @@ html { scroll-behavior: smooth; }
   justify-content: center;
   gap: .75rem;
   padding: 2.5rem 1.25rem;
-  background: rgba(43, 40, 38, .92);
+  background: rgba(31, 35, 40, .92);
   backdrop-filter: blur(3px);
 }
 

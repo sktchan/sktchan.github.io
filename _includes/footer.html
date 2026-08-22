@@ -1,32 +1,10 @@
-{%- assign l = site.data.links -%}
-
 <footer class="site-footer">
   <div class="wrap {% if page.wide %}wrap--wide{% endif %}">
     {%- comment -%}
-      Collect the links that actually have values, then join them — otherwise an
-      empty email leaves a stray "·" leading the line. Explicit `!= ''` because
-      an empty string is truthy in Liquid.
+      Deliberately just the one line. The contact links lived here and in the
+      link row under the intro, and the "built with jekyll, hosted on GitHub
+      Pages" credit served the tooling rather than the reader.
     {%- endcomment -%}
-    {%- assign parts = '' | split: '' -%}
-    {%- if l.email and l.email != '' -%}
-      {%- capture p %}<a href="mailto:{{ l.email }}">{{ l.email }}</a>{% endcapture -%}
-      {%- assign parts = parts | push: p -%}
-    {%- endif -%}
-    {%- if l.scholar and l.scholar != '' -%}
-      {%- capture p %}<a href="{{ l.scholar }}">Google Scholar</a>{% endcapture -%}
-      {%- assign parts = parts | push: p -%}
-    {%- endif -%}
-    {%- if l.github and l.github != '' -%}
-      {%- capture p %}<a href="{{ l.github }}">GitHub</a>{% endcapture -%}
-      {%- assign parts = parts | push: p -%}
-    {%- endif -%}
-    {%- if parts.size > 0 -%}
-      <p>{{ parts | join: ' &middot; ' }}</p>
-    {%- endif -%}
-    <p>
-      &copy; {{ 'now' | date: "%Y" }} {{ site.author | default: site.title }} &middot;
-      built with <a href="https://jekyllrb.com">jekyll</a>, hosted on
-      <a href="https://github.com/sktchan/sktchan.github.io">github pages</a>
-    </p>
+    <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author | default: site.title }}</p>
   </div>
 </footer>

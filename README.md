@@ -118,7 +118,7 @@ that has to be readable. That pair, plus `--ink-muted`, clears WCAG AA (4.5:1)
 on the page background; if you darken the background or lighten the accent,
 re-check the contrast.
 
-Fonts are Fraunces (headings) and Inter (body), self-hosted in `assets/fonts/`
+Fonts are Source Serif 4 (headings) and Inter (body), self-hosted in `assets/fonts/`
 so the site makes no third-party requests. See `assets/fonts/LICENSE.md`.
 
 ### Adding or removing a tab
