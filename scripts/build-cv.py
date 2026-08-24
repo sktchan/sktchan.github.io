@@ -90,19 +90,25 @@ def load(name):
         return yaml.safe_load(fh)
 
 
-def itemize(lines):
-    """The one list style in the document.
+def itemize(lines, tight=True):
+    """The list style, in two densities.
 
-    This is what the publications block always used - \\small with the item
-    spacing pulled in - and it is now what every list uses. Education and the
-    two experience sections were each doing something slightly different, which
-    is most of why the CV ran to three pages.
+    `tight` pulls consecutive items 2pt closer than their natural leading. That
+    suits a list of two or three bullets hanging off a record, where the block
+    should read as one unit.
+
+    It does NOT suit a long standalone list. Awards runs to eleven items and
+    Publications to eight, and at -2pt their items sat 9.0pt apart while the
+    \\small text inside them has 11.0pt leading - consecutive bullets closer
+    together than the lines within a single wrapped bullet, which is what made
+    those two sections read as a wall. They pass tight=False.
 
     `lines` must already be escaped.
     """
     if not lines:
         return ""
-    out = ["\\begin{itemize}\n    \\setlength\\itemsep{-2pt}\n    \\small\n"]
+    sep = "    \\setlength\\itemsep{-2pt}\n" if tight else ""
+    out = ["\\begin{itemize}\n%s    \\small\n" % sep]
     out += ["    \\item %s\n" % l for l in lines]
     out.append("\\end{itemize}\n")
     return "".join(out)
@@ -221,7 +227,10 @@ def header(cfg, cv, links):
     for i in range(max(len(left), len(right))):
         l = left[i] if i < len(left) else ""
         r = right[i] if i < len(right) else ""
-        rows.append("  %s\n  \\vspace{0.1pt} & \n  %s \\\\" % (l, r))
+        # -1.5pt rather than the original 0.1pt: four rows at full leading read
+        # as four separate lines instead of one masthead. This pulls them to
+        # ~10.6pt, still clear of the ~10pt type, so nothing can collide.
+        rows.append("  %s\n  \\vspace{-1.5pt} & \n  %s \\\\" % (l, r))
 
     return (
         "\n\\begin{tabular*}{\\textwidth}{l@{\\extracolsep{\\fill}}r}\n"
@@ -231,7 +240,17 @@ def header(cfg, cv, links):
 
 
 def section(name):
-    return "\n%s\n\\vspace{0,24\\baselineskip}\n\\section{%s}\n\\vspace{0,12\\baselineskip}\n" % (
+    """A section rule, with more space above it than below.
+
+    It used to be the other way round - 13.9pt above and 16 to 20pt below -
+    which put every heading closer to the section it ended than to the one it
+    started. Space above is what makes a heading belong to what follows it.
+
+    These two numbers are deltas on top of the \\vspace{-18pt} and
+    \\vspace{-6pt} that \\titleformat already applies, so they are tuned by
+    measuring the built PDF rather than derived.
+    """
+    return "\n%s\n\\vspace{0,55\\baselineskip}\n\\section{%s}\n" % (
         "%" * 78,
         tex(name),
     )
@@ -268,13 +287,19 @@ def skills(items):
     ])
 
 
+RECORD_GAP = "\n\\vspace{0,2\\baselineskip}\n"
+
+
 def experience(items):
     out = [section("Research & Professional Experience")]
-    for it in items:
+    for n, it in enumerate(items):
         where, city = split_place(it.get("where", ""))
         out.append(
-            "\n\\vspace{0,25\\baselineskip}\n"
-            "\\textbf{%s} {%s} \\\\\\vspace{0.2pt}\n%s\n\\hfill \\textit{%s}\\hfill\n"
+            # The first record follows a section rule, which already separates
+            # it. Emitting the gap there too is what made this section sit
+            # 19.8pt below its heading against 16.0 elsewhere.
+            ("\n" if n == 0 else RECORD_GAP)
+            + "\\textbf{%s} {%s} \\\\\\vspace{0.2pt}\n%s\n\\hfill \\textit{%s}\\hfill\n"
             % (tex(where), tex(city), tex(it.get("title", "")), tex(it.get("when", "")))
         )
         out.append(itemize([tex(d) for d in bullets(it.get("detail"))]))
@@ -299,10 +324,10 @@ def projects(research, extra):
     """
     items = list(research.get("projects", []) or []) + list(extra or [])
     out = [section("Projects")]
-    for it in items:
+    for n, it in enumerate(items):
         out.append(
-            "\n\\vspace{0,25\\baselineskip}\n"
-            "\\textbf{%s}\n\\hfill \\textit{%s}\\hfill \\\\\\vspace{0.2pt}\n%s\n"
+            ("\n" if n == 0 else RECORD_GAP)
+            + "\\textbf{%s}\n\\hfill \\textit{%s}\\hfill \\\\\\vspace{0.2pt}\n%s\n"
             % (tex(it.get("title", "")), tex(it.get("year", "")), tex(it.get("role", "")))
         )
         out.append(itemize([tex(b) for b in (it.get("bullets") or [])]))
@@ -315,7 +340,7 @@ def awards(items):
         bits = [b for b in (it.get("detail"), it.get("when")) if b]
         suffix = " (%s)" % tex(", ".join(str(b) for b in bits)) if bits else ""
         lines.append("%s%s" % (tex(it.get("title", "")), suffix))
-    return section("Awards") + itemize(lines)
+    return section("Awards") + itemize(lines, tight=False)
 
 
 def publications(research, author):
@@ -349,7 +374,7 @@ def publications(research, author):
             % (tex(t.get("venue", "")), tex(t.get("year", "")), tex(t.get("title", "")))
         )
 
-    return section("Conferences & Publications") + itemize(lines)
+    return section("Conferences & Publications") + itemize(lines, tight=False)
 
 
 def build():
