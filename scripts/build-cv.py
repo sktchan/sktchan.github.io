@@ -90,6 +90,24 @@ def load(name):
         return yaml.safe_load(fh)
 
 
+def itemize(lines):
+    """The one list style in the document.
+
+    This is what the publications block always used - \\small with the item
+    spacing pulled in - and it is now what every list uses. Education and the
+    two experience sections were each doing something slightly different, which
+    is most of why the CV ran to three pages.
+
+    `lines` must already be escaped.
+    """
+    if not lines:
+        return ""
+    out = ["\\begin{itemize}\n    \\setlength\\itemsep{-2pt}\n    \\small\n"]
+    out += ["    \\item %s\n" % l for l in lines]
+    out.append("\\end{itemize}\n")
+    return "".join(out)
+
+
 # ── preamble ────────────────────────────────────────────────────────────────
 # Serena's template, unchanged except for one addition: [T1]{fontenc}. Without
 # it pdflatex renders "Montréal", "Université" and "Québec" with broken accents,
@@ -149,6 +167,12 @@ PREAMBLE = r"""%------------------------
 
 \renewcommand{\labelitemii}{$\circ$}
 
+% enumitem is already loaded, so the space LaTeX puts around and inside every
+% list can be set once here rather than fought entry by entry. topsep and
+% parsep are the two that add up: at default they contribute roughly a blank
+% line above and below each of the ~20 lists in this document.
+\setlist[itemize]{topsep=1pt, partopsep=0pt, parsep=0pt, itemsep=-2pt}
+
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 
@@ -201,7 +225,7 @@ def header(cfg, cv, links):
 
 
 def section(name):
-    return "\n%s\n\\vspace{0,5\\baselineskip}\n\\section{%s}\n\\vspace{0,3\\baselineskip}\n" % (
+    return "\n%s\n\\vspace{0,25\\baselineskip}\n\\section{%s}\n\\vspace{0,15\\baselineskip}\n" % (
         "%" * 78,
         tex(name),
     )
@@ -212,15 +236,10 @@ def education(items):
     for it in items:
         where, city = split_place(it.get("where", ""))
         out.append(
-            "\n\\textbf{%s} {%s}\n\\hfill \\textit{%s} \\\\\n\\vspace{0.1\\baselineskip}\n%s\\\\\n"
+            "\n\\textbf{%s} {%s}\n\\hfill \\textit{%s} \\\\\n%s\\\\\n"
             % (tex(where), tex(city), tex(it.get("when", "")), tex(it.get("title", "")))
         )
-        detail = bullets(it.get("detail"))
-        if detail:
-            out.append("\\begin{itemize}\n    \\setlength\\itemsep{-3pt}\n    \\small\n")
-            for d in detail:
-                out.append("    \\item %s\n" % tex(d))
-            out.append("\\end{itemize}\n")
+        out.append(itemize([tex(d) for d in bullets(it.get("detail"))]))
     return "".join(out)
 
 
@@ -231,7 +250,7 @@ def skills(items):
             "\\resumeSubItem{\\textbf{%s:}}{{ %s}}\n"
             % (tex(it.get("when", "")), tex(it.get("title", "")))
         )
-    out.append("\\resumeSubHeadingListEnd\n\\vspace{0,5\\baselineskip}\n")
+    out.append("\\resumeSubHeadingListEnd\n\\vspace{0,15\\baselineskip}\n")
     return "".join(out)
 
 
@@ -240,16 +259,11 @@ def experience(items):
     for it in items:
         where, city = split_place(it.get("where", ""))
         out.append(
-            "\n\\vspace{0,3\\baselineskip}\n"
+            "\n\\vspace{0,15\\baselineskip}\n"
             "\\textbf{%s} {%s} \\\\\\vspace{0.2pt}\n%s\n\\hfill \\textit{%s}\\hfill\n"
             % (tex(where), tex(city), tex(it.get("title", "")), tex(it.get("when", "")))
         )
-        detail = bullets(it.get("detail"))
-        if detail:
-            out.append("\\begin{itemize}\n")
-            for d in detail:
-                out.append("    \\item %s\n" % tex(d))
-            out.append("\\end{itemize}\n")
+        out.append(itemize([tex(d) for d in bullets(it.get("detail"))]))
     return "".join(out)
 
 
@@ -273,27 +287,21 @@ def projects(research, extra):
     out = [section("Projects")]
     for it in items:
         out.append(
-            "\n\\vspace{0,3\\baselineskip}\n"
+            "\n\\vspace{0,15\\baselineskip}\n"
             "\\textbf{%s}\n\\hfill \\textit{%s}\\hfill \\\\\\vspace{0.2pt}\n%s\n"
             % (tex(it.get("title", "")), tex(it.get("year", "")), tex(it.get("role", "")))
         )
-        bl = it.get("bullets") or []
-        if bl:
-            out.append("\\begin{itemize}\n")
-            for b in bl:
-                out.append("    \\item %s\n" % tex(b))
-            out.append("\\end{itemize}\n")
+        out.append(itemize([tex(b) for b in (it.get("bullets") or [])]))
     return "".join(out)
 
 
 def awards(items):
-    out = [section("Awards"), "\\begin{itemize}\n    \\setlength\\itemsep{-2pt}\n    \\small\n"]
+    lines = []
     for it in items:
         bits = [b for b in (it.get("detail"), it.get("when")) if b]
         suffix = " (%s)" % tex(", ".join(str(b) for b in bits)) if bits else ""
-        out.append("    \\item %s%s\n" % (tex(it.get("title", "")), suffix))
-    out.append("\\end{itemize}\n")
-    return "".join(out)
+        lines.append("%s%s" % (tex(it.get("title", "")), suffix))
+    return section("Awards") + itemize(lines)
 
 
 def publications(research, author):
@@ -303,8 +311,7 @@ def publications(research, author):
     what keeps them attached to their work on the site; here they flatten into
     one list, exactly as the CV page used to do.
     """
-    out = [section("Conferences & Publications")]
-    out.append("\\begin{itemize}\n    \\setlength\\itemsep{-2pt}\n    \\small\n")
+    lines = []
 
     surname = author.split()[-1]
     for p in research.get("papers", []) or []:
@@ -317,19 +324,18 @@ def publications(research, author):
         )
         if doi:
             line += " " + href(doi, doi.replace("https://", ""))
-        out.append("    \\item %s\n" % line)
+        lines.append(line)
 
     talks = []
     for proj in research.get("projects", []) or []:
         talks.extend(proj.get("presentations", []) or [])
     for t in talks:
-        out.append(
-            "    \\item \\textbf{%s} (%s): \\textit{%s}\n"
+        lines.append(
+            "\\textbf{%s} (%s): \\textit{%s}"
             % (tex(t.get("venue", "")), tex(t.get("year", "")), tex(t.get("title", "")))
         )
 
-    out.append("\\end{itemize}\n")
-    return "".join(out)
+    return section("Conferences & Publications") + itemize(lines)
 
 
 def build():
