@@ -250,14 +250,22 @@ def education(items):
 
 
 def skills(items):
-    out = [section("Skills Summary"), "\\resumeSubHeadingListStart\n"]
-    for it in items:
-        out.append(
-            "\\resumeSubItem{\\textbf{%s:}}{{ %s}}\n"
-            % (tex(it.get("when", "")), tex(it.get("title", "")))
-        )
-    out.append("\\resumeSubHeadingListEnd\n\\vspace{0,08\\baselineskip}\n")
-    return "".join(out)
+    """Plain itemize, like every other list here.
+
+    This used \\resumeSubItem, which is the one macro in the template that adds
+    negative space of its own (-2pt inside the item, -3pt after). That kept
+    colliding with the negative space elsewhere: first with the global itemsep,
+    which made the rows overprint each other, then with the -18pt that
+    \\titleformat pulls the next section heading up by, which put "Languages"
+    through the middle of "Research & Professional Experience".
+
+    Two bugs from one special case was enough. The macro is still defined in the
+    preamble, since that preamble is Serena's; nothing calls it now.
+    """
+    return section("Skills Summary") + itemize([
+        "\\textbf{%s:} %s" % (tex(it.get("when", "")), tex(it.get("title", "")))
+        for it in items
+    ])
 
 
 def experience(items):
