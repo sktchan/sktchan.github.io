@@ -325,7 +325,7 @@ html { scroll-behavior: smooth; }
    changed. object-fit stays as a guard against a source that isn't exactly 4:5. */
 .intro__photo {
   flex: 0 0 auto;
-  width: 13rem;
+  width: 11.5rem;
   aspect-ratio: 4 / 5;
   height: auto;
   object-fit: cover;
@@ -344,7 +344,7 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 34rem) {
   .intro { flex-direction: column; gap: 1.25rem; }
-  .intro__photo { width: 10rem; }
+  .intro__photo { width: 9rem; }
 }
 
 /* ─── link row (email / scholar / github …) ───────────────────────────────── */
