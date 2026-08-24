@@ -253,6 +253,39 @@ def experience(items):
     return "".join(out)
 
 
+def projects(research, extra):
+    """Every project the site lists, in the order the site lists them.
+
+    That order is deliberate rather than chronological: research.yml holds the
+    three shown under "Relevant works" and projects.yml the rest under
+    "Additional works", each already curated strongest-first. Sorting the
+    combined list by date would put a coursework project above the thesis work,
+    which is not what either the site or a CV wants.
+
+    The bold line is the project title, not the institution - that is the whole
+    point of a projects section, and the supervisor and lab are carried in the
+    `role` line underneath, exactly as on the site.
+
+    Talks attached to these projects are NOT emitted here; they flatten into
+    Conferences & Publications so they appear once.
+    """
+    items = list(research.get("projects", []) or []) + list(extra or [])
+    out = [section("Projects")]
+    for it in items:
+        out.append(
+            "\n\\vspace{0,3\\baselineskip}\n"
+            "\\textbf{%s}\n\\hfill \\textit{%s}\\hfill \\\\\\vspace{0.2pt}\n%s\n"
+            % (tex(it.get("title", "")), tex(it.get("year", "")), tex(it.get("role", "")))
+        )
+        bl = it.get("bullets") or []
+        if bl:
+            out.append("\\begin{itemize}\n")
+            for b in bl:
+                out.append("    \\item %s\n" % tex(b))
+            out.append("\\end{itemize}\n")
+    return "".join(out)
+
+
 def awards(items):
     out = [section("Awards"), "\\begin{itemize}\n    \\setlength\\itemsep{-2pt}\n    \\small\n"]
     for it in items:
@@ -314,6 +347,7 @@ def build():
         education(cv.get("education", []) or []),
         skills(cv.get("skills", []) or []),
         experience(cv.get("experience", []) or []),
+        projects(research, load("projects")),
         awards(cv.get("awards", []) or []),
         publications(research, author),
         "\n\\vspace{2pt}\n\\end{document}\n",
