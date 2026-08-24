@@ -50,8 +50,14 @@ hide_title: true
       {%- capture b %}<a href="{{ l.linkedin }}">{{ l.linkedin | remove: 'https://www.' }}</a>{% endcapture -%}
       {%- assign bits = bits | push: b -%}
     {%- endif -%}
-    {%- if l.github and l.github != '' -%}
-      {%- capture b %}<a href="{{ l.github }}">{{ l.github | remove: 'https://' }}</a>{% endcapture -%}
+    {%- comment -%}
+      The site itself rather than the GitHub profile. Derived from `url:` in
+      _config.yml so it can never drift from where the site actually lives, and
+      absolute on purpose - a CV gets printed and handed over, where a relative
+      link is no link at all.
+    {%- endcomment -%}
+    {%- if site.url and site.url != '' -%}
+      {%- capture b %}<a href="{{ site.url }}">{{ site.url | remove: 'https://' }}</a>{% endcapture -%}
       {%- assign bits = bits | push: b -%}
     {%- endif -%}
     {{ bits | join: ' &middot; ' }}
