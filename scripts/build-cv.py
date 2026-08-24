@@ -231,7 +231,7 @@ def header(cfg, cv, links):
 
 
 def section(name):
-    return "\n%s\n\\vspace{0,16\\baselineskip}\n\\section{%s}\n\\vspace{0,08\\baselineskip}\n" % (
+    return "\n%s\n\\vspace{0,3\\baselineskip}\n\\section{%s}\n\\vspace{0,15\\baselineskip}\n" % (
         "%" * 78,
         tex(name),
     )
@@ -273,7 +273,7 @@ def experience(items):
     for it in items:
         where, city = split_place(it.get("where", ""))
         out.append(
-            "\n\\vspace{0,18\\baselineskip}\n"
+            "\n\\vspace{0,3\\baselineskip}\n"
             "\\textbf{%s} {%s} \\\\\\vspace{0.2pt}\n%s\n\\hfill \\textit{%s}\\hfill\n"
             % (tex(where), tex(city), tex(it.get("title", "")), tex(it.get("when", "")))
         )
@@ -301,7 +301,7 @@ def projects(research, extra):
     out = [section("Projects")]
     for it in items:
         out.append(
-            "\n\\vspace{0,18\\baselineskip}\n"
+            "\n\\vspace{0,3\\baselineskip}\n"
             "\\textbf{%s}\n\\hfill \\textit{%s}\\hfill \\\\\\vspace{0.2pt}\n%s\n"
             % (tex(it.get("title", "")), tex(it.get("year", "")), tex(it.get("role", "")))
         )
