@@ -177,7 +177,7 @@ PREAMBLE = r"""%------------------------
 % global -2pt on top of that overshoots the line height - the Skills list
 % printed its rows on top of each other. The lists that need tightening set
 % itemsep themselves; see itemize() in scripts/build-cv.py.
-\setlist[itemize]{topsep=1pt, partopsep=0pt, parsep=0pt}
+\setlist[itemize]{topsep=0pt, partopsep=0pt, parsep=0pt}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
@@ -231,7 +231,7 @@ def header(cfg, cv, links):
 
 
 def section(name):
-    return "\n%s\n\\vspace{0,25\\baselineskip}\n\\section{%s}\n\\vspace{0,15\\baselineskip}\n" % (
+    return "\n%s\n\\vspace{0,1\\baselineskip}\n\\section{%s}\n\\vspace{0,05\\baselineskip}\n" % (
         "%" * 78,
         tex(name),
     )
@@ -256,7 +256,7 @@ def skills(items):
             "\\resumeSubItem{\\textbf{%s:}}{{ %s}}\n"
             % (tex(it.get("when", "")), tex(it.get("title", "")))
         )
-    out.append("\\resumeSubHeadingListEnd\n\\vspace{0,15\\baselineskip}\n")
+    out.append("\\resumeSubHeadingListEnd\n\\vspace{0,08\\baselineskip}\n")
     return "".join(out)
 
 
@@ -265,7 +265,7 @@ def experience(items):
     for it in items:
         where, city = split_place(it.get("where", ""))
         out.append(
-            "\n\\vspace{0,15\\baselineskip}\n"
+            "\n\\vspace{0,08\\baselineskip}\n"
             "\\textbf{%s} {%s} \\\\\\vspace{0.2pt}\n%s\n\\hfill \\textit{%s}\\hfill\n"
             % (tex(where), tex(city), tex(it.get("title", "")), tex(it.get("when", "")))
         )
@@ -293,7 +293,7 @@ def projects(research, extra):
     out = [section("Projects")]
     for it in items:
         out.append(
-            "\n\\vspace{0,15\\baselineskip}\n"
+            "\n\\vspace{0,08\\baselineskip}\n"
             "\\textbf{%s}\n\\hfill \\textit{%s}\\hfill \\\\\\vspace{0.2pt}\n%s\n"
             % (tex(it.get("title", "")), tex(it.get("year", "")), tex(it.get("role", "")))
         )
