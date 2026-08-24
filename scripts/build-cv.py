@@ -107,8 +107,12 @@ def itemize(lines, tight=True):
     """
     if not lines:
         return ""
-    sep = "    \\setlength\\itemsep{-2pt}\n" if tight else ""
-    out = ["\\begin{itemize}\n%s    \\small\n" % sep]
+    # 0pt, not "leave it unset". Omitting \itemsep falls back to LaTeX's default
+    # for the class, which is ~4pt on top of the leading - it measured 15.0pt
+    # between Awards items when the target was 11.0. Explicit zero is what
+    # "consecutive items exactly one line apart" actually requires.
+    sep = "-2pt" if tight else "0pt"
+    out = ["\\begin{itemize}\n    \\setlength\\itemsep{%s}\n    \\small\n" % sep]
     out += ["    \\item %s\n" % l for l in lines]
     out.append("\\end{itemize}\n")
     return "".join(out)
