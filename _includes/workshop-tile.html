@@ -1,10 +1,17 @@
 {%- comment -%}
-  One workshop: a photo with the title over it and the links beneath.
+  One workshop: a photo with the title over it, and the links taking the title's
+  place when the tile is hovered or focused.
 
   Usage:  {% include workshop-tile.html item=item %}
 
-  Links sit below the image rather than on it so they're real, hittable text on
-  touch as well as pointer — an overlay would need a hover fallback.
+  Title and links occupy the SAME spot in the caption and cross-fade, so the
+  tile never changes height and the grid never shifts. They have to be siblings
+  inside .wtile__cap for that; the links used to sit below the image, outside
+  .wtile__media entirely.
+
+  On a device that can't hover, both are shown stacked instead - see the
+  (hover: hover) block in the stylesheet. The title is never simply hidden
+  there, because it is the only thing naming the workshop.
 
   Source photos vary from 1.03:1 to 1.35:1, so the tile fixes a 4:3 box and
   crops with object-fit: cover to keep the grid even.
@@ -20,14 +27,17 @@
     {%- else -%}
       <span class="wtile__empty" aria-hidden="true"></span>
     {%- endif -%}
-    <span class="wtile__title">{{ item.title }}</span>
-  </div>
 
-  {%- if item.links -%}
-    <ul class="wtile__links">
-      {%- for link in item.links %}
-        <li><a href="{{ link.url }}">{{ link.name }}</a></li>
-      {%- endfor -%}
-    </ul>
-  {%- endif -%}
+    <div class="wtile__cap">
+      <span class="wtile__title">{{ item.title }}</span>
+
+      {%- if item.links -%}
+        <ul class="wtile__links">
+          {%- for link in item.links %}
+            <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
 </div>

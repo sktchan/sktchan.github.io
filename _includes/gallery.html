@@ -9,9 +9,33 @@
   The page including this must also include lightbox.html once.
 {%- endcomment -%}
 
-<div class="gallery">
+<div class="gallery-strip">
+  {%- comment -%}
+    Arrow buttons in addition to the scrollbar. They are real <button>s so they
+    are keyboard-reachable, and they carry aria-hidden="true" only when disabled
+    at the ends — gallery.js manages that. If JavaScript never runs they stay
+    hidden, because a control that cannot do anything is worse than no control:
+    the strip is still scrollable by trackpad, wheel and touch without them.
+  {%- endcomment -%}
+  <button class="gallery__nav gallery__nav--prev" type="button" hidden
+          aria-label="Scroll photos left">&#8249;</button>
+
+  <div class="gallery">
+  {%- comment -%}
+    Two sizes per photo. The strip shows a 288px-tall thumbnail (~16KB); the
+    lightbox opens the full-size file from data-src. Serving the originals into
+    a 144px-tall strip meant pushing 5.8MB to render 234KB worth of pixels, and
+    the lazy-loading that made that survivable left visible blanks as you
+    scrolled. Thumbnails are small enough to load eagerly, so there are none.
+
+    The width/height attributes still come from the original: the thumbnail is
+    a proportional resize, so the ratio - which is all those attributes are for
+    - is unchanged.
+  {%- endcomment -%}
+  {%- capture thumbdir %}{{ include.base }}thumbs/{% endcapture -%}
   {%- for photo in include.items %}
     {%- assign src = photo.file | prepend: include.base | relative_url -%}
+    {%- assign thumb = photo.file | prepend: thumbdir | relative_url -%}
     <figure class="gallery__item">
       {%- comment -%}
         A button, not a div — that's what makes the lightbox keyboard-reachable.
@@ -23,11 +47,10 @@
               data-alt="{{ photo.alt | escape }}"
               data-caption="{{ photo.caption | default: '' | escape }}"
               aria-label="View larger: {{ photo.alt | escape }}">
-        <img src="{{ src }}"
+        <img src="{{ thumb }}"
              alt="{{ photo.alt | escape }}"
              width="{{ photo.width | default: 1600 }}"
              height="{{ photo.height | default: 1067 }}"
-             loading="lazy"
              decoding="async">
       </button>
       {%- if photo.caption and photo.caption != '' -%}
@@ -35,4 +58,10 @@
       {%- endif -%}
     </figure>
   {%- endfor %}
+  </div>
+
+  <button class="gallery__nav gallery__nav--next" type="button" hidden
+          aria-label="Scroll photos right">&#8250;</button>
 </div>
+
+<script src="{{ '/assets/js/gallery.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

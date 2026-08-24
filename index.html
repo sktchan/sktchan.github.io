@@ -20,7 +20,7 @@ wide: true
   <img class="intro__photo"
        src="{{ l.photo | default: '/assets/img/profile.svg' | relative_url }}"
        alt="Portrait of {{ site.author }}"
-       width="380" height="380">
+       width="720" height="900">
 
   <div class="intro__body">
     <h1>Hi, I'm {{ site.author | split: ' ' | first }} <span class="heart" aria-hidden="true">&#9829;</span></h1>
@@ -85,7 +85,7 @@ wide: true
     and the rest began.
   {%- endcomment -%}
   {%- if r.projects and r.projects.size > 0 -%}
-    <h3 class="band__sub">Selected works</h3>
+    <h3 class="band__sub">Relevant works</h3>
     <div class="wks">
       {%- for item in r.projects %}{% include work-tile.html item=item %}{% endfor -%}
     </div>

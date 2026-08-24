@@ -34,18 +34,16 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* colour. --tint-deep is the pastel rose; it is a *surface*, never a text
-     colour — at 1.55:1 it cannot legally carry type. --accent is its darkened
+  /* colour. --tint-deep is the pale pink; it is a *surface*, never a text
+     colour — at 1.52:1 it cannot legally carry type. --accent is its darkened
      sibling and does all the text work.
 
-     The hue (348) is taken from the portrait's maples. Sampling the foliage —
-     39% of the frame — found the reds spread across hue 340-9: a dusty band at
-     #956771, the maple crimson at #894e52, brick at #8e504b. 348 sits between
-     the first two, so it reads pink rather than terracotta. Saturation is
-     pulled well below the source (0.35 against ~0.43) and far below the site's
-     original #a8415c (0.61) — that gap is the "muted".
+     Essentially the pink the site launched with (#a8415c, hue 344, sat 0.61),
+     eased to saturation 0.52. Deriving one from the Banff portrait was tried
+     and abandoned: the jacket reads pink to the eye but measures only 0.08
+     saturation, so every colour sampled from it came out grey.
 
-     Verified against --bg #fcfcfd: accent 5.61:1, ink-muted 5.77:1, ink 15.4:1.
+     Verified against --bg #fefefe: accent 5.37:1, ink-muted 5.86:1, ink 15.7:1.
 
      The ground is near-white rather than pure white — it still reads as white
      but takes the glare off long passages, and it lets --surface (true #ffffff)
@@ -54,21 +52,21 @@
      dirty against a cool white. */
   --bg:         #fefefe;
   --surface:    #ffffff;
-  --tint:       #feecf0;
-  --tint-deep:  #edc2cb;
-  --accent:     #885962;
+  --tint:       #fce6eb;
+  --tint-deep:  #edb9c6;
+  --accent:     #a44f64;
   --ink:        #1f2328;
   --ink-muted:  #5c6570;
   --rule:       #e8eaed;
 
   /* The community ribbon's three cities, as one rose deepening toward the
      present — which, because the rows run in date order, also deepens eastward.
-     Contrast on --bg: 3.19:1, 4.31:1, 5.61:1, all clearing the 3:1 that AA asks
+     Contrast on --bg: 3.21:1, 4.31:1, 5.37:1, all clearing the 3:1 that AA asks
      of non-text UI. Colour never carries meaning alone here: the rows are
      grouped and labelled by city, and the popover names the place. */
-  --city-1:     #b0828b;   /* Toronto  */
-  --city-2:     #9b6b75;   /* Hamilton */
-  --city-3:     #885962;   /* Montréal */
+  --city-1:     #c17b8d;   /* Toronto  */
+  --city-2:     #af6276;   /* Hamilton */
+  --city-3:     #a44f64;   /* Montréal */
 
   /* shape */
   /* Tighter than it was (14/9). Large radii read consumer-app; these read
@@ -322,10 +320,14 @@ html { scroll-behavior: smooth; }
   margin-bottom: .25rem;
 }
 
+/* 4:5 portrait, not a square. The height comes from aspect-ratio rather than a
+   second fixed length, so re-cropping the source later only needs this ratio
+   changed. object-fit stays as a guard against a source that isn't exactly 4:5. */
 .intro__photo {
   flex: 0 0 auto;
-  width: 10.5rem;
-  height: 10.5rem;
+  width: 13rem;
+  aspect-ratio: 4 / 5;
+  height: auto;
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -342,7 +344,7 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 34rem) {
   .intro { flex-direction: column; gap: 1.25rem; }
-  .intro__photo { width: 8.5rem; height: 8.5rem; }
+  .intro__photo { width: 10rem; }
 }
 
 /* ─── link row (email / scholar / github …) ───────────────────────────────── */
@@ -830,10 +832,6 @@ html { scroll-behavior: smooth; }
    ────────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 40rem) {
-  /* Hover-to-reveal is meaningless at this width whatever the media query
-     thinks the device can do, so the workshop links are simply always on. */
-  .wtile__links { opacity: 1 !important; }
-
   /* Nothing to read at rest, so the row only has to be big enough for a thumb. */
   .cribbon__row { height: 1.9rem; }
 
@@ -892,19 +890,24 @@ html { scroll-behavior: smooth; }
   background: linear-gradient(140deg, var(--tint) 0%, var(--tint-deep) 100%);
 }
 
-/* Title sits over the image, on a scrim dark enough to stay legible whatever
-   the photo underneath happens to be. */
-/* At half size the longest titles run to three lines, so the scrim covers the
+/* The caption carries the scrim and holds both the title and the links.
+
+   At half size the longest titles run to three lines, so the scrim covers the
    whole tile rather than just the lower edge — otherwise the top lines sit on
    bare photo and become unreadable. */
-.wtile__title {
+.wtile__cap {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: .3rem;
   padding: .5rem;
   background: linear-gradient(to top, rgba(31, 35, 40, .9) 0%, rgba(31, 35, 40, .72) 45%, rgba(31, 35, 40, .35) 100%);
   color: #fff;
+}
+
+.wtile__title {
   font-family: var(--serif);
   font-weight: 600;
   font-size: .74rem;
@@ -914,38 +917,80 @@ html { scroll-behavior: smooth; }
 .wtile__links {
   display: flex;
   flex-wrap: wrap;
-  gap: .55rem;
+  gap: .6rem;
   list-style: none;
   padding: 0;
-  margin: .4rem 0 0;
-  font-size: .82rem;
+  margin: 0;
+  font-size: .8rem;
 }
 
-/* Hidden until the tile is hovered or something inside it takes focus.
+/* On the image, the links have to carry their own contrast — the accent pink
+   is chosen against a light page and is unreadable on the dark scrim. */
+.wtile__links a {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, .55);
+}
 
-   Three things this must not break, hence the shape:
-   - `opacity`, never `display:none` - the links keep their space, so nothing
-     below shifts when they appear, and they stay in the accessibility tree.
-   - `:focus-within` - a keyboard user tabbing to a link would otherwise be
-     sent to something they cannot see.
-   - `@media (hover: hover) and (pointer: fine)` - a touch device never enters
-     this block, so the links simply stay visible there. Both conditions are
-     needed: hybrid machines (a tablet with a trackpad) report `hover: hover`
-     while still being tapped at, and `pointer: fine` is what rules those out.
-     There is a second, blunter guard in the narrow-screen block below - phones
-     are where this matters most and it is not worth being clever there. */
+.wtile__links a:hover { text-decoration-color: #fff; }
+
+/* ── hover: the links take the title's place ─────────────────────────────────
+
+   Both sit in the same spot and cross-fade, so the tile never changes height
+   and the grid never shifts. The image scales underneath, the same gesture the
+   photo strip uses.
+
+   `(hover: hover) and (pointer: fine)` for the same reason as everywhere else:
+   a touch device never enters this block, so it keeps the stacked layout where
+   the title and the links are both simply visible. The title is never just
+   hidden there — it is the only thing naming the workshop.
+   ────────────────────────────────────────────────────────────────────────── */
+
 @media (hover: hover) and (pointer: fine) {
   .wtile__links {
+    position: absolute;
+    left: .5rem;
+    right: .5rem;
+    bottom: .5rem;
     opacity: 0;
-    transition: opacity .18s ease;
   }
+
+  .wtile__title,
+  .wtile__links { transition: opacity .2s ease; }
+
+  .wtile__media img { transition: transform .3s ease; }
+
+  .wtile:hover .wtile__title,
+  .wtile:focus-within .wtile__title { opacity: 0; }
 
   .wtile:hover .wtile__links,
   .wtile:focus-within .wtile__links { opacity: 1; }
+
+  .wtile:hover .wtile__media img,
+  .wtile:focus-within .wtile__media img { transform: scale(1.06); }
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
-  .wtile__links { transition: none; }
+  .wtile__title,
+  .wtile__links,
+  .wtile__media img { transition: none; }
+
+  .wtile:hover .wtile__media img,
+  .wtile:focus-within .wtile__media img { transform: none; }
+}
+
+/* Hover-to-reveal is meaningless at phone width whatever the media query thinks
+   the device can do, so the caption reverts to title-above-links with both
+   simply visible.
+
+   This has to come AFTER the hover block: both selectors are a single class, so
+   source order is what decides, and the same rules placed up in the ribbon's
+   narrow-screen block lost silently. */
+@media (max-width: 40rem) {
+  .wtile__links {
+    position: static;
+    opacity: 1;
+  }
+  .wtile__title { opacity: 1; }
 }
 
 /* ─── conference dropdown ─────────────────────────────────────────────────── */
@@ -1155,6 +1200,52 @@ html { scroll-behavior: smooth; }
 
 /* Denser still: 15 photos inside the one-pager read as contact-sheet
    thumbnails rather than a feature gallery. */
+/* The strip and its two arrow buttons. Position is relative so the arrows can
+   sit over the fading edges of the rail. */
+.gallery-strip {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.gallery__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--accent);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity .15s ease, background-color .15s ease;
+}
+
+.gallery__nav--prev { left: -.6rem; }
+.gallery__nav--next { right: -.6rem; }
+
+/* Swiping is the natural gesture at this width and the buttons would sit on
+   top of the photos, so they go. The strip still scrolls. */
+@media (max-width: 40rem) {
+  .gallery__nav { display: none; }
+}
+
+.gallery__nav:hover { background: var(--tint); }
+
+/* Kept in the layout rather than removed, so the strip doesn't shift when you
+   reach an end. */
+.gallery__nav:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* One horizontal strip rather than a masonry grid.
 
    The vertical padding is load-bearing, not decoration: `overflow-x: auto`
@@ -1166,7 +1257,6 @@ html { scroll-behavior: smooth; }
   gap: .5rem;
   overflow-x: auto;
   overflow-y: hidden;
-  margin-top: 1rem;
   padding-block: 1.1rem;
   scroll-padding-inline: 1rem;
   scrollbar-width: thin;
