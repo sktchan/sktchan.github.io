@@ -254,7 +254,7 @@ def section(name):
     \\vspace{-6pt} that \\titleformat already applies, so they are tuned by
     measuring the built PDF rather than derived.
     """
-    return "\n%s\n\\vspace{0,55\\baselineskip}\n\\section{%s}\n" % (
+    return "\n%s\n\\vspace{0,45\\baselineskip}\n\\section{%s}\n" % (
         "%" * 78,
         tex(name),
     )
@@ -291,7 +291,7 @@ def skills(items):
     ])
 
 
-RECORD_GAP = "\n\\vspace{0,2\\baselineskip}\n"
+RECORD_GAP = "\n\\vspace{0,12\\baselineskip}\n"
 
 
 def experience(items):
