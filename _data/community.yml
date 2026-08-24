@@ -100,11 +100,11 @@ workshops:
 # One combined group, newest first.
 leadership:
   - title: "Equity, Diversity & Inclusion (EDI) Team"
-    venue: "Mila — Quebec AI Institute"
+    venue: "Mila - Quebec AI Institute"
     map_x: 89.85
     map_y: 14.0
     location: "Montréal, Canada"
-    year: "Apr 2025 – present"
+    year: "Apr 2025 - present"
     start: "2025-04"
     end: "present"
     x: 82.27
@@ -118,7 +118,7 @@ leadership:
     map_x: 9.03
     map_y: 80.35
     location: "Hamilton, Canada"
-    year: "Apr 2022 – Apr 2023"
+    year: "Apr 2022 - Apr 2023"
     start: "2022-04"
     end: "2023-04"
     x: 44.72
@@ -129,7 +129,7 @@ leadership:
   - title: "Design Review Team"
     venue: "McMaster IMPACT Initiative"
     location: "Hamilton, Canada"
-    year: "Mar 2021 – Jan 2022"
+    year: "Mar 2021 - Jan 2022"
     start: "2021-03"
     end: "2022-01"
     x: 31.16
@@ -143,7 +143,7 @@ leadership:
     map_x: 15.1
     map_y: 69.2
     location: "Toronto, Canada"
-    year: "Nov 2018 – Nov 2019"
+    year: "Nov 2018 - Nov 2019"
     start: "2018-11"
     end: "2019-11"
     x: 14.60
@@ -156,7 +156,7 @@ leadership:
     map_x: 18.74
     map_y: 74.56
     location: "Toronto, Canada"
-    year: "Sep 2017 – Dec 2018"
+    year: "Sep 2017 - Dec 2018"
     start: "2017-09"
     end: "2018-12"
     x: 0.00
@@ -184,7 +184,7 @@ mentorship:
     map_x: 89.85
     map_y: 21.14
     location: "Montréal, Canada"
-    year: "Jan 2025 – present"
+    year: "Jan 2025 - present"
     start: "2025-01"
     end: "present"
     x: 79.14
@@ -198,7 +198,7 @@ mentorship:
     map_x: 9.03
     map_y: 87.49
     location: "Hamilton, Canada"
-    year: "Mar 2022 – present"
+    year: "Mar 2022 - present"
     start: "2022-03"
     end: "present"
     x: 43.68
@@ -210,7 +210,7 @@ mentorship:
   - title: "Undergraduate Mentor"
     venue: "McMaster Women in STEM"
     location: "Hamilton, Canada"
-    year: "Sep 2021 – Apr 2022"
+    year: "Sep 2021 - Apr 2022"
     start: "2021-09"
     end: "2022-04"
     x: 37.42

@@ -11,12 +11,12 @@ headline: "MSc student in computer science · Université de Montréal, Mila, IR
 location: "Montréal, QC"
 
 education:
-  - when: "Jan 2025 – present"
+  - when: "Jan 2025 - present"
     title: "Master of Computer Science"
     where: "Université de Montréal, Montréal, QC"
     detail: "Coursework: Probabilistic Machine Learning, Molecular Bioinformatics, Genomic Bioinformatics."
 
-  - when: "Sep 2020 – Apr 2024"
+  - when: "Sep 2020 - Apr 2024"
     title: "BSc, Honours Life Sciences"
     where: "McMaster University, Hamilton, ON"
     detail: "Coursework: Genetics, Organic Chemistry, Data Structures & Algorithms, Statistics, Data Science, Calculus, Neuroscience."
@@ -24,37 +24,37 @@ education:
 # `detail` may be a single string or a list — a list renders as bullets, which is
 # what the Offord Centre entry needs.
 experience:
-  - when: "January 2025 – Present"
+  - when: "January 2025 - Present"
     title: "Research Affiliate"
     where: "Mila - Quebec AI Institute"
     detail: "Benchmarking transformer, autoencoder, and feedforward architectures while analyzing pre-training objectives and interpretability in transcriptomic representation learning."
 
-  - when: "January 2025 – Present"
+  - when: "January 2025 - Present"
     title: "Research Affiliate"
     where: "Institute for Research in Immunology and Cancer"
     detail: "Modeling gene dependencies using bulk and single-cell RNA-seq datasets, evaluating the impact of rank-normalized inputs versus raw expression counts on biological inference."
 
-  - when: "February 2025 – April 2025"
+  - when: "February 2025 - April 2025"
     title: "AI/NLP Intern"
     where: "Ubineer"
     detail: "Developed and optimized a text parsing pipeline using NLTK and POS tagging in Python to clean and structure 250+ text documents, improving dataset quality for LLM training."
 
-  - when: "May 2024 – December 2024"
+  - when: "May 2024 - December 2024"
     title: "Medical Administrative Assistant"
     where: "The Clinic @ College Corner, Toronto, ON"
     detail: "Maintained efficient patient records by accurately inputting and updating medical histories, test results, billing histories, treatment plans, and patient inquiries using EMR system PS Suite."
 
-  - when: "May 2024 – December 2024"
+  - when: "May 2024 - December 2024"
     title: "Research Assistant"
     where: "AI Atlas, Hamilton, ON"
     detail: "Collaborated with engineers to investigate self-learning AI-based arrhythmia detection algorithms, incorporating clinical expertise and feedback to research model architectures and optimize clinical utility."
 
-  - when: "September 2023 – April 2024"
+  - when: "September 2023 - April 2024"
     title: "Research Affiliate"
     where: "Juravinski Cancer Centre, Hamilton, ON"
     detail: "Facilitated the use of Optical Surface Monitoring Systems (OSMS) and ARIA software to collect, transfer, and verify fidelity of both positional and CT image registration data."
 
-  - when: "September 2022 – May 2024"
+  - when: "September 2022 - May 2024"
     title: "Research Assistant"
     where: "Offord Centre for Child Studies, Hamilton, ON"
     detail:
@@ -71,7 +71,7 @@ awards:
     detail: "$5,000"
 
   - when: "2025"
-    title: "NSERC CGS — Master's Scholarship"
+    title: "NSERC CGS - Master's Scholarship"
     detail: "$27,000"
 
   - when: "2025"
@@ -94,7 +94,7 @@ awards:
     title: "McMaster Graduation with Distinction"
 
   - when: "2022"
-    title: "McMaster WiSTEM Case Study Competition — First place"
+    title: "McMaster WiSTEM Case Study Competition - First place"
 
   - when: "2020"
     title: "Ted Rogers Scholarship Fund"

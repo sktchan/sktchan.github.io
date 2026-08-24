@@ -139,8 +139,13 @@
     Leadership, volunteering and mentorship are drawn identically, so there's no
     encoding to explain — and with the bars unlabelled, this line is the only
     thing telling a visitor the rows do anything. It earns its place.
+
+    It says "hover" rather than "hover or focus" because that is the plain
+    reading; keyboard focus still reveals the popover exactly as before. The
+    hint is display:none below 40rem, so it never claims hover where there is
+    none.
   {%- endcomment -%}
-  <p class="cribbon__hint">Hover or focus a row for details</p>
+  <p class="cribbon__hint">Hover a bar for details!</p>
 </div>
 
 {%- comment -%} ?v= is the same cache buster as the stylesheet; see head.html. {%- endcomment -%}

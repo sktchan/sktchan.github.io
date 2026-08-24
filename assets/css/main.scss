@@ -52,7 +52,7 @@
      sit *brighter* than the page, so cards and popovers lift off it instead of
      dissolving into it. The greys are neutral, not warm: warm greys go visibly
      dirty against a cool white. */
-  --bg:         #fcfcfd;
+  --bg:         #fefefe;
   --surface:    #ffffff;
   --tint:       #feecf0;
   --tint-deep:  #edc2cb;
@@ -122,8 +122,8 @@ h1, h2, h3, h4 {
 /* Section headings used to sit at 1.3rem — barely above the .95rem body, so
    the page had almost no structure to read at a glance. Widening that gap is
    the single largest "this looks considered" lever after the typeface. */
-h1 { font-size: clamp(2rem, 1.55rem + 1.9vw, 2.7rem); }
-h2 { font-size: 1.7rem; margin-top: 2.4rem; }
+h1 { font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2rem); }
+h2 { font-size: 1.35rem; margin-top: 2.4rem; }
 h3 { font-size: 1.15rem; margin-top: 1.25rem; }
 
 p { margin: 0 0 .7rem; }
@@ -203,7 +203,9 @@ code {
    they are what keeps the page from reading as a plain document. */
 .site-header {
   position: relative;
-  padding: 1.1rem 0 .7rem;
+  /* Holds nothing but the two gradient blobs now that the sparkle band is gone,
+     so this is just the height they need to read as a soft masthead. */
+  padding: 2.1rem 0 0;
   overflow: hidden;
 }
 
@@ -221,49 +223,6 @@ code {
 .site-header::after  { width: 18rem; height: 18rem; top: -6rem;  left: -9rem; opacity: .5; }
 
 .site-header > * { position: relative; z-index: 1; }
-
-/* ─── sparkle band ────────────────────────────────────────────────────────── */
-
-/* Two rows of star glyphs standing in for the old name and tagline.
-   `space-between` makes the band fill any viewport width without JavaScript;
-   nth-child varies size and opacity so it reads as scattered rather than as a
-   repeating pattern. The markup carries aria-hidden. */
-.sparkles {
-  display: flex;
-  flex-direction: column;
-  gap: .15rem;
-  color: var(--accent);
-  line-height: 1;
-  user-select: none;
-}
-
-.sparkles__row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Second row inset and lighter, so the two don't line up into a grid. */
-.sparkles__row--two {
-  padding-inline: 6%;
-  opacity: .6;
-}
-
-/* Dialled well back from where this started. The glyphs used to run to
-   1.35rem at 95% opacity, which made them the loudest thing above the fold;
-   at this size they read as texture in the margin instead of as decoration
-   demanding attention. The size *variation* is kept — that's what stops the
-   row looking like a repeating border — just compressed into a narrower band. */
-.sparkles span { font-size: .5rem; opacity: .3; }
-
-.sparkles span:nth-child(3n + 1) { font-size: .72rem; opacity: .45; }
-.sparkles span:nth-child(4n + 3) { font-size: .4rem;  opacity: .24; }
-.sparkles span:nth-child(5n + 2) { font-size: .6rem;  opacity: .36; }
-.sparkles span:nth-child(7n + 5) { font-size: .82rem; opacity: .5; }
-
-/* Nudge alternate glyphs off the baseline so the row isn't perfectly level. */
-.sparkles span:nth-child(even) { transform: translateY(-.22em); }
-.sparkles span:nth-child(3n)   { transform: translateY(.18em); }
 
 /* ─── nav ─────────────────────────────────────────────────────────────────── */
 
@@ -283,7 +242,7 @@ code {
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: .35rem;
+  gap: 1.4rem;
 }
 
 /* Anchor jumps should land below the sticky bar, not under it. */
@@ -295,22 +254,27 @@ html { scroll-behavior: smooth; }
   html { scroll-behavior: auto; }
 }
 
+/* Plain text, no pill. The tinted capsules were the last thing in the chrome
+   that read as a web app rather than a document; hover is a colour change and
+   the current page is marked by an underline. */
 .nav a {
   display: inline-block;
-  padding: .35rem .8rem;
-  border-radius: var(--radius-sm);
+  padding: .35rem 0;
   color: var(--ink-muted);
   font-size: .95rem;
   text-decoration: none;
-  transition: background-color .15s ease, color .15s ease;
+  transition: color .15s ease;
 }
 
-.nav a:hover { background: var(--tint); color: var(--accent); }
+.nav a:hover { color: var(--accent); }
 
 .nav a[aria-current="page"] {
-  background: var(--tint);
   color: var(--accent);
   font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--tint-deep);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* ─── footer ──────────────────────────────────────────────────────────────── */
@@ -646,7 +610,7 @@ html { scroll-behavior: smooth; }
   /* Room for the arrowheads on bars that run to 100%. */
   margin-right: .55rem;
   /* Room for the year labels beneath the last row. */
-  padding-bottom: 1.3rem;
+  padding-bottom: 1.15rem;
 }
 
 /* ── axis ── */
@@ -660,7 +624,7 @@ html { scroll-behavior: smooth; }
 .cribbon__tick {
   position: absolute;
   top: .15rem;
-  bottom: 1.3rem;
+  bottom: 1.15rem;
   width: 0;
   border-left: 1px solid var(--rule);
 }
@@ -681,7 +645,7 @@ html { scroll-behavior: smooth; }
 .cribbon__break {
   position: absolute;
   top: .15rem;
-  bottom: 1.3rem;
+  bottom: 1.15rem;
   border-left: 1px dashed var(--rule);
   border-right: 1px dashed var(--rule);
   background: repeating-linear-gradient(
@@ -706,7 +670,7 @@ html { scroll-behavior: smooth; }
    the only thing telling them apart. */
 .cribbon__city {
   position: relative;
-  height: 1.15rem;
+  height: .95rem;
 }
 
 .cribbon__city span {
@@ -720,7 +684,7 @@ html { scroll-behavior: smooth; }
   color: var(--ink-muted);
 }
 
-.cribbon__row { position: relative; height: 1.4rem; }
+.cribbon__row { position: relative; height: 1.15rem; }
 
 /* The whole row is the hit target, not just the bar — a .44rem bar is a cruel
    thing to ask anyone to point at. */
@@ -753,8 +717,8 @@ html { scroll-behavior: smooth; }
   width: var(--w);
   top: 50%;
   transform: translateY(-50%);
-  height: .44rem;
-  min-width: .44rem;
+  height: .40rem;
+  min-width: .40rem;
   border-radius: var(--radius-pill);
   background: var(--c);
 }
@@ -852,7 +816,7 @@ html { scroll-behavior: smooth; }
 /* ── hint ── */
 
 .cribbon__hint {
-  margin: .85rem 0 0;
+  margin: .7rem 0 0;
   text-align: right;
   font-size: .76rem;
   font-style: italic;
@@ -866,8 +830,12 @@ html { scroll-behavior: smooth; }
    ────────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 40rem) {
+  /* Hover-to-reveal is meaningless at this width whatever the media query
+     thinks the device can do, so the workshop links are simply always on. */
+  .wtile__links { opacity: 1 !important; }
+
   /* Nothing to read at rest, so the row only has to be big enough for a thumb. */
-  .cribbon__row { height: 2.1rem; }
+  .cribbon__row { height: 1.9rem; }
 
   .cribbon__hit:focus-visible .cribbon__bar { outline-offset: 2px; }
 
@@ -951,6 +919,33 @@ html { scroll-behavior: smooth; }
   padding: 0;
   margin: .4rem 0 0;
   font-size: .82rem;
+}
+
+/* Hidden until the tile is hovered or something inside it takes focus.
+
+   Three things this must not break, hence the shape:
+   - `opacity`, never `display:none` - the links keep their space, so nothing
+     below shifts when they appear, and they stay in the accessibility tree.
+   - `:focus-within` - a keyboard user tabbing to a link would otherwise be
+     sent to something they cannot see.
+   - `@media (hover: hover) and (pointer: fine)` - a touch device never enters
+     this block, so the links simply stay visible there. Both conditions are
+     needed: hybrid machines (a tablet with a trackpad) report `hover: hover`
+     while still being tapped at, and `pointer: fine` is what rules those out.
+     There is a second, blunter guard in the narrow-screen block below - phones
+     are where this matters most and it is not worth being clever there. */
+@media (hover: hover) and (pointer: fine) {
+  .wtile__links {
+    opacity: 0;
+    transition: opacity .18s ease;
+  }
+
+  .wtile:hover .wtile__links,
+  .wtile:focus-within .wtile__links { opacity: 1; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .wtile__links { transition: none; }
 }
 
 /* ─── conference dropdown ─────────────────────────────────────────────────── */
@@ -1160,16 +1155,29 @@ html { scroll-behavior: smooth; }
 
 /* Denser still: 15 photos inside the one-pager read as contact-sheet
    thumbnails rather than a feature gallery. */
+/* One horizontal strip rather than a masonry grid.
+
+   The vertical padding is load-bearing, not decoration: `overflow-x: auto`
+   forces `overflow-y` to compute to `auto` as well, so a hovered image scaled
+   past the content box would simply be clipped. The padding gives it somewhere
+   to grow into. */
 .gallery {
-  columns: 7 6.5rem;
-  column-gap: .45rem;
+  display: flex;
+  gap: .5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
   margin-top: 1rem;
+  padding-block: 1.1rem;
+  scroll-padding-inline: 1rem;
+  scrollbar-width: thin;
 }
 
 .gallery__item {
-  break-inside: avoid;
-  margin: 0 0 .45rem;
+  flex: 0 0 auto;
+  margin: 0;
 }
+
+.gallery__item img { height: 9rem; width: auto; }
 
 .gallery__button {
   display: block;
@@ -1184,15 +1192,19 @@ html { scroll-behavior: smooth; }
 }
 
 .gallery__button img {
-  width: 100%;
-  height: auto;
   display: block;
   border-radius: var(--radius-sm);
-  transition: transform .3s ease, filter .3s ease;
+  transition: transform .25s ease;
 }
 
+/* The hovered frame lifts over its neighbours; without the stacking context a
+   later sibling would paint on top of the enlarged image. */
+.gallery__item:hover,
+.gallery__item:focus-within { position: relative; z-index: 1; }
+
 @media (prefers-reduced-motion: no-preference) {
-  .gallery__button:hover img { transform: scale(1.02); filter: brightness(1.03); }
+  .gallery__button:hover img,
+  .gallery__button:focus-visible img { transform: scale(1.16); }
 }
 
 .gallery__caption {

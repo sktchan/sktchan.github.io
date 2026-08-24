@@ -5,26 +5,14 @@
     <a class="skip-link" href="#main">skip to content</a>
 
     {%- comment -%}
-      Decorative sparkle band in place of a name and tagline. aria-hidden
-      because a screen reader reading out two dozen star characters would be
-      actively hostile — the name is carried by <title>, the SEO metadata, and
-      the "Hi, I'm Serena" heading below.
+      A bare decorative masthead: two soft gradient blobs set on ::before and
+      ::after, nothing else. It used to carry a band of star glyphs, which read
+      as ornament on a page that wants to read as a research site.
 
-      Two flex rows with space-between, so the band spans any viewport width
-      without JavaScript. Sizes and opacities vary by nth-child in the CSS.
+      aria-hidden because there is nothing here to announce - the name is
+      carried by <title>, the SEO metadata, and the "Hi, I'm Serena" heading.
     {%- endcomment -%}
-    <header class="site-header" aria-hidden="true">
-      <div class="wrap {% if page.wide %}wrap--wide{% endif %}">
-        <div class="sparkles">
-          <div class="sparkles__row">
-            <span>&#10022;</span><span>&#8902;</span><span>&#10023;</span><span>&#10036;</span><span>&#8901;</span><span>&#10022;</span><span>&#10037;</span><span>&#8902;</span><span>&#10023;</span><span>&#8901;</span><span>&#10036;</span><span>&#10022;</span><span>&#8902;</span><span>&#10023;</span>
-          </div>
-          <div class="sparkles__row sparkles__row--two">
-            <span>&#8901;</span><span>&#10037;</span><span>&#8902;</span><span>&#10023;</span><span>&#10036;</span><span>&#8901;</span><span>&#10022;</span><span>&#8902;</span><span>&#10037;</span><span>&#10023;</span><span>&#8901;</span><span>&#10022;</span>
-          </div>
-        </div>
-      </div>
-    </header>
+    <header class="site-header" aria-hidden="true"></header>
 
     {%- comment -%}
       The nav sits OUTSIDE .site-header on purpose. That element sets

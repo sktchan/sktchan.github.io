@@ -7,7 +7,7 @@
 - id: "protein-embeddings"
   title: "Protein language model embeddings for sequence alignment"
   role: "Prof: Dr. Nadia El-Mabrouk, Université de Montréal"
-  year: "Sep 2025 – Dec 2025"
+  year: "Sep 2025 - Dec 2025"
   bullets:
     - "Review of protein language model embeddings and cosine similarity scoring in Smith-Waterman dynamic programming over traditional BLOSUM matrices."
   links:
@@ -16,8 +16,8 @@
 
 - id: "energy-forecasting"
   title: "Forecasting building energy demand with LSTMs"
-  role: "Prof: Dr. Vincent Taboga, Mila — Quebec AI Institute"
-  year: "Jan 2025 – Apr 2025"
+  role: "Prof: Dr. Vincent Taboga, Mila - Quebec AI Institute"
+  year: "Jan 2025 - Apr 2025"
   bullets:
     - "Engineered multi-horizon time-series features, incorporating cyclical time representations, wind chill, and heat indices."
     - "Trained and evaluated LSTM neural networks in PyTorch to forecast building power demand."
@@ -28,7 +28,7 @@
 - id: "viral-rna"
   title: "Visualizing base-pairing in viral RNA structures"
   role: "Prof: Dr. François Major, Université de Montréal"
-  year: "Jan 2025 – Apr 2025"
+  year: "Jan 2025 - Apr 2025"
   bullets:
     - "Rendered 3D structural models in PyMOL to analyze base-pairing in the West Nile Virus 5’ UTR stem-loop B and hydrogen bonding interactions in the H7N1 NS1 RNA-binding domain."
   links:
@@ -42,7 +42,7 @@
 - id: "tumor-mri"
   title: "Brain tumor classification from multi-modal MRI"
   role: "Prof: Dr. Erik Sorensen, McMaster University"
-  year: "Jan 2024 – Apr 2024"
+  year: "Jan 2024 - Apr 2024"
   bullets:
     - "Built an image processing pipeline incorporating data augmentation and standard normalization for multi-modal MRI datasets."
     - "Trained a CNN in TensorFlow to classify four distinct brain tumor types."
@@ -53,7 +53,7 @@
 - id: "hpa-axis"
   title: "Housing insecurity and the childhood stress response"
   role: "Supervisor: Dr. Krysta Andrews, Offord Centre for Child Studies"
-  year: "Sep 2022 – Apr 2023"
+  year: "Sep 2022 - Apr 2023"
   bullets:
     - "Conducted a systematic literature review evaluating the impact of socioenvironmental housing instability on HPA axis functioning in children."
     - "Analyzed salivary cortisol biomarker data to identify physiological links between housing quality and long-term neuroendocrine stress response dysregulation."
