@@ -52,11 +52,17 @@
 
 \renewcommand{\labelitemii}{$\circ$}
 
-% enumitem is already loaded, so the space LaTeX puts around and inside every
-% list can be set once here rather than fought entry by entry. topsep and
-% parsep are the two that add up: at default they contribute roughly a blank
-% line above and below each of the ~20 lists in this document.
-\setlist[itemize]{topsep=1pt, partopsep=0pt, parsep=0pt, itemsep=-2pt}
+% enumitem is already loaded, so the space LaTeX puts AROUND every list can be
+% set once here rather than fought entry by entry. topsep and parsep are the
+% two that add up: at default they contribute roughly a blank line above and
+% below each of the ~20 lists in this document.
+%
+% itemsep is deliberately NOT set here. \resumeItem and \resumeSubItem already
+% apply their own negative spacing (-2pt inside the item, -3pt after it), and a
+% global -2pt on top of that overshoots the line height - the Skills list
+% printed its rows on top of each other. The lists that need tightening set
+% itemsep themselves; see itemize() in scripts/build-cv.py.
+\setlist[itemize]{topsep=1pt, partopsep=0pt, parsep=0pt}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
