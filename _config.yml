@@ -38,6 +38,9 @@ exclude:
   - scripts/
   - vendor/
   - .bundle/
+# cv/ holds the LaTeX source and its build litter. The compiled PDF is moved
+# into assets/docs/ before Jekyll runs, so nothing here needs publishing.
+  - cv/
 # assets/fonts/LICENSE.md is deliberately NOT excluded — the OFL asks that the
 # licence travel with the font files, and the site serves those .woff2s.
 

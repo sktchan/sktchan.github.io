@@ -34,6 +34,27 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
+      # The CV is a PDF built from cv/cv.tex, which is itself generated from
+      # _data/cv.yml and _data/research.yml. Both steps run BEFORE the Jekyll
+      # build, because the PDF has to exist in assets/docs/ for Jekyll to copy
+      # it into _site.
+      - name: Regenerate cv.tex from the data files
+        run: |
+          python3 -m pip install --quiet pyyaml
+          python3 scripts/build-cv.py
+
+      - name: Compile the CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: cv.tex
+          working_directory: cv
+
+      - name: Publish the CV into the site
+        run: |
+          mkdir -p assets/docs
+          mv cv/cv.pdf assets/docs/cv.pdf
+          ls -l assets/docs/cv.pdf
+
       - run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production

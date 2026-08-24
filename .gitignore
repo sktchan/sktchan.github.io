@@ -13,3 +13,11 @@ vendor/
 # Drop full-resolution originals here; scripts/resize-photos.sh writes the
 # web-sized copies into assets/img/photos/, which *are* committed.
 photos-originals/
+
+# The CV PDF is compiled in CI from cv/cv.tex on every deploy, so it is a build
+# artifact rather than source. cv/cv.tex IS committed - it is what CI compiles.
+assets/docs/cv.pdf
+cv/*.aux
+cv/*.log
+cv/*.out
+cv/*.pdf

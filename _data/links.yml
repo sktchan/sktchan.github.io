@@ -8,7 +8,7 @@ orcid:    "" # add once you have an ORCID iD
 linkedin: "https://www.linkedin.com/in/serenaktchan"
 bluesky:  ""
 twitter:  ""
-cv:       "/cv/"
+cv:       "/assets/docs/cv.pdf"   # compiled from cv/cv.tex during deploy
 
 # Phone number deliberately not listed — a public page gets scraped, and a
 # personal mobile is near-impossible to take back once it's out there.

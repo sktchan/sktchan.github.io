@@ -69,8 +69,13 @@ wide: true
       {%- if l.orcid    and l.orcid    != '' %}<li><a href="{{ l.orcid }}">ORCID</a></li>{% endif -%}
       {%- if l.bluesky  and l.bluesky  != '' %}<li><a href="{{ l.bluesky }}">Bluesky</a></li>{% endif -%}
       {%- if l.twitter  and l.twitter  != '' %}<li><a href="{{ l.twitter }}">Twitter</a></li>{% endif -%}
-      {%- comment -%} CV lives here rather than in the nav. {%- endcomment -%}
-      <li><a class="linkrow__cv" href="{{ '/cv/' | relative_url }}">CV</a></li>
+      {%- comment -%}
+        The CV is a PDF compiled from cv/cv.tex during the deploy, not a page on
+        this site any more. Opens in a new tab because leaving the site for a
+        PDF viewer and losing your place is a poor trade.
+      {%- endcomment -%}
+      <li><a class="linkrow__cv" href="{{ '/assets/docs/cv.pdf' | relative_url }}"
+             target="_blank" rel="noopener">CV</a></li>
     </ul>
   </div>
 </section>
