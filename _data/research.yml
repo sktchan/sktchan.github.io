@@ -23,7 +23,7 @@ projects:
   - id: "tokenization"
     title: "Transcriptomic foundation models for perturbation prediction"
     role: "Supervisor: Dr. Sébastien Lemieux, Université de Montréal"
-    year: "Jan 2025 - present"
+    year: "Jan 2025 - Present"
     bullets:
       - "Developing an evaluation framework integrating various tokenization, pre-training, and architectural variations to assess model performance on downstream perturbation predictions."
     links:

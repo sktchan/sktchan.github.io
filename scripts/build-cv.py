@@ -111,8 +111,8 @@ def itemize(lines, tight=True):
     # for the class, which is ~4pt on top of the leading - it measured 15.0pt
     # between Awards items when the target was 11.0. Explicit zero is what
     # "consecutive items exactly one line apart" actually requires.
-    sep = "-2pt" if tight else "0pt"
-    out = ["\\begin{itemize}\n    \\setlength\\itemsep{%s}\n    \\small\n" % sep]
+    sep = "\\TightBullets" if tight else "\\LooseBullets"
+    out = ["\\begin{itemize}\n    %s\n    \\small\n" % sep]
     out += ["    \\item %s\n" % l for l in lines]
     out.append("\\end{itemize}\n")
     return "".join(out)
@@ -143,19 +143,21 @@ PREAMBLE = r"""%------------------------
 \usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage[pdftex]{hyperref}
-\usepackage{fancyhdr}
-
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[C]{\thepage}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
 
 \addtolength{\oddsidemargin}{-0.50in}
 \addtolength{\evensidemargin}{-0.35in}
 \addtolength{\textwidth}{1in}
 \addtolength{\topmargin}{-0.6in}
-\addtolength{\textheight}{0.005in}
+\addtolength{\textheight}{1.2in}
+
+% ─── spacing control panel ───────────────────────────────────────────────────
+% Every spacing knob in the document is one of these four. Change a number
+% here rather than hunting through the body; scripts/build-cv.py emits the
+% macros, never the raw lengths.
+\newcommand{\SectionGap}{\vspace{1\baselineskip}}     % above each section rule
+\newcommand{\RecordGap}{\vspace{0.5\baselineskip}}    % between jobs / projects
+\newcommand{\TightBullets}{\setlength\itemsep{-1pt}}  % bullets under a record
+\newcommand{\LooseBullets}{\setlength\itemsep{2pt}}   % standalone lists
 
 \urlstyle{rm}
 
@@ -254,7 +256,7 @@ def section(name):
     \\vspace{-6pt} that \\titleformat already applies, so they are tuned by
     measuring the built PDF rather than derived.
     """
-    return "\n%s\n\\vspace{0,45\\baselineskip}\n\\section{%s}\n" % (
+    return "\n%s\n\\SectionGap\n\\section{%s}\n" % (
         "%" * 78,
         tex(name),
     )
@@ -285,13 +287,15 @@ def skills(items):
     Two bugs from one special case was enough. The macro is still defined in the
     preamble, since that preamble is Serena's; nothing calls it now.
     """
+    # A standalone list of five rows, same as Awards and Publications - not two
+    # or three bullets hanging off a record - so it takes the looser spacing.
     return section("Skills Summary") + itemize([
         "\\textbf{%s:} %s" % (tex(it.get("when", "")), tex(it.get("title", "")))
         for it in items
-    ])
+    ], tight=False)
 
 
-RECORD_GAP = "\n\\vspace{0,12\\baselineskip}\n"
+RECORD_GAP = "\n\\RecordGap\n"
 
 
 def experience(items):
