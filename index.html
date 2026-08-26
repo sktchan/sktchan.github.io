@@ -49,8 +49,8 @@ wide: true
       <a href="https://www.mcmaster.ca/">McMaster University</a>. Working directly
       with patients showed me how often our most advanced tools rarely reach the
       people who need them most. I want to pursue science to bridge this gap -
-      building <strong>scalable, equitable AI</strong> for the realities of
-      global healthcare.
+      building <strong>scalable, interpretable, and most importantly, equitable
+      AI</strong> for the realities of global health.
     </p>
     <p>
       Outside the lab, you can find me reading, baking, or in the wilderness
@@ -116,14 +116,14 @@ wide: true
   {%- endif -%}
 
   {%- comment -%}
-    Leadership, volunteering and mentorship merged into one ribbon, and drawn
+    Leadership, volunteering, and mentorship merged into one ribbon, and drawn
     identically once they're there — nothing downstream cares which group an
     entry came from. The two keys in community.yml survive only because they're
     a convenient way to edit that file.
   {%- endcomment -%}
   {%- assign people = c.leadership | concat: c.mentorship -%}
   {%- if people.size > 0 -%}
-    <h3 class="band__sub">Leadership, volunteering and mentorship</h3>
+    <h3 class="band__sub">Leadership, volunteering, and mentorship</h3>
     {% include community-ribbon.html items=people %}
   {%- endif -%}
 </section>
