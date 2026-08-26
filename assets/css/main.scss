@@ -986,6 +986,27 @@ html { scroll-behavior: smooth; }
    source order is what decides, and the same rules placed up in the ribbon's
    narrow-screen block lost silently. */
 @media (max-width: 40rem) {
+  /* Two columns, not four.
+
+     The grid was `repeat(4, minmax(0, 10.5rem))` at every width, and minmax's
+     0 floor let the columns collapse rather than wrap: on a 420px phone that
+     is an 85px tile, 63px tall, holding a title AND its links. Three of the
+     four titles overflowed the box and were clipped away by the media's
+     overflow:hidden, so those tiles read as nothing but "Slides Code", and the
+     photo underneath was invisible behind a scrim covering the whole tile.
+
+     At two columns the tile is ~180x135px: the title fits, and the photograph
+     is actually a photograph again. */
+  .wtiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .6rem;
+  }
+
+  /* .74rem is a caption size that works when the title is the only thing on a
+     desktop tile. Here it shares the space with the links and needs to survive
+     being read at arm's length. */
+  .wtile__title { font-size: .82rem; }
+
   .wtile__links {
     position: static;
     opacity: 1;
