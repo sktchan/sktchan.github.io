@@ -21,3 +21,9 @@ cv/*.aux
 cv/*.log
 cv/*.out
 cv/*.pdf
+
+# README stays local. It documents how this site is built, which is useful to
+# have next to the code but not something that needs publishing on a public
+# repo's landing page. Untracked with `git rm --cached README.md`, so the file
+# is still right here - it is just no longer pushed.
+README.md
