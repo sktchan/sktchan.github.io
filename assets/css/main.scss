@@ -1007,9 +1007,15 @@ html { scroll-behavior: smooth; }
     gap: .6rem;
   }
 
-  /* .74rem is a caption size that works when the title is the only thing on a
-     desktop tile. Here it shares the space with the links and needs to survive
-     being read at arm's length. */
+  /* A step below the .88rem of a desktop tile, because this is the one place
+     the title is NOT alone in the caption: the links sit under it here instead
+     of cross-fading with it. The caption is bottom-aligned inside a tile with
+     overflow:hidden, so anything too tall is clipped off the TOP — which is
+     how three of these titles once vanished entirely.
+
+     Measured on a ~158px tile, the longest name leaves 33px of headroom at
+     .82rem, 10px at .88rem and 4px at .95rem. It is the margin that is being
+     bought here, not the size. */
   .wtile__title { font-size: .82rem; }
 
   .wtile__links {
