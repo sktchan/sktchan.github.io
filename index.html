@@ -140,10 +140,10 @@ wide: true
 
 {%- comment -%} ─── favourites ────────────────────────────────────────── {%- endcomment -%}
 {%- comment -%}
-  The page's postscript, and drawn to read as one: two silhouettes rather than
-  two lists. It is deliberately absent from the nav — leaving the nav at three
-  items is what tells a visitor this isn't a peer of Projects, Community and
-  Photos. The id stays anyway, so the intro can point at it.
+  The page's postscript: a range of mountains and a shelf of covers rather than
+  two bulleted lists. It sits last and stays visually lighter than the sections
+  above it, which is what marks it as an aside — it used to be kept out of the
+  nav for the same reason, but it is reachable from there now.
 {%- endcomment -%}
 <section id="favourites" class="band">
   <h2><span class="section-title">Favourites</span></h2>
@@ -159,7 +159,7 @@ wide: true
     {%- if f.books and f.books.size > 0 -%}
       <div class="favs__col">
         <h3 class="band__sub">On paper</h3>
-        {% include book-stack.html items=f.books %}
+        {% include shelf.html items=f.books base="/assets/img/books/" %}
       </div>
     {%- endif -%}
   </div>

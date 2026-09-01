@@ -56,3 +56,5 @@ nav:
     url: "#community"
   - title: Photos
     url: "#photos"
+  - title: Favourites
+    url: "#favourites"

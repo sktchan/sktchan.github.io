@@ -1,0 +1,38 @@
+{%- comment -%}
+  Favourite books as their covers, side by side.
+
+  Usage:  {% include shelf.html items=list base="/assets/img/books/" %}
+
+  Each item needs `title` and `author`; `cover` is a filename under `base` and
+  is optional — a book without one falls back to a plate carrying its title, so
+  a new entry is never broken while the artwork is being found.
+
+  ─── why the title and author are not hidden ────────────────────────────────
+  The mountains next door reveal their detail on hover because a summit has
+  nowhere to put a label. A cover has the space beneath it, and unlike a peak
+  it is not self-explanatory — the art alone does not reliably tell you what
+  the book is, especially in a 5rem-wide thumbnail. So both lines are simply
+  printed, which also means this half needs no touch fallback at all.
+
+  Covers are decorative here, not content: the title and author sit right below
+  every one of them in real text. So the alt attribute is empty rather than
+  repeating what a screen reader is about to read anyway.
+{%- endcomment -%}
+
+<ul class="shelf">
+  {%- for book in include.items %}
+    <li class="shelf__book">
+      {%- if book.cover and book.cover != '' -%}
+        <img class="shelf__cover"
+             src="{{ book.cover | prepend: include.base | relative_url }}"
+             alt=""
+             width="174" height="280"
+             loading="lazy" decoding="async">
+      {%- else -%}
+        <span class="shelf__cover shelf__cover--bare">{{ book.title }}</span>
+      {%- endif -%}
+      <span class="shelf__title">{{ book.title }}</span>
+      <span class="shelf__author">{{ book.author }}</span>
+    </li>
+  {%- endfor %}
+</ul>

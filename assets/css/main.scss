@@ -1252,7 +1252,7 @@ html { scroll-behavior: smooth; }
 
 .todo strong { color: var(--accent); }
 
-/* ─── favourites (ridge + book stack) ─────────────────────────────────────── */
+/* ─── favourites (mountains + shelf) ──────────────────────────────────────── */
 
 /* The page's postscript, so it is sized like one: two columns that together
    occupy about the height of one workshop tile. Everything below is tuned to
@@ -1471,101 +1471,97 @@ html { scroll-behavior: smooth; }
   }
 }
 
-/* ─── the book stack ─────────────────────────────────────────────────────── */
+/* ─── the shelf ──────────────────────────────────────────────────────────── */
 
-.stack {
+/* Covers side by side. Sized to sit level with the mountains next door rather
+   than to show the artwork off — this is still the page's postscript, and a
+   row of full-size covers would outweigh everything above it.
+
+   Sized by flex-grow from a zero basis, capped at 6.3rem — not by a fixed
+   width, and not by grid's repeat(auto-fit, minmax(a, b)).
+
+   Both of the obvious approaches wrap when they should shrink. Grid counts its
+   tracks at the max of the minmax, so on a phone the third cover drops to a row
+   of its own with room going spare beside it. Flex with a 6.3rem basis does the
+   same, because wrapping is decided on the basis before any shrinking happens.
+   From a basis of zero there is nothing to overflow: the books always share one
+   line and grow into it, up to the cap. The min-width is what finally forces a
+   wrap, once there are enough books that each would be squeezed under it. */
+.shelf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem .8rem;
   list-style: none;
   padding: 0;
   margin: .35rem 0 0;
 }
 
-/* A book seen end-on, lying in a pile: cloth spine down the left, page block
-   on the right, and a step of indent per row so the group leans like a stack
-   rather than lining up like a table. --i and --thick come from the include.
-
-   The right corners are rounded and the left ones almost square, because that
-   is the shape of a bound book — the spine is the folded edge. */
-.stack__book {
-  position: relative;
+.shelf__book {
   display: flex;
-  align-items: baseline;
-  gap: .6rem;
-  margin-left: calc(var(--i) * .5rem);
-  margin-bottom: .3rem;
-  padding: calc(.34rem + var(--thick) * .075rem) 1.3rem
-           calc(.34rem + var(--thick) * .075rem) 1.15rem;
-  border: 1px solid var(--rule);
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 4.4rem;
+  max-width: 6.3rem;
+}
+
+/* 2:3 is the trade paperback proportion. object-fit guards the odd cover that
+   is scanned to a different ratio — better a slight crop than a row of covers
+   at mismatched heights. The width/height attributes carry the real ratio, so
+   the row does not reflow as the images arrive. */
+.shelf__cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  height: auto;
+  object-fit: cover;
   border-radius: 2px var(--radius-sm) var(--radius-sm) 2px;
-  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
-.stack__book:last-child { margin-bottom: 0; }
-
-/* The spine — the folded edge of the book, in cloth. Wide enough to read as a
-   spine and not as a coloured rule, and carrying the hinge: the crease where
-   the cover turns and meets the page block. That single line is what makes the
-   left end read as bound rather than as a highlight bar.
-
-   Raised bands across the spine were tried and cut. At this size they landed
-   as two white nicks and made the spine look broken, not tooled. */
-.stack__spine {
-  position: absolute;
-  left: -1px;
-  top: -1px;
-  bottom: -1px;
-  width: .7rem;
-  border-radius: 2px 0 0 2px;
-  background: var(--tint-deep);
-  box-shadow: inset -1px 0 0 rgba(31, 35, 40, .1);
+/* The fallback plate for a book whose artwork has not been found yet. It has
+   to look like a placeholder, not like a minimalist cover, or nobody will
+   notice it needs replacing. */
+.shelf__cover--bare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  background: var(--tint);
+  border: 1px dashed var(--tint-deep);
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: .74rem;
+  line-height: 1.25;
+  text-align: center;
+  box-shadow: none;
 }
 
-/* Page edges: fine lines down the fore-edge, which is the detail that stops
-   the row reading as a plain pill. 3px apart, so they stay countable lines
-   rather than closing up into a grey block. */
-.stack__pages {
-  position: absolute;
-  right: 3px;
-  top: .28rem;
-  bottom: .28rem;
-  width: .42rem;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--rule) 0 1px,
-    transparent 1px 3px
-  );
+/* Reserving two lines keeps the authors on one baseline across the row. A
+   one-line title next to a two-line one otherwise leaves its author floating
+   half a line high, which reads as a mistake. */
+.shelf__title {
+  margin-top: .4rem;
+  min-height: 2.03rem;
+  font-size: .78rem;
+  line-height: 1.3;
 }
 
-.stack__title {
-  font-size: .88rem;
-  line-height: 1.35;
-}
-
-/* Pushed to the far end of the row, and never out of the DOM — it is faded,
-   not hidden, so the row's height and the section below it never move. */
-.stack__author {
-  margin-left: auto;
-  font-size: .76rem;
+.shelf__author {
+  font-size: .72rem;
+  line-height: 1.3;
   color: var(--ink-muted);
-  text-align: right;
-  white-space: nowrap;
 }
 
-/* The pull-out, and the only place the author is ever invisible. Guarded on
-   real hover: where there is none the author simply shows, because it must
-   never be the thing a touch user cannot get to. Same contract as .wtile. */
+/* Lifting the cover off the shelf. Not a reveal — both lines below it are
+   already printed — so it is pure feedback, and everything still works with it
+   switched off. */
 @media (hover: hover) and (pointer: fine) {
-  .stack__author { opacity: 0; }
-
-  .stack__book:hover {
-    border-left-color: var(--accent);
-    box-shadow: var(--shadow);
-    transform: translateX(.45rem);
+  .shelf__book:hover .shelf__cover:not(.shelf__cover--bare) {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
   }
 
-  .stack__book:hover .stack__author { opacity: 1; }
-
   @media (prefers-reduced-motion: no-preference) {
-    .stack__book   { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-    .stack__author { transition: opacity .18s ease; }
+    .shelf__cover { transition: transform .18s ease, box-shadow .18s ease; }
   }
 }

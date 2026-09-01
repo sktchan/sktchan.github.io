@@ -2,9 +2,19 @@
 # the hikes as a ridgeline, the books as a stack of spines.
 #
 # Deliberately the thinnest file in _data/. A hike is a name, a region and two
-# numbers; a book is a title and an author. Nothing here carries links, dates
-# or notes — if an entry starts wanting them, it has outgrown this section and
-# belongs in community.yml instead.
+# numbers; a book is a title, an author and a cover. Nothing here carries
+# links, dates or notes — if an entry starts wanting them, it has outgrown this
+# section and belongs in community.yml instead.
+#
+# ─── covers ──────────────────────────────────────────────────────────────────
+# `cover` is a filename in assets/img/books/, at 280px tall — twice the size it
+# renders at, the same 2x rule scripts/resize-photos.sh follows for the photo
+# strip. They are the publishers' cover art, pulled from Open Library and
+# committed rather than hotlinked, because the site makes no third-party
+# requests for anything else either.
+#
+# A book with no `cover` still renders; it just gets a blank plate carrying the
+# title, so a new entry is never broken while you go and find the artwork.
 #
 # ─── ridge geometry ──────────────────────────────────────────────────────────
 # `gain` is elevation gain in metres, `distance` round-trip kilometres. Summit
@@ -27,7 +37,7 @@ hikes:
     gain:     987
     distance: 10.8
 
-  - name:     "Nihahi ridge"
+  - name:     "Nihahi Ridge"
     region:   "Kananaskis, Alberta"
     gain:     717
     distance: 11.72
@@ -40,9 +50,12 @@ hikes:
 books:
   - title:  "The Correspondent"
     author: "Virginia Evans"
+    cover:  "correspondent.jpg"
 
   - title:  "Orbital"
     author: "Samantha Harvey"
+    cover:  "orbital.jpg"
 
   - title:  "Klara and the Sun"
     author: "Kazuo Ishiguro"
+    cover:  "klara.jpg"
