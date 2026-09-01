@@ -7,16 +7,16 @@
   is optional — a book without one falls back to a plate carrying its title, so
   a new entry is never broken while the artwork is being found.
 
-  ─── why the title and author are not hidden ────────────────────────────────
-  The mountains next door reveal their detail on hover because a summit has
-  nowhere to put a label. A cover has the space beneath it, and unlike a peak
-  it is not self-explanatory — the art alone does not reliably tell you what
-  the book is, especially in a 5rem-wide thumbnail. So both lines are simply
-  printed, which also means this half needs no touch fallback at all.
+  ─── the alt text is the only label ─────────────────────────────────────────
+  Nothing is printed beneath the covers, so unlike the photo gallery — where
+  the alt describes the picture because a caption carries the facts — the alt
+  here has to BE the record. It reads "Title by Author", which is what a screen
+  reader gets in place of art it cannot see, and it is the only place the
+  author appears at all.
 
-  Covers are decorative here, not content: the title and author sit right below
-  every one of them in real text. So the alt attribute is empty rather than
-  repeating what a screen reader is about to read anyway.
+  That means a cover is content, not decoration, and an empty alt would drop
+  the book from the page entirely for anyone not looking at it. Do not blank
+  it, and do not shorten it to just the title.
 {%- endcomment -%}
 
 <ul class="shelf">
@@ -25,14 +25,16 @@
       {%- if book.cover and book.cover != '' -%}
         <img class="shelf__cover"
              src="{{ book.cover | prepend: include.base | relative_url }}"
-             alt=""
+             alt="{{ book.title | escape }} by {{ book.author | escape }}"
              width="174" height="280"
              loading="lazy" decoding="async">
       {%- else -%}
+        {%- comment -%}
+          No cover yet, so the plate has to carry the title in visible text —
+          it is standing in for the artwork, not sitting beside it.
+        {%- endcomment -%}
         <span class="shelf__cover shelf__cover--bare">{{ book.title }}</span>
       {%- endif -%}
-      <span class="shelf__title">{{ book.title }}</span>
-      <span class="shelf__author">{{ book.author }}</span>
     </li>
   {%- endfor %}
 </ul>

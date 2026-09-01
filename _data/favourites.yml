@@ -32,7 +32,7 @@
 # wildly between them, so what is here is the day you actually walked.
 
 hikes:
-  - name:     "Upper Yosemite"
+  - name:     "Upper Yosemite Falls"
     region:   "Yosemite National Park, California"
     gain:     987
     distance: 10.8
@@ -48,10 +48,6 @@ hikes:
     distance: 15.96
 
 books:
-  - title:  "The Correspondent"
-    author: "Virginia Evans"
-    cover:  "correspondent.jpg"
-
   - title:  "Orbital"
     author: "Samantha Harvey"
     cover:  "orbital.jpg"
@@ -59,3 +55,7 @@ books:
   - title:  "Klara and the Sun"
     author: "Kazuo Ishiguro"
     cover:  "klara.jpg"
+
+  - title:  "The Correspondent"
+    author: "Virginia Evans"
+    cover:  "correspondent.jpg"

@@ -1538,22 +1538,6 @@ html { scroll-behavior: smooth; }
   box-shadow: none;
 }
 
-/* Reserving two lines keeps the authors on one baseline across the row. A
-   one-line title next to a two-line one otherwise leaves its author floating
-   half a line high, which reads as a mistake. */
-.shelf__title {
-  margin-top: .4rem;
-  min-height: 2.03rem;
-  font-size: .78rem;
-  line-height: 1.3;
-}
-
-.shelf__author {
-  font-size: .72rem;
-  line-height: 1.3;
-  color: var(--ink-muted);
-}
-
 /* Lifting the cover off the shelf. Not a reveal — both lines below it are
    already printed — so it is pure feedback, and everything still works with it
    switched off. */
