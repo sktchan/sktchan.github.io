@@ -16,17 +16,25 @@
   The reveal is therefore sugar, and the stylesheet treats it that way: where
   there is no hover, the authors simply show.
 
-  ─── why the stagger is inline ──────────────────────────────────────────────
+  ─── what the two custom properties do ──────────────────────────────────────
   `--i` is the row's index, which the stylesheet turns into a left indent so
-  the group leans like a real stack. Passing the index beats :nth-child rules,
-  which would have to be rewritten every time a book is added.
+  the group leans like a real stack. `--thick` is a fixed 0/1/2 cycle the
+  stylesheet turns into extra height, so the books are not all the same
+  thickness — a stack of identical slabs reads as a table, not as books. It
+  says nothing about the book; it is there to stop the pile looking machined.
+
+  Both are passed as indices rather than written as :nth-child rules, which
+  would have to be rewritten every time a book is added.
 {%- endcomment -%}
 
 <ul class="stack">
   {%- for book in include.items %}
-    <li class="stack__book" style="--i: {{ forloop.index0 }}">
+    {%- assign thick = forloop.index0 | times: 7 | modulo: 3 -%}
+    <li class="stack__book" style="--i: {{ forloop.index0 }}; --thick: {{ thick }}">
+      <span class="stack__spine" aria-hidden="true"></span>
       <span class="stack__title">{{ book.title }}</span>
       <span class="stack__author">{{ book.author }}</span>
+      <span class="stack__pages" aria-hidden="true"></span>
     </li>
   {%- endfor %}
 </ul>

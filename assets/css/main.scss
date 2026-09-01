@@ -1479,22 +1479,61 @@ html { scroll-behavior: smooth; }
   margin: .35rem 0 0;
 }
 
-/* Each book indented one step further than the one above, so the group leans
-   like a stack rather than lining up like a table. --i comes from the include. */
+/* A book seen end-on, lying in a pile: cloth spine down the left, page block
+   on the right, and a step of indent per row so the group leans like a stack
+   rather than lining up like a table. --i and --thick come from the include.
+
+   The right corners are rounded and the left ones almost square, because that
+   is the shape of a bound book — the spine is the folded edge. */
 .stack__book {
+  position: relative;
   display: flex;
   align-items: baseline;
   gap: .6rem;
   margin-left: calc(var(--i) * .5rem);
   margin-bottom: .3rem;
-  padding: .38rem .6rem;
+  padding: calc(.34rem + var(--thick) * .075rem) 1.3rem
+           calc(.34rem + var(--thick) * .075rem) 1.15rem;
   border: 1px solid var(--rule);
-  border-left: 4px solid var(--tint-deep);
-  border-radius: var(--radius-sm);
+  border-radius: 2px var(--radius-sm) var(--radius-sm) 2px;
   background: var(--surface);
 }
 
 .stack__book:last-child { margin-bottom: 0; }
+
+/* The spine — the folded edge of the book, in cloth. Wide enough to read as a
+   spine and not as a coloured rule, and carrying the hinge: the crease where
+   the cover turns and meets the page block. That single line is what makes the
+   left end read as bound rather than as a highlight bar.
+
+   Raised bands across the spine were tried and cut. At this size they landed
+   as two white nicks and made the spine look broken, not tooled. */
+.stack__spine {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  bottom: -1px;
+  width: .7rem;
+  border-radius: 2px 0 0 2px;
+  background: var(--tint-deep);
+  box-shadow: inset -1px 0 0 rgba(31, 35, 40, .1);
+}
+
+/* Page edges: fine lines down the fore-edge, which is the detail that stops
+   the row reading as a plain pill. 3px apart, so they stay countable lines
+   rather than closing up into a grey block. */
+.stack__pages {
+  position: absolute;
+  right: 3px;
+  top: .28rem;
+  bottom: .28rem;
+  width: .42rem;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--rule) 0 1px,
+    transparent 1px 3px
+  );
+}
 
 .stack__title {
   font-size: .88rem;

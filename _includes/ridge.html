@@ -1,6 +1,6 @@
 {%- comment -%}
-  Favourite hikes as one ridgeline: a summit per hike, its height the trail's
-  elevation gain.
+  Favourite hikes as one mountain range: a summit per hike, its height the
+  trail's real elevation gain.
 
   Usage:  {% include ridge.html items=list %}
 
@@ -8,24 +8,36 @@
 
   ─── why the geometry is computed here ──────────────────────────────────────
   The community ribbon's bar positions come from a generator script because
-  Liquid can't do date arithmetic. Nothing here needs dates — normalising three
+  Liquid can't do date arithmetic. Nothing here needs dates — normalising a few
   integers against the largest of them is arithmetic Liquid *can* do — so the
-  ridge is built at render time and stays correct the moment favourites.yml
+  range is built at render time and stays correct the moment favourites.yml
   changes. Same principle, less machinery.
 
   ─── why there is no JavaScript ─────────────────────────────────────────────
   ribbon.js exists almost entirely to flip popovers that would run off the
   frame. With a fixed handful of peaks that decision is knowable at build time:
   the first peak's popover left-aligns, the last one's right-aligns, everything
-  between is centred. So the reveal is a plain CSS sibling selector and the
-  ridge works with JS disabled.
+  between is centred, and each opens away from the edge it is nearest. So the
+  reveal is a plain CSS sibling selector and the range works with JS disabled.
 
-  ─── what is data and what is decoration ────────────────────────────────────
-  Summit heights are real. The saddles between them, the drop to the baseline
-  at either end, and the haze gradient in the fill are not — they are what
-  turns three points into a landform. The SVG is aria-hidden and carries no
-  text: every fact in it is also in a button's aria-label, which is what a
-  screen reader gets.
+  ─── what is data and what is drawing ───────────────────────────────────────
+  ONLY the summit heights are data. Everything that makes these read as
+  mountains rather than as a line chart is drawing:
+
+    · flanks break at a shoulder instead of running straight to the valley,
+      and the two shoulders sit at different fractions of their flank, so no
+      peak is symmetric — real ones aren't, and symmetry is most of what made
+      the first version look like a graph
+    · the right flank of each peak is shaded, as if the light came from the
+      left. A flat triangle reads as a triangle; a lit one reads as rock
+    · snowcaps, with a ragged snowline, because nothing says "mountain" faster
+    · the saddles between peaks and the drop to the baseline at either end are
+      fixed depths — they say nothing about the walks
+
+  None of it moves a summit. Change a `gain` and only the heights change.
+
+  The SVG is aria-hidden and carries no text: every fact in it is also in a
+  button's aria-label, which is what a screen reader gets.
 {%- endcomment -%}
 
 {%- assign items = include.items -%}
@@ -41,22 +53,93 @@
 {%- assign vbw = n | times: 100 -%}
 {%- assign max = items | map: 'gain' | sort | last -%}
 
-{%- capture ridgepath -%}
-M 0,100
+{%- assign ridgepath = 'M 0,100' -%}
+{%- assign shadows = '' -%}
+{%- assign caps = '' -%}
+
 {%- for item in items -%}
-  {%- assign ratio = item.gain | times: 1.0 | divided_by: max -%}
-  {%- assign h = ratio | times: 62 | plus: 18 -%}
-  {%- assign y = 100 | minus: h | round: 1 -%}
+  {%- assign x0 = forloop.index0 | times: 100 -%}
+  {%- assign x1 = x0 | plus: 100 -%}
+  {%- assign sx = x0 | plus: 50 -%}
+
+  {%- assign sy = item.gain | times: 1.0 | divided_by: max | times: 62 | plus: 18 -%}
+  {%- assign sy = 100 | minus: sy -%}
+
+  {%- comment -%} The outermost flanks run to the floor; the inner ones meet at a saddle. {%- endcomment -%}
+  {%- if forloop.first %}{% assign vy0 = 100 %}{% else %}{% assign vy0 = 88 %}{% endif -%}
+  {%- if forloop.last  %}{% assign vy1 = 100 %}{% else %}{% assign vy1 = 88 %}{% endif -%}
+
+  {%- comment -%}
+    The shoulders. Left: 55% of the way across for only 40% of the climb, so
+    the lower slope is the gentle one and the summit end is steep. Right: 42%
+    across for 68% of the drop, so that side falls away fast and then eases.
+    Different fractions on purpose — matching them would restore the symmetry
+    this is here to break.
+  {%- endcomment -%}
+  {%- assign lsx = x0 | plus: 27.5 -%}
+  {%- assign lsy = vy0 | minus: sy | times: 0.40 -%}
+  {%- assign lsy = vy0 | minus: lsy -%}
+
+  {%- assign rsx = sx | plus: 21 -%}
+  {%- assign rsy = vy1 | minus: sy | times: 0.68 | plus: sy -%}
+
+  {%- capture seg -%}
+ L {{ lsx | round: 1 }},{{ lsy | round: 1 }} L {{ sx }},{{ sy | round: 1 }} L {{ rsx | round: 1 }},{{ rsy | round: 1 }}
+  {%- endcapture -%}
   {%- unless forloop.first -%}
-    {%- assign saddle = forloop.index0 | times: 100 %} L {{ saddle }},88
+    {%- capture saddle %} L {{ x0 }},88{% endcapture -%}
+    {%- assign ridgepath = ridgepath | append: saddle -%}
   {%- endunless -%}
-  {%- assign px = forloop.index0 | times: 100 | plus: 50 %} L {{ px }},{{ y }}
-{%- endfor %} L {{ vbw }},100 Z
-{%- endcapture -%}
+  {%- assign ridgepath = ridgepath | append: seg -%}
+
+  {%- comment -%}
+    Shading. The lit/shadow line drops vertically from the summit, so the wedge
+    is bounded by that line, the right flank, and the floor — all of it inside
+    the silhouette, which is why it needs no clip path.
+
+    It is filled with a gradient that fades out well before the floor, and that
+    is not decoration for its own sake: at a flat opacity the wedge's vertical
+    edge carried on down through the valley, where there is no flank to justify
+    it, and each mountain read as a bar in a chart. Fading it kills the edge
+    exactly where the slope stops being a slope.
+  {%- endcomment -%}
+  {%- capture shadow -%}
+<path d="M {{ sx }},{{ sy | round: 1 }} L {{ rsx | round: 1 }},{{ rsy | round: 1 }} L {{ x1 }},{{ vy1 }} L {{ x1 }},100 L {{ sx }},100 Z" fill="url(#ridge-shade)"/>
+  {%- endcapture -%}
+  {%- assign shadows = shadows | append: shadow -%}
+
+  {%- comment -%}
+    The snowcap runs down each flank to just under a third of the peak's
+    height, and the snowline zigzags rather than cutting straight across. Both cap corners are
+    interpolated along the real flanks, so the cap sits inside the mountain
+    however tall it is.
+  {%- endcomment -%}
+  {%- assign ph = vy0 | plus: vy1 | times: 0.5 | minus: sy -%}
+  {%- assign capd = ph | times: 0.30 -%}
+  {%- assign capy = sy | plus: capd -%}
+
+  {%- assign dl = lsy | minus: sy -%}
+  {%- assign clx = lsx | minus: sx | times: capd | divided_by: dl | plus: sx -%}
+  {%- assign dr = rsy | minus: sy -%}
+  {%- assign crx = rsx | minus: sx | times: capd | divided_by: dr | plus: sx -%}
+
+  {%- assign span = clx | minus: crx -%}
+  {%- assign z1x = span | times: 0.28 | plus: crx -%}
+  {%- assign z2x = span | times: 0.55 | plus: crx -%}
+  {%- assign z3x = span | times: 0.78 | plus: crx -%}
+
+  {%- capture cap -%}
+<path d="M {{ sx }},{{ sy | round: 1 }} L {{ crx | round: 1 }},{{ capy | round: 1 }} L {{ z1x | round: 1 }},{{ capy | minus: 2.6 | round: 1 }} L {{ z2x | round: 1 }},{{ capy | plus: 3.0 | round: 1 }} L {{ z3x | round: 1 }},{{ capy | minus: 1.4 | round: 1 }} L {{ clx | round: 1 }},{{ capy | round: 1 }} Z" fill="var(--surface)" fill-opacity=".95"/>
+  {%- endcapture -%}
+  {%- assign caps = caps | append: cap -%}
+{%- endfor -%}
+
+{%- capture tail %} L {{ vbw }},100 Z{% endcapture -%}
+{%- assign ridgepath = ridgepath | append: tail | strip_newlines -%}
 
 <div class="ridge" style="--n: {{ n }}">
   {%- comment -%}
-    preserveAspectRatio="none" so the ridge is exactly as tall as the CSS says
+    preserveAspectRatio="none" so the range is exactly as tall as the CSS says
     however wide the column gets — a compact band can't have its height set by
     the viewport. That stretches the coordinate system non-uniformly, which
     would smear the ridge stroke; vector-effect pins it back to a true 2px.
@@ -69,40 +152,50 @@ M 0,100
        role="presentation" aria-hidden="true" focusable="false">
     <defs>
       {%- comment -%}
-        Haze, not a second data series: the fill fades out toward the valley
-        floor so the ridge has depth without a decorative back ridge that
-        someone could mistake for real terrain. Stop colours read the theme
-        tokens directly — custom properties cascade into inline SVG.
+        Haze, not a second range: the rock fades toward the valley floor so the
+        massif has depth without a backdrop someone could mistake for more
+        terrain. Stop colours read the theme tokens directly — custom
+        properties cascade into inline SVG.
       {%- endcomment -%}
       <linearGradient id="ridge-haze" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0"   stop-color="var(--tint-deep)" stop-opacity=".75"/>
-        <stop offset="1"   stop-color="var(--tint)"      stop-opacity=".25"/>
+        <stop offset="0" stop-color="var(--tint-deep)" stop-opacity=".8"/>
+        <stop offset="1" stop-color="var(--tint)"      stop-opacity=".2"/>
+      </linearGradient>
+
+      {%- comment -%}
+        The shaded flank, gone by three-quarters of the way down. Measured in
+        each wedge's own box, so a short peak's shadow fades over a short
+        distance and a tall one's over a long one.
+      {%- endcomment -%}
+      <linearGradient id="ridge-shade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0"   stop-color="var(--tint-deep)" stop-opacity=".6"/>
+        <stop offset=".72" stop-color="var(--tint-deep)" stop-opacity="0"/>
       </linearGradient>
     </defs>
 
-    <path d="{{ ridgepath | strip_newlines }}" fill="url(#ridge-haze)"/>
-    <path d="{{ ridgepath | strip_newlines }}" fill="none"
+    <path d="{{ ridgepath }}" fill="url(#ridge-haze)"/>
+    {{ shadows }}
+    {{ caps }}
+    <path d="{{ ridgepath }}" fill="none"
           stroke="var(--tint-deep)" stroke-width="2"
           stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
   </svg>
 
   <ul class="ridge__peaks">
     {%- for item in items -%}
-      {%- assign ratio = item.gain | times: 1.0 | divided_by: max -%}
-      {%- assign h = ratio | times: 62 | plus: 18 -%}
-      {%- assign y = 100 | minus: h | round: 1 -%}
+      {%- assign y = item.gain | times: 1.0 | divided_by: max | times: 62 | plus: 18 -%}
+      {%- assign y = 100 | minus: y -%}
 
       {%- comment -%}
-        Each peak owns its whole 1/n slice of the ridge, so the hit areas are
+        Each peak owns its whole 1/n slice of the range, so the hit areas are
         contiguous and there is nowhere between two summits that responds to
         nothing. `--x` is the slice's centre, which is where the summit is.
       {%- endcomment -%}
-      {%- assign cx = forloop.index0 | times: 100 | plus: 50 -%}
-      {%- assign px = cx | times: 100.0 | divided_by: vbw | round: 2 -%}
+      {%- assign px = forloop.index0 | times: 100 | plus: 50 | times: 100.0 | divided_by: vbw -%}
 
       {%- comment -%}
         The popover is wider than one slice, so at the ends it anchors to the
-        ridge's edge instead of to the summit. See the note on JavaScript above.
+        range's edge instead of to the summit. See the note on JavaScript above.
       {%- endcomment -%}
       {%- if forloop.first -%}{%- assign side = 'start' -%}
       {%- elsif forloop.last -%}{%- assign side = 'end' -%}
@@ -117,7 +210,7 @@ M 0,100
       {%- if y > 45 -%}{%- assign vert = 'up' -%}
       {%- else -%}{%- assign vert = 'down' -%}{%- endif -%}
 
-      <li class="ridge__peak" style="--x: {{ px }}%; --y: {{ y }}%">
+      <li class="ridge__peak" style="--x: {{ px | round: 2 }}%; --y: {{ y | round: 1 }}%">
         {%- comment -%}
           The label carries the whole record — name, region and both figures —
           so the popover beside it can stay decorative and aria-hidden, exactly
@@ -142,9 +235,10 @@ M 0,100
 
     :focus-visible does not fire on tap, so on a touch device the popovers
     would never open and the regions and figures would be reachable only by
-    screen reader — the ridge would go from a compact chart to a decoration
+    screen reader — the range would go from a compact chart to a decoration
     with three bare names under it. Below 40rem the stylesheet swaps the whole
-    reveal for this list and the ridge stays as the illustration it is there.
+    reveal for this list and the mountains stay as the illustration they are
+    there.
 
     aria-hidden because it duplicates what every button already carries in its
     label; the same contract the popovers are under, and for the same reason.
