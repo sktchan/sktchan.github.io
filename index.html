@@ -10,6 +10,7 @@ wide: true
 {%- assign pj = site.data.projects -%}
 {%- assign c = site.data.community -%}
 {%- assign ph = site.data.photos -%}
+{%- assign f = site.data.favourites -%}
 
 {%- comment -%}
   The whole site lives on this page. /cv/ is the only separate page, linked at
@@ -53,8 +54,8 @@ wide: true
       AI</strong> for the realities of global health.
     </p>
     <p>
-      Outside the lab, you can find me reading, baking, or in the wilderness
-      <a href="#photos">shooting film</a>!
+      Outside the lab, you can find me <a href="#favourites">reading</a>, baking,
+      or in the wilderness <a href="#photos">shooting film</a>!
     </p>
 
     {%- comment -%}
@@ -136,5 +137,32 @@ wide: true
     {% include gallery.html items=ph.photos base="/assets/img/photos/" %}
   </section>
 {%- endif -%}
+
+{%- comment -%} ─── favourites ────────────────────────────────────────── {%- endcomment -%}
+{%- comment -%}
+  The page's postscript, and drawn to read as one: two silhouettes rather than
+  two lists. It is deliberately absent from the nav — leaving the nav at three
+  items is what tells a visitor this isn't a peer of Projects, Community and
+  Photos. The id stays anyway, so the intro can point at it.
+{%- endcomment -%}
+<section id="favourites" class="band">
+  <h2><span class="section-title">Favourites</span></h2>
+
+  <div class="favs">
+    {%- if f.hikes and f.hikes.size > 0 -%}
+      <div class="favs__col">
+        <h3 class="band__sub">On foot</h3>
+        {% include ridge.html items=f.hikes %}
+      </div>
+    {%- endif -%}
+
+    {%- if f.books and f.books.size > 0 -%}
+      <div class="favs__col">
+        <h3 class="band__sub">On paper</h3>
+        {% include book-stack.html items=f.books %}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
 
 {% include lightbox.html %}

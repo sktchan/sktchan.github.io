@@ -1,0 +1,32 @@
+{%- comment -%}
+  Favourite books as a stack lying flat: one spine per book, each pulling out
+  of the stack when hovered to show who wrote it.
+
+  Usage:  {% include book-stack.html items=list %}
+
+  Each item needs `title` and `author`.
+
+  ─── no buttons, and nothing hidden ─────────────────────────────────────────
+  The ribbon's rows are <button>s because their notes exist nowhere else; a
+  keyboard user who couldn't reach them would lose the content. Nothing is
+  hidden here — both the title and the author are always in the DOM, and the
+  author is only ever faded, never display:none. So these stay plain list items
+  rather than becoming focusable controls with no action behind them.
+
+  The reveal is therefore sugar, and the stylesheet treats it that way: where
+  there is no hover, the authors simply show.
+
+  ─── why the stagger is inline ──────────────────────────────────────────────
+  `--i` is the row's index, which the stylesheet turns into a left indent so
+  the group leans like a real stack. Passing the index beats :nth-child rules,
+  which would have to be rewritten every time a book is added.
+{%- endcomment -%}
+
+<ul class="stack">
+  {%- for book in include.items %}
+    <li class="stack__book" style="--i: {{ forloop.index0 }}">
+      <span class="stack__title">{{ book.title }}</span>
+      <span class="stack__author">{{ book.author }}</span>
+    </li>
+  {%- endfor %}
+</ul>

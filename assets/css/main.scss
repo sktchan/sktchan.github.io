@@ -1251,3 +1251,282 @@ html { scroll-behavior: smooth; }
 }
 
 .todo strong { color: var(--accent); }
+
+/* ─── favourites (ridge + book stack) ─────────────────────────────────────── */
+
+/* The page's postscript, so it is sized like one: two columns that together
+   occupy about the height of one workshop tile. Everything below is tuned to
+   keep it there — if this section ever starts competing with Community for
+   attention, the fix is to make it shorter, not quieter. */
+.favs {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* .band__sub carries margin-top: 1.9rem, which is tuned for a sub-label that
+   follows a dense block of content — see the comment on that rule. Here it is
+   the first thing in a column and there is nothing above it to clear, so the
+   gap has to come back down or the two columns start halfway down the band. */
+.favs__col > .band__sub:first-child { margin-top: .6rem; }
+
+@media (max-width: 40rem) {
+  .favs { grid-template-columns: 1fr; gap: .5rem; }
+}
+
+/* ─── the ridge ──────────────────────────────────────────────────────────── */
+
+/* --plot is the height of the drawing itself; the padding below it is the
+   strip the summit names sit in. Both are named here because the peak markers
+   are positioned as percentages of --plot and would drift if the names' strip
+   were counted in. */
+.ridge {
+  --plot: 8rem;
+  position: relative;
+  padding-bottom: 1.6rem;
+  margin-top: .35rem;
+}
+
+/* The SVG is stretched to --plot rather than scaled to its own aspect ratio;
+   see the preserveAspectRatio note in ridge.html. */
+.ridge__art {
+  display: block;
+  width: 100%;
+  height: var(--plot);
+}
+
+.ridge__peaks {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* One slice per hike, centred on its summit, so the hit areas tile the whole
+   ridge and there is no dead ground between peaks. Height is --plot, not the
+   full box: it is what --y is measured against. */
+.ridge__peak {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: calc(100% / var(--n));
+  height: var(--plot);
+  transform: translateX(-50%);
+}
+
+/* Hovering or focusing a peak lifts it over its neighbours, so a popover that
+   overlaps the next slice is not clipped by it. */
+.ridge__peak:hover,
+.ridge__peak:focus-within { z-index: 1; }
+
+.ridge__hit {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* The ring goes on the marker, not the button: a rectangle around a tall
+   transparent slice of ridge would tell a keyboard user nothing. Same reasoning
+   as .cribbon__hit:focus-visible .cribbon__bar. */
+.ridge__hit:focus-visible { outline: none; }
+
+.ridge__hit:focus-visible .ridge__mark {
+  outline: 2.5px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Sits on the summit line, so it is nudged up by half its own height. */
+.ridge__mark {
+  position: absolute;
+  top: var(--y);
+  left: 50%;
+  width: .5rem;
+  height: .5rem;
+  margin: -.25rem 0 0 -.25rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--bg);
+}
+
+/* Names show at rest, unlike the ribbon's bars. Three of them is not clutter,
+   and a ridge whose summits are anonymous until you touch it is just a shape. */
+.ridge__name {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding-top: .45rem;
+  text-align: center;
+  font-size: .76rem;
+  line-height: 1.3;
+  color: var(--ink-muted);
+}
+
+.ridge__hit:hover .ridge__name,
+.ridge__hit:focus-visible .ridge__name { color: var(--accent); }
+
+.ridge__hit:hover .ridge__mark { transform: scale(1.35); }
+
+/* Which way it opens is worked out in ridge.html from the summit's height:
+   below a tall peak, above a low one. A low summit has no room beneath it — the
+   popover would sit on the name strip — and a tall one has none above. */
+.ridge__pop {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: max-content;
+  max-width: 12rem;
+  padding: .45rem .6rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* A popover is wider than one slice, so the end peaks anchor theirs to the
+   ridge's edge instead of to the summit. Which peak is which is decided in
+   ridge.html, at build time. */
+.ridge__pop--start { left: 0; }
+.ridge__pop--end   { right: 0; }
+.ridge__pop--mid   { left: 50%; transform: translateX(-50%); }
+
+.ridge__pop--down { top: calc(var(--y) + .9rem); }
+.ridge__pop--up   { bottom: calc(100% - var(--y) + .9rem); }
+
+.ridge__hit:hover ~ .ridge__pop,
+.ridge__hit:focus-visible ~ .ridge__pop { opacity: 1; }
+
+.ridge__pop-lead {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: .88rem;
+  line-height: 1.3;
+}
+
+.ridge__pop-meta {
+  display: block;
+  margin-top: .1rem;
+  font-size: .76rem;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ridge__pop  { transition: opacity .14s ease; }
+  .ridge__mark { transition: transform .15s ease; }
+  .ridge__name { transition: color .15s ease; }
+}
+
+/* The legend is the phone view of the ridge; see the comment in ridge.html for
+   why the popovers can't survive down there. */
+.ridge__legend { display: none; }
+
+/* Narrow screens: a shorter ridge kept as pure illustration, with the reveal
+   traded for a plain list. The names come off the peaks because the legend
+   already carries them and three labels do not fit across a phone. */
+@media (max-width: 40rem) {
+  .ridge {
+    --plot: 5.5rem;
+    padding-bottom: 0;
+  }
+
+  .ridge__name,
+  .ridge__pop { display: none; }
+
+  .ridge__hit { cursor: default; }
+
+  .ridge__legend {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: .7rem 0 0;
+  }
+
+  .ridge__legend li {
+    padding: .3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ridge__legend li:last-child { border-bottom: 0; }
+
+  .ridge__legend-name {
+    display: block;
+    font-size: .88rem;
+  }
+
+  .ridge__legend-meta {
+    display: block;
+    font-size: .76rem;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ─── the book stack ─────────────────────────────────────────────────────── */
+
+.stack {
+  list-style: none;
+  padding: 0;
+  margin: .35rem 0 0;
+}
+
+/* Each book indented one step further than the one above, so the group leans
+   like a stack rather than lining up like a table. --i comes from the include. */
+.stack__book {
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  margin-left: calc(var(--i) * .5rem);
+  margin-bottom: .3rem;
+  padding: .38rem .6rem;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--tint-deep);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.stack__book:last-child { margin-bottom: 0; }
+
+.stack__title {
+  font-size: .88rem;
+  line-height: 1.35;
+}
+
+/* Pushed to the far end of the row, and never out of the DOM — it is faded,
+   not hidden, so the row's height and the section below it never move. */
+.stack__author {
+  margin-left: auto;
+  font-size: .76rem;
+  color: var(--ink-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* The pull-out, and the only place the author is ever invisible. Guarded on
+   real hover: where there is none the author simply shows, because it must
+   never be the thing a touch user cannot get to. Same contract as .wtile. */
+@media (hover: hover) and (pointer: fine) {
+  .stack__author { opacity: 0; }
+
+  .stack__book:hover {
+    border-left-color: var(--accent);
+    box-shadow: var(--shadow);
+    transform: translateX(.45rem);
+  }
+
+  .stack__book:hover .stack__author { opacity: 1; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .stack__book   { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .stack__author { transition: opacity .18s ease; }
+  }
+}

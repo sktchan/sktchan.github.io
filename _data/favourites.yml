@@ -1,0 +1,48 @@
+# The closing band on the home page — two short lists drawn as two silhouettes:
+# the hikes as a ridgeline, the books as a stack of spines.
+#
+# Deliberately the thinnest file in _data/. A hike is a name, a region and two
+# numbers; a book is a title and an author. Nothing here carries links, dates
+# or notes — if an entry starts wanting them, it has outgrown this section and
+# belongs in community.yml instead.
+#
+# ─── ridge geometry ──────────────────────────────────────────────────────────
+# `gain` is elevation gain in metres, `distance` round-trip kilometres. Summit
+# heights are `gain` normalised against the largest gain in the list, worked
+# out in Liquid at render time — unlike the community ribbon there is no
+# generator script, because three peaks need no date arithmetic. Add or drop a
+# hike and the ridge redraws itself, in the order the entries appear here.
+#
+# So the numbers are load-bearing: they are the shape. An entry without a
+# `gain` would flatten to the baseline rather than fail.
+#
+# ─── on the figures ──────────────────────────────────────────────────────────
+# Your own recorded gain and distance, not a guidebook's. Every one of these
+# trails has longer and shorter variants and the published numbers disagree
+# wildly between them, so what is here is the day you actually walked.
+
+hikes:
+  - name:     "Upper Yosemite"
+    region:   "Yosemite National Park, California"
+    gain:     987
+    distance: 10.8
+
+  - name:     "Nihahi ridge"
+    region:   "Kananaskis, Alberta"
+    gain:     717
+    distance: 1.72
+
+  - name:     "Iceline"
+    region:   "Yoho National Park, British Columbia"
+    gain:     965
+    distance: 15.96
+
+books:
+  - title:  "The Correspondent"
+    author: "Virginia Evans"
+
+  - title:  "Orbital"
+    author: "Samantha Harvey"
+
+  - title:  "Klara and the Sun"
+    author: "Kazuo Ishiguro"
