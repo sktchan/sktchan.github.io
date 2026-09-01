@@ -24,10 +24,10 @@
 # The axis is piecewise-linear and scale-preserving. Stretches where nothing at
 # all was running collapse to a fixed sliver drawn as a visible break, while
 # every live stretch shares one %-per-month rate — so a two-year role is the
-# same width wherever it falls. There are currently two such breaks: fifteen
-# months between St. Joseph's ending and IMPACT starting, and the whole of 2024
-# once STEM Fellowship stopped being open-ended - it was the only entry that
-# spanned that year, so giving it an end date opened a hole behind it.
+# same width wherever it falls. There are currently two such breaks: the nine
+# months between St. Joseph's ending and the CSA role starting, and the whole
+# of 2024 once STEM Fellowship stopped being open-ended - it was the only entry
+# that spanned that year, so giving it an end date opened a hole behind it.
 #
 # The home page merges leadership and mentorship into one ribbon and draws every
 # bar the same way. The two groups below are kept only because they're a handy
@@ -109,8 +109,8 @@ leadership:
     year: "Apr 2025 - Present"
     start: "2025-04"
     end: "present"
-    x: 80.27
-    w: 19.73
+    x: 81.63
+    w: 18.37
     note: >-
       Institute-wide initiatives for a more equitable and inclusive research
       community.
@@ -120,11 +120,11 @@ leadership:
     map_x: 9.03
     map_y: 80.35
     location: "Hamilton, Canada"
-    year: "Apr 2022 - Apr 2023"
-    start: "2022-04"
+    year: "Sep 2020 - Apr 2023"
+    start: "2020-09"
     end: "2023-04"
-    x: 49.42
-    w: 15.09
+    x: 32.17
+    w: 34.57
     note: >-
       Ran event logistics and promotion, and led weekly subcommittee meetings.
 
@@ -134,8 +134,8 @@ leadership:
     year: "Mar 2021 - Jan 2022"
     start: "2021-03"
     end: "2022-01"
-    x: 34.33
-    w: 12.77
+    x: 38.66
+    w: 11.89
     note: >-
       Reviewed student-built prototypes designed to increase accessibility for
       clients.
@@ -148,8 +148,8 @@ leadership:
     year: "Nov 2018 - Nov 2019"
     start: "2018-11"
     end: "2019-11"
-    x: 16.25
-    w: 15.09
+    x: 15.13
+    w: 14.05
     note: >-
       Provided nonmedical care and support to inpatients.
 
@@ -162,7 +162,7 @@ leadership:
     start: "2017-09"
     end: "2018-12"
     x: 0.00
-    w: 18.57
+    w: 17.29
     note: >-
       Led weekly subcommittee meetings to plan the winter fair.
 
@@ -174,8 +174,8 @@ leadership:
     year: "Nov 2017"
     start: "2017-11"
     end: "2017-11"
-    x: 2.32
-    w: 1.16
+    x: 2.16
+    w: 1.08
     note: >-
       Served meals in a welcoming space to those unable to work.
 
@@ -189,8 +189,8 @@ mentorship:
     year: "Jan 2025 - Present"
     start: "2025-01"
     end: "present"
-    x: 76.79
-    w: 23.21
+    x: 78.39
+    w: 21.61
     note: >-
       Guided an early-stage biotech startup on feasibility, ML development and
       market strategy.
@@ -203,8 +203,8 @@ mentorship:
     year: "Mar 2022 - Dec 2023"
     start: "2022-03"
     end: "2023-12"
-    x: 48.26
-    w: 25.53
+    x: 51.62
+    w: 23.77
     note: >-
       Identified gaps in business processes and built tailored presentation
       material.
@@ -215,8 +215,8 @@ mentorship:
     year: "Sep 2021 - Apr 2022"
     start: "2021-09"
     end: "2022-04"
-    x: 41.30
-    w: 9.28
+    x: 45.14
+    w: 8.64
     note: >-
       One-on-one mentoring of first-year students through the return to in-person
       schooling.
@@ -229,12 +229,14 @@ mentorship:
 # break mark stands in for them.
 axis:
   ticks:
-    - { label: "2018", x: 4.64 }
-    - { label: "2019", x: 18.57 }
-    - { label: "2022", x: 45.94 }
-    - { label: "2023", x: 59.86 }
-    - { label: "2025", x: 76.79 }
-    - { label: "2026", x: 90.72 }
+    - { label: "2018", x: 4.32 }
+    - { label: "2019", x: 17.29 }
+    - { label: "2021", x: 36.49 }
+    - { label: "2022", x: 49.46 }
+    - { label: "2023", x: 62.43 }
+    - { label: "2025", x: 78.39 }
+    - { label: "2026", x: 91.36 }
   breaks:
-    - { x: 31.33, w: 3.00 }   # 15 months, 2019-12 to 2021-02
-    - { x: 73.79, w: 3.00 }   # 12 months, 2024-01 to 2024-12
+    - { x: 29.17, w: 3.00 }   # 9 months, 2019-12 to 2020-08
+    - { x: 75.39, w: 3.00 }   # 12 months, 2024-01 to 2024-12
+
