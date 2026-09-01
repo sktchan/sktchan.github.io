@@ -907,11 +907,13 @@ html { scroll-behavior: smooth; }
   color: #fff;
 }
 
+/* .74rem made these the smallest type on the page — smaller than the photo
+   captions — for what is actually the name of the thing the tile is about. */
 .wtile__title {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: .74rem;
-  line-height: 1.2;
+  font-size: .88rem;
+  line-height: 1.25;
 }
 
 .wtile__links {
