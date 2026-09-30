@@ -47,7 +47,7 @@ experience:
   - when: "May 2024 - Dec 2024"
     title: "Research Assistant"
     where: "AI Atlas, Hamilton, ON"
-    detail: "Collaborated with engineers to investigate self-learning AI-based arrhythmia detection algorithms, incorporating clinical expertise and feedback to research model architectures and optimize clinical utility."
+    detail: "Collaborated with engineers to investigate arrhythmia detection algorithms, incorporating clinical expertise and feedback to research model architectures and optimize clinical utility."
 
   - when: "Sep 2023 - Apr 2024"
     title: "Research Affiliate"
