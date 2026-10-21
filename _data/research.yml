@@ -46,6 +46,13 @@ projects:
         venue: "IRIC Scientific Day, Montréal, Canada"
         year: "Jun 2025"
 
+  - id: "editrace"
+    title: "Reverse-engineering short-form video edits"
+    role: "Editrace"
+    year: "Sep 2026 - Present"
+    bullets:
+      - "Building the computer vision signals and scoring pipeline (audio, OCR, captions, color) that reconstructs cuts, pacing, transitions, and text from short-form videos into editable templates for DaVinci Resolve, Premiere Pro, Final Cut Pro, and CapCut via an MCP integration."
+
   - id: "anti-aptamers"
     title: "DNA antidotes for a SARS-CoV-2 RNA aptamer"
     role: "Prof: Dr. François Major, Université de Montréal"
