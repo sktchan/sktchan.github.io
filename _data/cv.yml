@@ -26,13 +26,10 @@ education:
 experience:
   - when: "Jan 2025 - Present"
     title: "Research Affiliate"
-    where: "Mila - Quebec AI Institute"
-    detail: "Benchmarking transformer, autoencoder, and feedforward architectures while analyzing pre-training objectives and interpretability in transcriptomic representation learning."
-
-  - when: "Jan 2025 - Present"
-    title: "Research Affiliate"
-    where: "Institute for Research in Immunology and Cancer"
-    detail: "Modeling gene dependencies using bulk and single-cell RNA-seq datasets, evaluating the impact of rank-normalized inputs versus raw expression counts on biological inference."
+    where: "Mila - Quebec AI Institute / Institute for Research in Immunology and Cancer"
+    detail:
+      - "Benchmarking transformer, autoencoder, and feedforward architectures while analyzing pre-training objectives and interpretability in transcriptomic representation learning."
+      - "Modeling gene dependencies using bulk and single-cell RNA-seq datasets, evaluating the impact of rank-normalized inputs versus raw expression counts on biological inference."
 
   - when: "Feb 2025 - Apr 2025"
     title: "AI/NLP Intern"
