@@ -76,4 +76,3 @@ for f in "${originals[@]}"; do
 done
 
 echo "# Wrote $(ls -1 "$OUT"/*.jpg 2>/dev/null | wc -l | tr -d ' ') photo(s) to $OUT/ and $OUT/thumbs/"
-echo "# Delete the placeholder-*.svg entries once you have real photos."

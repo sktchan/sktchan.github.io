@@ -1,8 +1,5 @@
 # Additional projects — coursework and side work. Selected work lives in
 # research.yml.
-#
-# `gallery` is optional but currently unused: rows are flat, so there is nowhere
-# to render one. The PyMOL entries are kept in case galleries come back.
 
 - id: "protein-embeddings"
   title: "Protein language model embeddings for sequence alignment"
