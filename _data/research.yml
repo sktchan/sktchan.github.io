@@ -28,7 +28,7 @@ projects:
       - "Developing an evaluation framework integrating various tokenization, pre-training, and architectural variations to assess model performance on downstream perturbation predictions."
     links:
       - name: "Code"
-        url: "https://github.com/lemieux-lab/LTformers"
+        url: "https://github.com/sktchan/LincsFM"
     presentations:
       - title: "The limits of transformers for transcriptomic representation learning"
         venue: "ISCB - Intelligent Systems in Molecular Biology, Washington, USA"
